@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemelo Digital · Transporte Urbano de Lima</title>
+<meta name="description" content="Gemelo digital del transporte urbano de Lima Metropolitana y Callao: mapa vivo con simulación de la red masiva (Metro, Metropolitano, corredores) y tablero de datos de movilidad.">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ===================== TOPBAR ===================== -->
+<header class="topbar">
+  <div class="brand">
+    <span class="dot" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16"/><circle cx="8.5" cy="14" r="1"/><circle cx="15.5" cy="14" r="1"/><path d="M8 21l1.5-3M16 21l-1.5-3"/></svg>
+    </span>
+    <div><b>Gemelo Digital · Transporte de Lima</b><span>Metropolitana y Callao — maqueta de datos</span></div>
+  </div>
+  <nav>
+    <a href="#gemelo">Gemelo</a>
+    <a href="#tablero">Tablero</a>
+    <a href="#contexto">Contexto</a>
+    <a href="#fuentes">Fuentes</a>
+    <button class="iconbtn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+    </button>
+  </nav>
+</header>
+
+<!-- ===================== HERO / GEMELO ===================== -->
+<section class="hero wrap" id="gemelo">
+  <div class="hero-head">
+    <div class="eyebrow">Gemelo digital en vivo</div>
+    <h1>La red masiva de Lima, moviéndose en tiempo simulado</h1>
+    <p id="heroSub">Una réplica virtual de los corredores de transporte masivo de Lima y Callao.
+      Los vehículos circulan según frecuencias reales que cambian con la hora del día. Pulsa play y avanza el reloj.</p>
+  </div>
+
+  <div class="twin">
+    <!-- MAP -->
+    <div class="card mapcard">
+      <canvas id="twinCanvas"></canvas>
+      <div class="map-overlay">
+        <span class="chip">Vehículos activos <b id="ovVeh">—</b></span>
+        <span class="chip">Frecuencia <b id="ovFreq">—</b></span>
+      </div>
+      <div class="map-clock">
+        <div class="t tnum" id="ovClock">--:--</div>
+        <div class="d" id="ovPeak">—</div>
+      </div>
+      <div class="map-tooltip" id="mapTip"></div>
+      <div class="map-legend" id="mapLegend"></div>
+    </div>
+
+    <!-- PANEL -->
+    <div class="card panel">
+      <div class="controls">
+        <h3>Controles de simulación</h3>
+        <div class="playrow">
+          <button class="play" id="playBtn" aria-label="Reproducir / pausar">
+            <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="field" style="flex:1">
+            <label>Velocidad <b><span id="speedVal">120</span>×</b></label>
+            <input type="range" id="speed" min="10" max="600" step="10" value="120">
+          </div>
+        </div>
+        <div class="field">
+          <label>Hora del día <b class="tnum" id="hourVal">07:00</b></label>
+          <input type="range" id="hour" min="0" max="1439" step="1" value="420">
+        </div>
+      </div>
+
+      <div>
+        <h3>Estado de la red</h3>
+        <div class="livestats" style="margin-top:10px">
+          <div class="stat"><div class="v tnum" id="stVeh">—</div><div class="k">vehículos en circulación</div></div>
+          <div class="stat"><div class="v tnum" id="stPax">—</div><div class="k">pax/hora aprox. (red masiva)</div></div>
+          <div class="stat"><div class="v tnum" id="stLines">—</div><div class="k">líneas modeladas</div></div>
+          <div class="stat"><div class="v tnum" id="stKm">—</div><div class="k">km de red masiva</div></div>
+        </div>
+      </div>
+      <p class="hint">Toca una estación en el mapa para ver su información. Usa la leyenda para filtrar por línea.
+        Las frecuencias siguen la curva de demanda horaria de la ciudad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KPIs ===================== -->
+<section class="wrap" id="indicadores" style="padding-top:8px">
+  <div class="eyebrow">Indicadores de la red</div>
+  <h2 class="sec-title">Lima en cifras</h2>
+  <p class="sec-sub">Magnitudes de referencia del sistema de transporte de Lima Metropolitana y Callao.</p>
+  <div class="kpis" id="kpiStrip" style="margin-top:18px"><div class="loading">Cargando indicadores…</div></div>
+</section>
+
+<!-- ===================== TABLERO ===================== -->
+<section class="wrap" id="tablero">
+  <div class="eyebrow">Tablero de movilidad</div>
+  <h2 class="sec-title">Cómo se mueve Lima</h2>
+  <p class="sec-sub">Reparto de viajes, demanda por sistema y comparación regional. La curva de demanda es la misma que gobierna la simulación de arriba.</p>
+
+  <div class="grid2" style="margin-top:20px">
+    <div class="card chartcard">
+      <h3>Reparto modal de viajes</h3>
+      <div class="csub">Participación de cada modo en los viajes diarios de Lima-Callao</div>
+      <div class="chart-holder"><canvas id="chModal"></canvas></div>
+      <div class="legend-row" id="lgModal"></div>
+    </div>
+    <div class="card chartcard">
+      <h3>Pasajeros por día, por sistema</h3>
+      <div class="csub">Demanda del transporte masivo y semimasivo (miles de pax/día)</div>
+      <div class="chart-holder"><canvas id="chRider"></canvas></div>
+    </div>
+    <div class="card chartcard">
+      <h3>Demanda a lo largo del día</h3>
+      <div class="csub">Índice de demanda relativa por hora — el marcador sigue el reloj del gemelo</div>
+      <div class="chart-holder"><canvas id="chDemand"></canvas></div>
+    </div>
+    <div class="card chartcard">
+      <h3>Crecimiento de la red masiva</h3>
+      <div class="csub">Kilómetros de metro + BRT en operación por año</div>
+      <div class="chart-holder"><canvas id="chGrowth"></canvas></div>
+    </div>
+    <div class="card chartcard" style="grid-column:1/-1">
+      <h3>Metro y BRT frente a otras capitales</h3>
+      <div class="csub">Kilómetros de red masiva por ciudad (con población metropolitana en millones)</div>
+      <div class="chart-holder tall"><canvas id="chCompare"></canvas></div>
+      <div class="legend-row" id="lgCompare"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTEXTO ===================== -->
+<section class="wrap" id="contexto">
+  <div class="eyebrow">Contexto</div>
+  <h2 class="sec-title">Una reforma a medio camino</h2>
+  <div class="prose" id="ctxIntro" style="margin-top:12px"></div>
+
+  <div class="authority" id="ctxAuthority"></div>
+
+  <h3 style="margin-top:34px; font-size:19px">Línea de tiempo</h3>
+  <div class="timeline" id="ctxTimeline"></div>
+
+  <h3 style="margin-top:14px; font-size:19px">Retos abiertos</h3>
+  <div class="cardgrid" id="ctxChallenges"></div>
+
+  <h3 style="margin-top:34px; font-size:19px">Lo que viene</h3>
+  <div class="cardgrid" id="ctxFuture"></div>
+</section>
+
+<!-- ===================== FUENTES ===================== -->
+<section class="wrap" id="fuentes">
+  <div class="eyebrow">Metodología y fuentes</div>
+  <h2 class="sec-title">Qué es real y qué es maqueta</h2>
+  <p class="sec-sub" id="ctxMethod"></p>
+  <ul class="sources" id="ctxSources"></ul>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="badge">Gemelo digital · maqueta educativa</span>
+    <span>Datos de referencia de fuentes públicas (ATU, operadores, estudios de movilidad).</span>
+    <span>Geometría de rutas y frecuencias aproximadas.</span>
+    <span style="margin-left:auto">Hecho con datos abiertos · <span id="year"></span></span>
+  </div>
+</footer>
+
+<!-- Chart.js desde cdnjs (permitido) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/twin.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

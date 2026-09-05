@@ -1,0 +1,1367 @@
+{
+  "meta": {
+    "city": "Lima Metropolitana y Callao",
+    "updated": "2026",
+    "srs": "WGS84"
+  },
+  "lines": [
+    {
+      "id": "L1",
+      "name": "Metro de Lima — Línea 1",
+      "short": "L1",
+      "mode": "metro",
+      "status": "operational",
+      "color": "#2E7D32",
+      "length_km": 34.6,
+      "stations_count": 26,
+      "avg_speed_kmh": 34,
+      "operating_hours": {
+        "start": "05:00",
+        "end": "23:00"
+      },
+      "headway_min": {
+        "peak": 6,
+        "offpeak": 12
+      },
+      "fleet": {
+        "vehicles": 44,
+        "capacity_per_vehicle": 1200
+      },
+      "daily_riders": 700000,
+      "opened_year": 2011,
+      "stations": [
+        {
+          "id": "L1-01",
+          "name": "Villa El Salvador",
+          "lat": -12.2141,
+          "lng": -76.9392,
+          "order": 1,
+          "interchange": []
+        },
+        {
+          "id": "L1-02",
+          "name": "Parque Industrial",
+          "lat": -12.2015,
+          "lng": -76.944,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "L1-03",
+          "name": "Pumacahua",
+          "lat": -12.1902,
+          "lng": -76.9508,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "L1-04",
+          "name": "Villa María",
+          "lat": -12.1788,
+          "lng": -76.956,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "L1-05",
+          "name": "María Auxiliadora",
+          "lat": -12.1662,
+          "lng": -76.9602,
+          "order": 5,
+          "interchange": []
+        },
+        {
+          "id": "L1-06",
+          "name": "San Juan",
+          "lat": -12.1575,
+          "lng": -76.9705,
+          "order": 6,
+          "interchange": []
+        },
+        {
+          "id": "L1-07",
+          "name": "Atocongo",
+          "lat": -12.1505,
+          "lng": -76.9792,
+          "order": 7,
+          "interchange": []
+        },
+        {
+          "id": "L1-08",
+          "name": "Jorge Chávez",
+          "lat": -12.142,
+          "lng": -76.9876,
+          "order": 8,
+          "interchange": []
+        },
+        {
+          "id": "L1-09",
+          "name": "Ayacucho",
+          "lat": -12.1348,
+          "lng": -76.993,
+          "order": 9,
+          "interchange": []
+        },
+        {
+          "id": "L1-10",
+          "name": "Cabitos",
+          "lat": -12.125,
+          "lng": -76.9986,
+          "order": 10,
+          "interchange": []
+        },
+        {
+          "id": "L1-11",
+          "name": "Angamos",
+          "lat": -12.112,
+          "lng": -77.0016,
+          "order": 11,
+          "interchange": []
+        },
+        {
+          "id": "L1-12",
+          "name": "San Borja Sur",
+          "lat": -12.103,
+          "lng": -76.9996,
+          "order": 12,
+          "interchange": []
+        },
+        {
+          "id": "L1-13",
+          "name": "La Cultura",
+          "lat": -12.0955,
+          "lng": -76.9986,
+          "order": 13,
+          "interchange": []
+        },
+        {
+          "id": "L1-14",
+          "name": "Arriola",
+          "lat": -12.084,
+          "lng": -77.002,
+          "order": 14,
+          "interchange": []
+        },
+        {
+          "id": "L1-15",
+          "name": "Gamarra",
+          "lat": -12.073,
+          "lng": -77.0076,
+          "order": 15,
+          "interchange": []
+        },
+        {
+          "id": "L1-16",
+          "name": "Miguel Grau",
+          "lat": -12.059,
+          "lng": -77.013,
+          "order": 16,
+          "interchange": [
+            "L3"
+          ]
+        },
+        {
+          "id": "L1-17",
+          "name": "El Ángel",
+          "lat": -12.049,
+          "lng": -77.0075,
+          "order": 17,
+          "interchange": []
+        },
+        {
+          "id": "L1-18",
+          "name": "Presbítero Maestro",
+          "lat": -12.043,
+          "lng": -77.0055,
+          "order": 18,
+          "interchange": []
+        },
+        {
+          "id": "L1-19",
+          "name": "Caja de Agua",
+          "lat": -12.033,
+          "lng": -77.001,
+          "order": 19,
+          "interchange": []
+        },
+        {
+          "id": "L1-20",
+          "name": "Pirámide del Sol",
+          "lat": -12.024,
+          "lng": -76.996,
+          "order": 20,
+          "interchange": []
+        },
+        {
+          "id": "L1-21",
+          "name": "Los Jardines",
+          "lat": -12.014,
+          "lng": -76.9945,
+          "order": 21,
+          "interchange": []
+        },
+        {
+          "id": "L1-22",
+          "name": "Los Postes",
+          "lat": -12.006,
+          "lng": -76.995,
+          "order": 22,
+          "interchange": []
+        },
+        {
+          "id": "L1-23",
+          "name": "San Carlos",
+          "lat": -11.999,
+          "lng": -76.9955,
+          "order": 23,
+          "interchange": []
+        },
+        {
+          "id": "L1-24",
+          "name": "San Martín",
+          "lat": -11.9925,
+          "lng": -76.993,
+          "order": 24,
+          "interchange": []
+        },
+        {
+          "id": "L1-25",
+          "name": "Santa Rosa",
+          "lat": -11.9865,
+          "lng": -76.9905,
+          "order": 25,
+          "interchange": []
+        },
+        {
+          "id": "L1-26",
+          "name": "Bayóvar",
+          "lat": -11.986,
+          "lng": -76.9835,
+          "order": 26,
+          "interchange": [
+            "CM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L2",
+      "name": "Metro de Lima — Línea 2",
+      "short": "L2",
+      "mode": "metro",
+      "status": "construction",
+      "color": "#F2A900",
+      "length_km": 27.0,
+      "stations_count": 27,
+      "avg_speed_kmh": 35,
+      "operating_hours": {
+        "start": "06:00",
+        "end": "22:00"
+      },
+      "headway_min": {
+        "peak": 5,
+        "offpeak": 10
+      },
+      "fleet": {
+        "vehicles": 42,
+        "capacity_per_vehicle": 1200
+      },
+      "daily_riders": 140000,
+      "opened_year": 2024,
+      "stations": [
+        {
+          "id": "L2-01",
+          "name": "Puerto del Callao",
+          "lat": -12.051,
+          "lng": -77.147,
+          "order": 1,
+          "interchange": []
+        },
+        {
+          "id": "L2-02",
+          "name": "Buenos Aires",
+          "lat": -12.053,
+          "lng": -77.137,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "L2-03",
+          "name": "Juan Pablo II",
+          "lat": -12.0555,
+          "lng": -77.127,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "L2-04",
+          "name": "Insurgentes",
+          "lat": -12.058,
+          "lng": -77.118,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "L2-05",
+          "name": "Carmen de La Legua",
+          "lat": -12.06,
+          "lng": -77.108,
+          "order": 5,
+          "interchange": []
+        },
+        {
+          "id": "L2-06",
+          "name": "Óscar R. Benavides",
+          "lat": -12.061,
+          "lng": -77.098,
+          "order": 6,
+          "interchange": []
+        },
+        {
+          "id": "L2-07",
+          "name": "San Marcos",
+          "lat": -12.0615,
+          "lng": -77.088,
+          "order": 7,
+          "interchange": []
+        },
+        {
+          "id": "L2-08",
+          "name": "Elio",
+          "lat": -12.062,
+          "lng": -77.079,
+          "order": 8,
+          "interchange": []
+        },
+        {
+          "id": "L2-09",
+          "name": "La Alborada",
+          "lat": -12.0625,
+          "lng": -77.07,
+          "order": 9,
+          "interchange": []
+        },
+        {
+          "id": "L2-10",
+          "name": "Tingo María",
+          "lat": -12.063,
+          "lng": -77.061,
+          "order": 10,
+          "interchange": []
+        },
+        {
+          "id": "L2-11",
+          "name": "Parque Murillo",
+          "lat": -12.061,
+          "lng": -77.052,
+          "order": 11,
+          "interchange": []
+        },
+        {
+          "id": "L2-12",
+          "name": "Plaza Bolognesi",
+          "lat": -12.0585,
+          "lng": -77.044,
+          "order": 12,
+          "interchange": []
+        },
+        {
+          "id": "L2-13",
+          "name": "Estación Central",
+          "lat": -12.0562,
+          "lng": -77.037,
+          "order": 13,
+          "interchange": [
+            "MET"
+          ]
+        },
+        {
+          "id": "L2-14",
+          "name": "Plaza Manco Cápac",
+          "lat": -12.064,
+          "lng": -77.029,
+          "order": 14,
+          "interchange": []
+        },
+        {
+          "id": "L2-15",
+          "name": "Cangallo",
+          "lat": -12.0645,
+          "lng": -77.021,
+          "order": 15,
+          "interchange": []
+        },
+        {
+          "id": "L2-16",
+          "name": "28 de Julio",
+          "lat": -12.0655,
+          "lng": -77.014,
+          "order": 16,
+          "interchange": []
+        },
+        {
+          "id": "L2-17",
+          "name": "Nicolás Ayllón",
+          "lat": -12.056,
+          "lng": -77.005,
+          "order": 17,
+          "interchange": []
+        },
+        {
+          "id": "L2-18",
+          "name": "Circunvalación",
+          "lat": -12.051,
+          "lng": -76.995,
+          "order": 18,
+          "interchange": []
+        },
+        {
+          "id": "L2-19",
+          "name": "San Juan de Dios",
+          "lat": -12.046,
+          "lng": -76.985,
+          "order": 19,
+          "interchange": []
+        },
+        {
+          "id": "L2-20",
+          "name": "Evitamiento",
+          "lat": -12.043,
+          "lng": -76.976,
+          "order": 20,
+          "interchange": []
+        },
+        {
+          "id": "L2-21",
+          "name": "Óvalo Santa Anita",
+          "lat": -12.043,
+          "lng": -76.966,
+          "order": 21,
+          "interchange": []
+        },
+        {
+          "id": "L2-22",
+          "name": "Colectora Industrial",
+          "lat": -12.044,
+          "lng": -76.956,
+          "order": 22,
+          "interchange": []
+        },
+        {
+          "id": "L2-23",
+          "name": "Hermilio Valdizán",
+          "lat": -12.045,
+          "lng": -76.947,
+          "order": 23,
+          "interchange": []
+        },
+        {
+          "id": "L2-24",
+          "name": "Mercado Santa Anita",
+          "lat": -12.046,
+          "lng": -76.939,
+          "order": 24,
+          "interchange": []
+        },
+        {
+          "id": "L2-25",
+          "name": "Vista Alegre",
+          "lat": -12.049,
+          "lng": -76.931,
+          "order": 25,
+          "interchange": []
+        },
+        {
+          "id": "L2-26",
+          "name": "Prolongación Javier Prado",
+          "lat": -12.052,
+          "lng": -76.923,
+          "order": 26,
+          "interchange": []
+        },
+        {
+          "id": "L2-27",
+          "name": "Municipalidad de Ate",
+          "lat": -12.0555,
+          "lng": -76.915,
+          "order": 27,
+          "interchange": []
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "name": "Metro de Lima — Línea 3 (proyectada)",
+      "short": "L3",
+      "mode": "metro",
+      "status": "planned",
+      "color": "#0D47A1",
+      "length_km": 34.0,
+      "stations_count": 7,
+      "avg_speed_kmh": 35,
+      "operating_hours": {
+        "start": "05:00",
+        "end": "23:00"
+      },
+      "headway_min": {
+        "peak": 5,
+        "offpeak": 10
+      },
+      "fleet": {
+        "vehicles": 0,
+        "capacity_per_vehicle": 1200
+      },
+      "daily_riders": 0,
+      "opened_year": 2031,
+      "stations": [
+        {
+          "id": "L3-01",
+          "name": "Comas",
+          "lat": -11.92,
+          "lng": -77.05,
+          "order": 1,
+          "interchange": []
+        },
+        {
+          "id": "L3-02",
+          "name": "Independencia",
+          "lat": -11.986,
+          "lng": -77.055,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "L3-03",
+          "name": "Caquetá",
+          "lat": -12.04,
+          "lng": -77.047,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "L3-04",
+          "name": "Centro de Lima",
+          "lat": -12.052,
+          "lng": -77.036,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "L3-05",
+          "name": "La Victoria",
+          "lat": -12.072,
+          "lng": -77.025,
+          "order": 5,
+          "interchange": []
+        },
+        {
+          "id": "L3-06",
+          "name": "Corpac",
+          "lat": -12.098,
+          "lng": -77.015,
+          "order": 6,
+          "interchange": []
+        },
+        {
+          "id": "L3-07",
+          "name": "Atocongo",
+          "lat": -12.152,
+          "lng": -76.99,
+          "order": 7,
+          "interchange": []
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "name": "Metro de Lima — Línea 4 (proyectada)",
+      "short": "L4",
+      "mode": "metro",
+      "status": "planned",
+      "color": "#00838F",
+      "length_km": 32.0,
+      "stations_count": 5,
+      "avg_speed_kmh": 35,
+      "operating_hours": {
+        "start": "05:00",
+        "end": "23:00"
+      },
+      "headway_min": {
+        "peak": 6,
+        "offpeak": 12
+      },
+      "fleet": {
+        "vehicles": 0,
+        "capacity_per_vehicle": 1200
+      },
+      "daily_riders": 0,
+      "opened_year": 2032,
+      "stations": [
+        {
+          "id": "L4-01",
+          "name": "Bocanegra",
+          "lat": -12.01,
+          "lng": -77.108,
+          "order": 1,
+          "interchange": []
+        },
+        {
+          "id": "L4-02",
+          "name": "Aeropuerto Jorge Chávez",
+          "lat": -12.023,
+          "lng": -77.109,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "L4-03",
+          "name": "Faucett / Argentina",
+          "lat": -12.049,
+          "lng": -77.098,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "L4-04",
+          "name": "Faucett / Venezuela",
+          "lat": -12.062,
+          "lng": -77.093,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "L4-05",
+          "name": "Faucett / La Marina",
+          "lat": -12.073,
+          "lng": -77.09,
+          "order": 5,
+          "interchange": []
+        }
+      ]
+    },
+    {
+      "id": "MET",
+      "name": "Metropolitano (BRT)",
+      "short": "MET",
+      "mode": "brt",
+      "status": "operational",
+      "color": "#00A0DF",
+      "length_km": 46.0,
+      "stations_count": 43,
+      "avg_speed_kmh": 22,
+      "operating_hours": {
+        "start": "05:00",
+        "end": "23:00"
+      },
+      "headway_min": {
+        "peak": 3,
+        "offpeak": 6
+      },
+      "fleet": {
+        "vehicles": 300,
+        "capacity_per_vehicle": 160
+      },
+      "daily_riders": 700000,
+      "opened_year": 2010,
+      "stations": [
+        {
+          "id": "MET-01",
+          "name": "Terminal Chimpu Ocllo",
+          "lat": -11.871,
+          "lng": -77.018,
+          "order": 1,
+          "interchange": []
+        },
+        {
+          "id": "MET-02",
+          "name": "Los Incas",
+          "lat": -11.888,
+          "lng": -77.023,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "MET-03",
+          "name": "Jamaica",
+          "lat": -11.901,
+          "lng": -77.027,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "MET-04",
+          "name": "Micaela Bastidas",
+          "lat": -11.908,
+          "lng": -77.03,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "MET-05",
+          "name": "Andrés Belaunde",
+          "lat": -11.916,
+          "lng": -77.033,
+          "order": 5,
+          "interchange": []
+        },
+        {
+          "id": "MET-06",
+          "name": "22 de Agosto",
+          "lat": -11.924,
+          "lng": -77.036,
+          "order": 6,
+          "interchange": []
+        },
+        {
+          "id": "MET-07",
+          "name": "Las Vegas",
+          "lat": -11.933,
+          "lng": -77.04,
+          "order": 7,
+          "interchange": []
+        },
+        {
+          "id": "MET-08",
+          "name": "Universitaria",
+          "lat": -11.942,
+          "lng": -77.044,
+          "order": 8,
+          "interchange": []
+        },
+        {
+          "id": "MET-09",
+          "name": "Santa Ligia",
+          "lat": -11.949,
+          "lng": -77.047,
+          "order": 9,
+          "interchange": []
+        },
+        {
+          "id": "MET-10",
+          "name": "Terminal Naranjal",
+          "lat": -11.956,
+          "lng": -77.057,
+          "order": 10,
+          "interchange": []
+        },
+        {
+          "id": "MET-11",
+          "name": "Izaguirre",
+          "lat": -11.966,
+          "lng": -77.058,
+          "order": 11,
+          "interchange": []
+        },
+        {
+          "id": "MET-12",
+          "name": "Pacífico",
+          "lat": -11.976,
+          "lng": -77.059,
+          "order": 12,
+          "interchange": []
+        },
+        {
+          "id": "MET-13",
+          "name": "Independencia",
+          "lat": -11.986,
+          "lng": -77.06,
+          "order": 13,
+          "interchange": []
+        },
+        {
+          "id": "MET-14",
+          "name": "Los Jazmines",
+          "lat": -11.996,
+          "lng": -77.0605,
+          "order": 14,
+          "interchange": []
+        },
+        {
+          "id": "MET-15",
+          "name": "Tomás Valle",
+          "lat": -12.005,
+          "lng": -77.061,
+          "order": 15,
+          "interchange": []
+        },
+        {
+          "id": "MET-16",
+          "name": "El Milagro",
+          "lat": -12.013,
+          "lng": -77.0605,
+          "order": 16,
+          "interchange": []
+        },
+        {
+          "id": "MET-17",
+          "name": "Honorio Delgado",
+          "lat": -12.021,
+          "lng": -77.06,
+          "order": 17,
+          "interchange": []
+        },
+        {
+          "id": "MET-18",
+          "name": "UNI",
+          "lat": -12.025,
+          "lng": -77.057,
+          "order": 18,
+          "interchange": []
+        },
+        {
+          "id": "MET-19",
+          "name": "Parque del Trabajo",
+          "lat": -12.033,
+          "lng": -77.053,
+          "order": 19,
+          "interchange": []
+        },
+        {
+          "id": "MET-20",
+          "name": "Caquetá",
+          "lat": -12.04,
+          "lng": -77.047,
+          "order": 20,
+          "interchange": []
+        },
+        {
+          "id": "MET-21",
+          "name": "Ramón Castilla",
+          "lat": -12.047,
+          "lng": -77.043,
+          "order": 21,
+          "interchange": []
+        },
+        {
+          "id": "MET-22",
+          "name": "Dos de Mayo",
+          "lat": -12.051,
+          "lng": -77.041,
+          "order": 22,
+          "interchange": []
+        },
+        {
+          "id": "MET-23",
+          "name": "Tacna",
+          "lat": -12.053,
+          "lng": -77.039,
+          "order": 23,
+          "interchange": []
+        },
+        {
+          "id": "MET-24",
+          "name": "Jirón de la Unión",
+          "lat": -12.0555,
+          "lng": -77.0372,
+          "order": 24,
+          "interchange": []
+        },
+        {
+          "id": "MET-25",
+          "name": "Colmena",
+          "lat": -12.0575,
+          "lng": -77.0378,
+          "order": 25,
+          "interchange": []
+        },
+        {
+          "id": "MET-26",
+          "name": "Estación Central",
+          "lat": -12.0605,
+          "lng": -77.0358,
+          "order": 26,
+          "interchange": [
+            "L2"
+          ]
+        },
+        {
+          "id": "MET-27",
+          "name": "Estadio Nacional",
+          "lat": -12.067,
+          "lng": -77.0335,
+          "order": 27,
+          "interchange": []
+        },
+        {
+          "id": "MET-28",
+          "name": "México",
+          "lat": -12.076,
+          "lng": -77.03,
+          "order": 28,
+          "interchange": []
+        },
+        {
+          "id": "MET-29",
+          "name": "Canadá",
+          "lat": -12.083,
+          "lng": -77.026,
+          "order": 29,
+          "interchange": []
+        },
+        {
+          "id": "MET-30",
+          "name": "Javier Prado",
+          "lat": -12.092,
+          "lng": -77.0225,
+          "order": 30,
+          "interchange": [
+            "CR"
+          ]
+        },
+        {
+          "id": "MET-31",
+          "name": "Canaval y Moreyra",
+          "lat": -12.098,
+          "lng": -77.023,
+          "order": 31,
+          "interchange": []
+        },
+        {
+          "id": "MET-32",
+          "name": "Aramburú",
+          "lat": -12.105,
+          "lng": -77.024,
+          "order": 32,
+          "interchange": []
+        },
+        {
+          "id": "MET-33",
+          "name": "Domingo Orué",
+          "lat": -12.11,
+          "lng": -77.0245,
+          "order": 33,
+          "interchange": []
+        },
+        {
+          "id": "MET-34",
+          "name": "Angamos",
+          "lat": -12.115,
+          "lng": -77.025,
+          "order": 34,
+          "interchange": []
+        },
+        {
+          "id": "MET-35",
+          "name": "Ricardo Palma",
+          "lat": -12.12,
+          "lng": -77.0252,
+          "order": 35,
+          "interchange": []
+        },
+        {
+          "id": "MET-36",
+          "name": "Benavides",
+          "lat": -12.125,
+          "lng": -77.0258,
+          "order": 36,
+          "interchange": []
+        },
+        {
+          "id": "MET-37",
+          "name": "28 de Julio",
+          "lat": -12.13,
+          "lng": -77.026,
+          "order": 37,
+          "interchange": []
+        },
+        {
+          "id": "MET-38",
+          "name": "Plaza de Flores",
+          "lat": -12.1345,
+          "lng": -77.0258,
+          "order": 38,
+          "interchange": []
+        },
+        {
+          "id": "MET-39",
+          "name": "Balta",
+          "lat": -12.143,
+          "lng": -77.023,
+          "order": 39,
+          "interchange": []
+        },
+        {
+          "id": "MET-40",
+          "name": "Bulevar",
+          "lat": -12.149,
+          "lng": -77.021,
+          "order": 40,
+          "interchange": []
+        },
+        {
+          "id": "MET-41",
+          "name": "Estadio Unión",
+          "lat": -12.156,
+          "lng": -77.017,
+          "order": 41,
+          "interchange": []
+        },
+        {
+          "id": "MET-42",
+          "name": "Escuela Militar",
+          "lat": -12.165,
+          "lng": -77.013,
+          "order": 42,
+          "interchange": []
+        },
+        {
+          "id": "MET-43",
+          "name": "Terminal Matellini",
+          "lat": -12.172,
+          "lng": -77.009,
+          "order": 43,
+          "interchange": []
+        }
+      ]
+    },
+    {
+      "id": "CR",
+      "name": "Corredor Rojo",
+      "short": "Rojo",
+      "mode": "corredor",
+      "status": "operational",
+      "color": "#E4002B",
+      "length_km": 26.0,
+      "stations_count": 12,
+      "avg_speed_kmh": 18,
+      "operating_hours": {
+        "start": "05:00",
+        "end": "23:00"
+      },
+      "headway_min": {
+        "peak": 4,
+        "offpeak": 8
+      },
+      "fleet": {
+        "vehicles": 220,
+        "capacity_per_vehicle": 100
+      },
+      "daily_riders": 300000,
+      "opened_year": 2014,
+      "stations": [
+        {
+          "id": "CR-01",
+          "name": "Javier Prado Este (Ate)",
+          "lat": -12.073,
+          "lng": -76.943,
+          "order": 1,
+          "interchange": []
+        },
+        {
+          "id": "CR-02",
+          "name": "Óvalo Santa Rosa",
+          "lat": -12.08,
+          "lng": -76.962,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "CR-03",
+          "name": "Javier Prado / Aviación",
+          "lat": -12.0885,
+          "lng": -76.988,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "CR-04",
+          "name": "Javier Prado / Corpac",
+          "lat": -12.0915,
+          "lng": -77.008,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "CR-05",
+          "name": "Javier Prado / Vía Expresa",
+          "lat": -12.092,
+          "lng": -77.022,
+          "order": 5,
+          "interchange": [
+            "MET"
+          ]
+        },
+        {
+          "id": "CR-06",
+          "name": "Javier Prado / Petit Thouars",
+          "lat": -12.093,
+          "lng": -77.031,
+          "order": 6,
+          "interchange": []
+        },
+        {
+          "id": "CR-07",
+          "name": "Javier Prado / Salaverry",
+          "lat": -12.09,
+          "lng": -77.045,
+          "order": 7,
+          "interchange": []
+        },
+        {
+          "id": "CR-08",
+          "name": "Pershing",
+          "lat": -12.083,
+          "lng": -77.06,
+          "order": 8,
+          "interchange": []
+        },
+        {
+          "id": "CR-09",
+          "name": "La Marina / Universitaria",
+          "lat": -12.079,
+          "lng": -77.08,
+          "order": 9,
+          "interchange": []
+        },
+        {
+          "id": "CR-10",
+          "name": "La Marina / Faucett",
+          "lat": -12.074,
+          "lng": -77.094,
+          "order": 10,
+          "interchange": []
+        },
+        {
+          "id": "CR-11",
+          "name": "Faucett / Venezuela",
+          "lat": -12.062,
+          "lng": -77.098,
+          "order": 11,
+          "interchange": []
+        },
+        {
+          "id": "CR-12",
+          "name": "Callao / Óscar Benavides",
+          "lat": -12.054,
+          "lng": -77.108,
+          "order": 12,
+          "interchange": []
+        }
+      ]
+    },
+    {
+      "id": "CA",
+      "name": "Corredor Azul",
+      "short": "Azul",
+      "mode": "corredor",
+      "status": "operational",
+      "color": "#1565C0",
+      "length_km": 20.0,
+      "stations_count": 11,
+      "avg_speed_kmh": 16,
+      "operating_hours": {
+        "start": "05:00",
+        "end": "23:00"
+      },
+      "headway_min": {
+        "peak": 4,
+        "offpeak": 8
+      },
+      "fleet": {
+        "vehicles": 180,
+        "capacity_per_vehicle": 100
+      },
+      "daily_riders": 250000,
+      "opened_year": 2015,
+      "stations": [
+        {
+          "id": "CA-01",
+          "name": "Tacna / Caquetá",
+          "lat": -12.043,
+          "lng": -77.035,
+          "order": 1,
+          "interchange": []
+        },
+        {
+          "id": "CA-02",
+          "name": "Tacna / Emancipación",
+          "lat": -12.05,
+          "lng": -77.038,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "CA-03",
+          "name": "Plaza San Martín",
+          "lat": -12.054,
+          "lng": -77.0378,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "CA-04",
+          "name": "Garcilaso de la Vega",
+          "lat": -12.0585,
+          "lng": -77.0372,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "CA-05",
+          "name": "Arequipa / 28 de Julio",
+          "lat": -12.0665,
+          "lng": -77.0345,
+          "order": 5,
+          "interchange": []
+        },
+        {
+          "id": "CA-06",
+          "name": "Arequipa / Canevaro",
+          "lat": -12.08,
+          "lng": -77.0335,
+          "order": 6,
+          "interchange": []
+        },
+        {
+          "id": "CA-07",
+          "name": "Arequipa / Javier Prado",
+          "lat": -12.0915,
+          "lng": -77.0325,
+          "order": 7,
+          "interchange": []
+        },
+        {
+          "id": "CA-08",
+          "name": "Arequipa / Angamos",
+          "lat": -12.109,
+          "lng": -77.03,
+          "order": 8,
+          "interchange": []
+        },
+        {
+          "id": "CA-09",
+          "name": "Ricardo Palma",
+          "lat": -12.118,
+          "lng": -77.0292,
+          "order": 9,
+          "interchange": []
+        },
+        {
+          "id": "CA-10",
+          "name": "Óvalo Miraflores",
+          "lat": -12.1215,
+          "lng": -77.0295,
+          "order": 10,
+          "interchange": []
+        },
+        {
+          "id": "CA-11",
+          "name": "Larco / Benavides",
+          "lat": -12.13,
+          "lng": -77.029,
+          "order": 11,
+          "interchange": []
+        }
+      ]
+    },
+    {
+      "id": "CM",
+      "name": "Corredor Morado",
+      "short": "Morado",
+      "mode": "corredor",
+      "status": "operational",
+      "color": "#7B2D8E",
+      "length_km": 18.0,
+      "stations_count": 10,
+      "avg_speed_kmh": 17,
+      "operating_hours": {
+        "start": "05:00",
+        "end": "23:00"
+      },
+      "headway_min": {
+        "peak": 5,
+        "offpeak": 9
+      },
+      "fleet": {
+        "vehicles": 120,
+        "capacity_per_vehicle": 100
+      },
+      "daily_riders": 130000,
+      "opened_year": 2020,
+      "stations": [
+        {
+          "id": "CM-01",
+          "name": "Bayóvar (SJL)",
+          "lat": -11.987,
+          "lng": -76.985,
+          "order": 1,
+          "interchange": [
+            "L1"
+          ]
+        },
+        {
+          "id": "CM-02",
+          "name": "Canto Grande",
+          "lat": -12.0,
+          "lng": -76.9945,
+          "order": 2,
+          "interchange": []
+        },
+        {
+          "id": "CM-03",
+          "name": "Las Flores",
+          "lat": -12.015,
+          "lng": -77.0,
+          "order": 3,
+          "interchange": []
+        },
+        {
+          "id": "CM-04",
+          "name": "Malecón Checa",
+          "lat": -12.0285,
+          "lng": -77.0055,
+          "order": 4,
+          "interchange": []
+        },
+        {
+          "id": "CM-05",
+          "name": "Puente Nuevo",
+          "lat": -12.035,
+          "lng": -77.0105,
+          "order": 5,
+          "interchange": []
+        },
+        {
+          "id": "CM-06",
+          "name": "Acho",
+          "lat": -12.04,
+          "lng": -77.023,
+          "order": 6,
+          "interchange": []
+        },
+        {
+          "id": "CM-07",
+          "name": "Plaza de Armas",
+          "lat": -12.0455,
+          "lng": -77.0295,
+          "order": 7,
+          "interchange": []
+        },
+        {
+          "id": "CM-08",
+          "name": "Abancay / Nicolás de Piérola",
+          "lat": -12.053,
+          "lng": -77.029,
+          "order": 8,
+          "interchange": []
+        },
+        {
+          "id": "CM-09",
+          "name": "Abancay / Grau",
+          "lat": -12.0585,
+          "lng": -77.027,
+          "order": 9,
+          "interchange": []
+        },
+        {
+          "id": "CM-10",
+          "name": "Estación Grau",
+          "lat": -12.062,
+          "lng": -77.025,
+          "order": 10,
+          "interchange": []
+        }
+      ]
+    }
+  ]
+}
