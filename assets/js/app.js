@@ -8,19 +8,55 @@
     return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0"); };
   const demandLabel = (d) => d > 0.72 ? "Hora punta" : d > 0.42 ? "Demanda media" : "Valle";
 
-  /* ---------- tema ---------- */
+  /* ---------- tema (oscuro por defecto) ---------- */
+  function themeLabel() {
+    const cur = document.documentElement.getAttribute("data-theme");
+    const isDark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    const l = $("themeLbl"); if (l) l.textContent = isDark ? "Modo claro" : "Modo oscuro";
+  }
   function initTheme() {
     const saved = localStorage.getItem("glt-theme");
-    if (saved) document.documentElement.setAttribute("data-theme", saved);
+    document.documentElement.setAttribute("data-theme", saved || "dark");
+    themeLabel();
     $("themeBtn").addEventListener("click", () => {
       const cur = document.documentElement.getAttribute("data-theme");
       const isDark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
       const next = isDark ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       localStorage.setItem("glt-theme", next);
+      themeLabel();
       if (window.__twin) window.__twin.draw();
       if (GLT.charts) GLT.charts.retheme();
     });
+  }
+
+  /* ---------- sidebar / nav / apoyo ---------- */
+  function initUI() {
+    const sb = $("sidebar"), scrim = $("scrim");
+    const openSb = (v) => { sb.classList.toggle("open", v); scrim.classList.toggle("show", v); };
+    const hb = $("hambBtn"); if (hb) hb.addEventListener("click", () => openSb(!sb.classList.contains("open")));
+    if (scrim) scrim.addEventListener("click", () => openSb(false));
+
+    const links = Array.from(document.querySelectorAll(".side-nav a"));
+    const map = {}; links.forEach((a) => { const id = a.getAttribute("href").slice(1); if ($(id)) map[id] = a; });
+    links.forEach((a) => a.addEventListener("click", () => openSb(false)));
+    try {
+      const obs = new IntersectionObserver((ents) => ents.forEach((e) => {
+        if (e.isIntersecting && map[e.target.id]) { links.forEach((l) => l.classList.remove("active")); map[e.target.id].classList.add("active"); }
+      }), { rootMargin: "-45% 0px -50% 0px" });
+      Object.keys(map).forEach((id) => obs.observe($(id)));
+    } catch (e) {}
+
+    document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(b.dataset.copy); const t = b.textContent; b.textContent = "¡Copiado!"; setTimeout(() => (b.textContent = t), 1500); } catch (e) {}
+    }));
+    const share = $("shareBtn");
+    if (share) share.addEventListener("click", async () => {
+      const d = { title: "Lima Transporte", text: "Gemelo digital del transporte urbano de Lima", url: location.href };
+      try { if (navigator.share) await navigator.share(d); else { await navigator.clipboard.writeText(location.href); share.textContent = "Enlace copiado"; setTimeout(() => (share.textContent = "Compartir"), 1500); } } catch (e) {}
+    });
+    const coffee = $("coffeeCard");
+    if (coffee) coffee.href = window.__COFFEE_URL__ || "https://www.buymeacoffee.com/";
   }
 
   /* ---------- KPIs ---------- */
@@ -104,6 +140,8 @@
   /* ---------- arranque ---------- */
   async function boot() {
     initTheme();
+    initUI();
+    if (GLT.chat) GLT.chat.init();
     $("year").textContent = new Date().getFullYear();
     try {
       const data = await GLT.load();

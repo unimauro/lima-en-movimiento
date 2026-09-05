@@ -3,44 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gemelo Digital · Transporte Urbano de Lima</title>
-<meta name="description" content="Gemelo digital del transporte urbano de Lima Metropolitana y Callao: mapa vivo con simulación de la red masiva (Metro, Metropolitano, corredores) y tablero de datos de movilidad.">
+<title>Lima Transporte · Gemelo Digital</title>
+<meta name="description" content="Lima Transporte — gemelo digital de la red de transporte urbano de Lima y Callao: mapa animado de la red masiva (Metro, Metropolitano, corredores) y tablero de datos de movilidad.">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lima Transporte">
+<meta property="og:title" content="Lima Transporte · Gemelo Digital del transporte urbano">
+<meta property="og:description" content="La red de Lima y Callao moviéndose en tiempo simulado: mapa vivo + tablero de datos de movilidad.">
+<meta property="og:url" content="https://unimauro.github.io/gemelo-lima-transporte/">
+<meta property="og:image" content="https://unimauro.github.io/gemelo-lima-transporte/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lima Transporte · Gemelo Digital">
+<meta name="twitter:description" content="La red de transporte de Lima y Callao moviéndose en tiempo simulado.">
+<meta name="twitter:image" content="https://unimauro.github.io/gemelo-lima-transporte/assets/og.png">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://ai.tunky.net">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-<!-- ===================== TOPBAR ===================== -->
-<header class="topbar">
-  <div class="brand">
+<!-- ===================== SIDEBAR ===================== -->
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="#gemelo">
     <span class="dot" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16"/><circle cx="8.5" cy="14" r="1"/><circle cx="15.5" cy="14" r="1"/><path d="M8 21l1.5-3M16 21l-1.5-3"/></svg>
     </span>
-    <div><b>Gemelo Digital · Transporte de Lima</b><span>Metropolitana y Callao — maqueta de datos</span></div>
-  </div>
-  <nav>
-    <a href="#gemelo">Gemelo</a>
-    <a href="#tablero">Tablero</a>
-    <a href="#contexto">Contexto</a>
-    <a href="#fuentes">Fuentes</a>
-    <button class="iconbtn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
-    </button>
-  </nav>
-</header>
+    <div><b>Lima Transporte</b><span>Gemelo digital · Lima y Callao</span></div>
+  </a>
 
-<!-- ===================== HERO / GEMELO ===================== -->
+  <nav class="side-nav">
+    <a href="#gemelo" class="active"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Gemelo en vivo</a>
+    <a href="#indicadores"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Indicadores</a>
+    <a href="#tablero"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/><rect x="3" y="14" width="8" height="7" rx="1"/></svg>Tablero</a>
+    <a href="#contexto"><svg viewBox="0 0 24 24"><path d="M12 8v5M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg>Contexto</a>
+    <a href="#apoyo"><svg viewBox="0 0 24 24"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>Apóyalo</a>
+    <a href="#fuentes"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Fuentes</a>
+  </nav>
+
+  <div class="side-foot">
+    <button class="side-theme" id="themeBtn">
+      <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+      <span id="themeLbl">Modo claro</span>
+    </button>
+    <a class="side-mini" href="https://github.com/unimauro/gemelo-lima-transporte" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1 0-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5 18 5.3 18 5.3c.6 1.6.1 2.8.1 3.2.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5A11.5 11.5 0 0 0 12 .5z"/></svg>
+      Código en GitHub
+    </a>
+  </div>
+</aside>
+
+<!-- ===================== MOBILE TOPBAR ===================== -->
+<div class="mtopbar">
+  <button class="hamb" id="hambBtn" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  <b>Lima Transporte</b>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<!-- ===================== MAIN ===================== -->
+<main class="main">
+
+<!-- HERO / GEMELO -->
 <section class="hero wrap" id="gemelo">
   <div class="hero-head">
     <div class="eyebrow">Gemelo digital en vivo</div>
-    <h1>La red masiva de Lima, moviéndose en tiempo simulado</h1>
+    <h1>La red de Lima, moviéndose en tiempo simulado</h1>
     <p id="heroSub">Una réplica virtual de los corredores de transporte masivo de Lima y Callao.
       Los vehículos circulan según frecuencias reales que cambian con la hora del día. Pulsa play y avanza el reloj.</p>
   </div>
 
   <div class="twin">
-    <!-- MAP -->
     <div class="card mapcard">
       <canvas id="twinCanvas"></canvas>
       <div class="map-overlay">
@@ -55,7 +93,6 @@
       <div class="map-legend" id="mapLegend"></div>
     </div>
 
-    <!-- PANEL -->
     <div class="card panel">
       <div class="controls">
         <h3>Controles de simulación</h3>
@@ -73,7 +110,6 @@
           <input type="range" id="hour" min="0" max="1439" step="1" value="420">
         </div>
       </div>
-
       <div>
         <h3>Estado de la red</h3>
         <div class="livestats" style="margin-top:10px">
@@ -83,13 +119,12 @@
           <div class="stat"><div class="v tnum" id="stKm">—</div><div class="k">km de red masiva</div></div>
         </div>
       </div>
-      <p class="hint">Toca una estación en el mapa para ver su información. Usa la leyenda para filtrar por línea.
-        Las frecuencias siguen la curva de demanda horaria de la ciudad.</p>
+      <p class="hint">Toca una estación en el mapa para ver su información. Usa la leyenda para filtrar por línea.</p>
     </div>
   </div>
 </section>
 
-<!-- ===================== KPIs ===================== -->
+<!-- KPIs -->
 <section class="wrap" id="indicadores" style="padding-top:8px">
   <div class="eyebrow">Indicadores de la red</div>
   <h2 class="sec-title">Lima en cifras</h2>
@@ -97,12 +132,11 @@
   <div class="kpis" id="kpiStrip" style="margin-top:18px"><div class="loading">Cargando indicadores…</div></div>
 </section>
 
-<!-- ===================== TABLERO ===================== -->
+<!-- TABLERO -->
 <section class="wrap" id="tablero">
   <div class="eyebrow">Tablero de movilidad</div>
   <h2 class="sec-title">Cómo se mueve Lima</h2>
   <p class="sec-sub">Reparto de viajes, demanda por sistema y comparación regional. La curva de demanda es la misma que gobierna la simulación de arriba.</p>
-
   <div class="grid2" style="margin-top:20px">
     <div class="card chartcard">
       <h3>Reparto modal de viajes</h3>
@@ -134,25 +168,49 @@
   </div>
 </section>
 
-<!-- ===================== CONTEXTO ===================== -->
+<!-- CONTEXTO -->
 <section class="wrap" id="contexto">
   <div class="eyebrow">Contexto</div>
   <h2 class="sec-title">Una reforma a medio camino</h2>
   <div class="prose" id="ctxIntro" style="margin-top:12px"></div>
-
   <div class="authority" id="ctxAuthority"></div>
-
   <h3 style="margin-top:34px; font-size:19px">Línea de tiempo</h3>
   <div class="timeline" id="ctxTimeline"></div>
-
   <h3 style="margin-top:14px; font-size:19px">Retos abiertos</h3>
   <div class="cardgrid" id="ctxChallenges"></div>
-
   <h3 style="margin-top:34px; font-size:19px">Lo que viene</h3>
   <div class="cardgrid" id="ctxFuture"></div>
 </section>
 
-<!-- ===================== FUENTES ===================== -->
+<!-- APOYO -->
+<section class="wrap" id="apoyo">
+  <div class="eyebrow">Apoya el proyecto</div>
+  <h2 class="sec-title">Invítame un café ☕</h2>
+  <p class="sec-sub">Este gemelo digital es un proyecto abierto y educativo. Si te fue útil, puedes apoyar su mantenimiento y que sume más líneas y datos reales.</p>
+  <div class="support" id="support">
+    <div class="sup-card yape">
+      <div class="sup-h"><span class="sup-ic">Y</span><b>Yape</b></div>
+      <p>Yapea a nombre de <b>Carlos M. Cárdenas</b></p>
+      <div class="sup-num tnum" id="yapeNum">940 584 307</div>
+      <button class="sup-btn" data-copy="940584307">Copiar número</button>
+    </div>
+    <a class="sup-card coffee" id="coffeeCard" href="#" target="_blank" rel="noopener">
+      <div class="sup-h"><span class="sup-ic">☕</span><b>Cómprame un café</b></div>
+      <p>Un aporte único vía Buy Me a Coffee.</p>
+      <span class="sup-btn">Ir a la página →</span>
+    </a>
+    <div class="sup-card share">
+      <div class="sup-h"><span class="sup-ic">↗</span><b>Compártelo</b></div>
+      <p>Ayuda difundiendo el proyecto.</p>
+      <div class="sup-actions">
+        <button class="sup-btn" id="shareBtn">Compartir</button>
+        <a class="sup-btn ghost" href="https://github.com/unimauro/gemelo-lima-transporte" target="_blank" rel="noopener">★ GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUENTES -->
 <section class="wrap" id="fuentes">
   <div class="eyebrow">Metodología y fuentes</div>
   <h2 class="sec-title">Qué es real y qué es maqueta</h2>
@@ -164,16 +222,33 @@
   <div class="wrap">
     <span class="badge">Gemelo digital · maqueta educativa</span>
     <span>Datos de referencia de fuentes públicas (ATU, operadores, estudios de movilidad).</span>
-    <span>Geometría de rutas y frecuencias aproximadas.</span>
-    <span style="margin-left:auto">Hecho con datos abiertos · <span id="year"></span></span>
+    <span style="margin-left:auto">Lima Transporte · <span id="year"></span></span>
   </div>
 </footer>
+</main>
 
-<!-- Chart.js desde cdnjs (permitido) -->
+<!-- ===================== CHATBOT ===================== -->
+<button class="chat-fab" id="chatFab" aria-label="Abrir asistente">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.7 8.7 0 0 1-4-.9L3 20l1.1-4.9a8.4 8.4 0 0 1-1-4 8.4 8.4 0 0 1 8.5-8.4 8.4 8.4 0 0 1 8.4 8.3z"/></svg>
+</button>
+<div class="chat-panel" id="chatPanel" hidden>
+  <div class="chat-top">
+    <span class="chat-dot"></span>
+    <div><b>Asistente de Lima Transporte</b><span>IA · pregunta sobre la red</span></div>
+    <button class="chat-x" id="chatClose" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="chat-log" id="chatLog"></div>
+  <form class="chat-form" id="chatForm">
+    <input id="chatInput" type="text" autocomplete="off" placeholder="Ej.: ¿Qué es el Metropolitano?" maxlength="500">
+    <button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </form>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/twin.js"></script>
 <script src="assets/js/charts.js"></script>
+<script src="assets/js/chat.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>

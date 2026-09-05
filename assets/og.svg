@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111417"/><stop offset="1" stop-color="#0b0e10"/>
+    </linearGradient>
+    <linearGradient id="ic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3987e5"/><stop offset="1" stop-color="#199e70"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- líneas de red estilizadas -->
+  <g fill="none" stroke-width="7" stroke-linecap="round" opacity="0.9">
+    <path d="M80 470 C 300 470, 360 300, 620 300 S 980 210, 1140 210" stroke="#2E7D32"/>
+    <path d="M80 540 C 380 540, 520 420, 820 420 S 1050 360, 1140 360" stroke="#00A0DF"/>
+    <path d="M120 250 C 320 250, 420 150, 720 150" stroke="#E4002B"/>
+    <path d="M60 360 C 260 360, 300 560, 560 560 S 900 520, 1140 520" stroke="#F2A900"/>
+  </g>
+  <g>
+    <circle cx="620" cy="300" r="9" fill="#fff"/><circle cx="820" cy="420" r="9" fill="#fff"/>
+    <circle cx="360" cy="300" r="9" fill="#fff"/><circle cx="720" cy="150" r="9" fill="#fff"/>
+  </g>
+  <!-- icono -->
+  <rect x="80" y="70" width="96" height="96" rx="24" fill="url(#ic)"/>
+  <g fill="none" stroke="#fff" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(80,70) scale(1.5)">
+    <rect x="20" y="13" width="24" height="27" rx="6"/><path d="M20 28h24"/><path d="M25 46l-4 6M39 46l4 6"/>
+  </g>
+  <text x="205" y="120" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="52" font-weight="800" fill="#fff">Lima Transporte</text>
+  <text x="205" y="160" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="26" font-weight="500" fill="#9aa0a6">Gemelo digital · red de transporte urbano</text>
+  <text x="80" y="330" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="70" font-weight="800" fill="#fff">La ciudad,</text>
+  <text x="80" y="410" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="70" font-weight="800" fill="#fff">moviéndose en</text>
+  <text x="80" y="490" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="70" font-weight="800" fill="url(#ic)">tiempo simulado</text>
+  <text x="1120" y="590" text-anchor="end" font-family="system-ui,Segoe UI,Arial" font-size="22" fill="#6b7075">Metro · Metropolitano · Corredores — Lima y Callao</text>
+</svg>
