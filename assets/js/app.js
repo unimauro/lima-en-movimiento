@@ -24,8 +24,9 @@
       const next = isDark ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       localStorage.setItem("glt-theme", next);
+      document.querySelector('meta[name=theme-color]').setAttribute("content", next === "dark" ? "#0d0d0d" : "#f4f5f3");
       themeLabel();
-      if (window.__twin) window.__twin.draw();
+      if (window.__twin) window.__twin.setTheme();
       if (GLT.charts) GLT.charts.retheme();
     });
   }
@@ -149,9 +150,10 @@
       renderContext(data.context);
       GLT.charts.buildAll(data);
 
-      twin = new GLT.Twin($("twinCanvas"), data);
+      twin = new GLT.Twin($("twinMap"), data);
       window.__twin = twin;
       renderLegend(data.network, twin);
+      const fit = $("mapFit"); if (fit) fit.addEventListener("click", () => twin.fit());
 
       const ops = (data.network.lines || []).filter((l) => l.status === "operational");
       $("stLines").textContent = (data.network.lines || []).length;

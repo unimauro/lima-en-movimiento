@@ -1,52 +1,81 @@
 /* ============================================================
-   chat.js — Asistente IA (gateway ai.tunky.net · POST /v1/chat)
+   chat.js — Asistente de Lima en Movimiento
+   Responde con los datos reales del sitio; usa el gateway
+   ai.tunky.net (POST /v1/chat) cuando hay token configurado.
    ============================================================ */
 (function () {
   "use strict";
 
   // ---- CONFIG -------------------------------------------------------------
-  // El gateway ai.tunky.net exige el header X-Client-Token y valida el Origin
-  // (unimauro.github.io ya está en su allowlist). Pega aquí el token del cliente:
+  // El gateway ai.tunky.net valida el Origin (unimauro.github.io ya permitido)
+  // y exige el header X-Client-Token. Pega el token para activar la IA:
   const CHAT = {
     endpoint: "https://ai.tunky.net/v1/chat",
-    token: "",                       // <-- X-Client-Token de ai.tunky.net
-    system: "Eres el asistente de 'Lima Transporte', un gemelo digital del transporte urbano de Lima y Callao (Metro, Metropolitano y corredores). Responde en español, breve y claro, sobre movilidad y transporte de Lima.",
+    token: "",   // <-- X-Client-Token de ai.tunky.net (opcional; sin él responde con datos locales)
+    system: "Eres el asistente de 'Lima en Movimiento', un gemelo digital del transporte urbano de Lima y Callao (Metro, Metropolitano y corredores). Responde en español, breve y claro.",
   };
   // ------------------------------------------------------------------------
 
   const $ = (id) => document.getElementById(id);
   const history = [];
   let open = false, busy = false, greeted = false;
-
-  function el(cls, html) { const d = document.createElement("div"); d.className = cls; if (html != null) d.innerHTML = html; return d; }
   const esc = (s) => String(s).replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]));
+  const norm = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const el = (cls, html) => { const d = document.createElement("div"); d.className = cls; if (html != null) d.innerHTML = html; return d; };
 
-  function add(role, text) {
-    const log = $("chatLog");
-    const m = el("msg " + role, esc(text));
-    log.appendChild(m); log.scrollTop = log.scrollHeight; return m;
-  }
-  function typing() {
-    const log = $("chatLog");
-    const m = el("msg bot", '<span class="typing"><i></i><i></i><i></i></span>');
-    log.appendChild(m); log.scrollTop = log.scrollHeight; return m;
-  }
+  function add(role, text) { const log = $("chatLog"); log.appendChild(el("msg " + role, esc(text))); log.scrollTop = log.scrollHeight; }
+  function typing() { const log = $("chatLog"); const m = el("msg bot", '<span class="typing"><i></i><i></i><i></i></span>'); log.appendChild(m); log.scrollTop = log.scrollHeight; return m; }
 
   function suggestions() {
     const wrap = el("chat-suggest");
-    ["¿Qué es el Metropolitano?", "¿Cuántas estaciones tiene la Línea 1?", "¿Cómo va la Línea 2?"]
-      .forEach((q) => { const b = document.createElement("button"); b.textContent = q;
-        b.onclick = () => { wrap.remove(); send(q); }; wrap.appendChild(b); });
+    ["¿Qué es el Metropolitano?", "¿Cuántas estaciones tiene la Línea 1?", "Reparto modal", "Pasajeros por día"]
+      .forEach((q) => { const b = document.createElement("button"); b.textContent = q; b.onclick = () => { wrap.remove(); handle(q); }; wrap.appendChild(b); });
     $("chatLog").appendChild(wrap);
   }
+  function greet() { if (greeted) return; greeted = true;
+    add("bot", "¡Hola! 👋 Soy el asistente de Lima en Movimiento. Pregúntame sobre el Metro, el Metropolitano, los corredores o la movilidad de la ciudad.");
+    suggestions(); }
 
-  function greet() {
-    if (greeted) return; greeted = true;
-    add("bot", "¡Hola! 👋 Soy el asistente de Lima Transporte. Pregúntame sobre el Metro, el Metropolitano, los corredores o la movilidad de la ciudad.");
-    suggestions();
+  // -------- respondedor local (datos reales del sitio) --------
+  const MODEL = { metro: "Metro (tren urbano)", brt: "BRT (bus de tránsito rápido)", corredor: "corredor de buses", tren_urbano: "tren urbano" };
+  const STATUSL = { operational: "en operación", construction: "en construcción", planned: "en planificación" };
+  function lineByText(t, lines) {
+    const map = [["linea 1", "L1"], ["l1", "L1"], ["linea 2", "L2"], ["l2", "L2"], ["linea 3", "L3"], ["l3", "L3"],
+      ["linea 4", "L4"], ["l4", "L4"], ["metropolitano", "MET"], ["corredor rojo", "CR"], ["javier prado", "CR"],
+      ["corredor azul", "CA"], ["arequipa", "CA"], ["corredor morado", "CM"], ["morado", "CM"], ["rojo", "CR"], ["azul", "CA"]];
+    for (const [k, id] of map) if (t.includes(k)) { const l = lines.find((x) => x.id === id); if (l) return l; }
+    return null;
+  }
+  function localAnswer(q) {
+    const d = GLT.data || {}, net = d.network || {}, ind = d.indicators || {}, ctx = d.context || {};
+    const lines = net.lines || [], t = norm(q);
+    const L = lineByText(t, lines);
+    const est = (l) => l.stations_count || (l.stations || []).length;
+
+    if (/estacion/.test(t) && /(cuant|numero|tiene)/.test(t)) {
+      if (L) return `La ${L.name} tiene ${est(L)} estaciones${L.length_km ? ` a lo largo de ${L.length_km} km` : ""}.`;
+      const tot = lines.reduce((a, l) => a + est(l), 0);
+      return `La red modelada suma ${tot} estaciones en ${lines.length} líneas (Metro, Metropolitano y corredores).`;
+    }
+    if (t.includes("modal") || t.includes("reparto") || (t.includes("como") && t.includes("mueve"))) {
+      const ms = (ind.modal_share || []).slice().sort((a, b) => b.pct - a.pct).slice(0, 5);
+      if (ms.length) return "Reparto modal de los viajes en Lima: " + ms.map((m) => `${m.mode} ${m.pct}%`).join(" · ") + ".";
+    }
+    if (t.includes("pasajero") || t.includes("demanda") || t.includes("viajes") || t.includes("cuanta gente")) {
+      const rb = (ind.ridership_by_mode || []).slice().sort((a, b) => b.daily - a.daily).slice(0, 5);
+      if (rb.length) return "Pasajeros por día (aprox.): " + rb.map((r) => `${r.mode} ${GLT.fmt.short(r.daily)}`).join(" · ") + ".";
+    }
+    if (t.includes("futuro") || t.includes("proyecto") || t.includes("viene")) {
+      const f = (ctx.future || []).slice(0, 4).map((x) => x.title);
+      if (f.length) return "Proyectos en marcha: " + f.join(", ") + ".";
+    }
+    if (t.includes("atu") || t.includes("autoridad")) { if (ctx.authority) return ctx.authority.text || ctx.authority.name; }
+    if (L) return `${L.name} — ${MODEL[L.mode] || L.mode}, ${STATUSL[L.status] || L.status}. ${L.length_km ? L.length_km + " km, " : ""}${est(L)} estaciones${L.daily_riders ? `, ~${GLT.fmt.short(L.daily_riders)} pasajeros/día` : ""}.`;
+    if ((t.includes("que es") || t.includes("explica")) && lines.length)
+      return "Lima en Movimiento modela la red masiva de Lima y Callao: " + lines.map((l) => l.short || l.id).join(", ") + ". Pregúntame por una línea concreta.";
+    return 'Puedo contarte sobre la red de Lima: prueba “¿cuántas estaciones tiene la Línea 1?”, “¿qué es el Metropolitano?”, “reparto modal” o “pasajeros por día”.';
   }
 
-  // extrae el texto de respuesta de formatos variados del gateway
   function pick(data) {
     if (!data) return null;
     if (typeof data === "string") return data;
@@ -54,57 +83,46 @@
       (data.choices && data.choices[0] && ((data.choices[0].message && data.choices[0].message.content) || data.choices[0].text)) || null;
   }
 
-  async function send(text) {
+  async function gateway(text) {
+    const res = await fetch(CHAT.endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Client-Token": CHAT.token },
+      body: JSON.stringify({ message: text, messages: history.slice(-12), system: CHAT.system }),
+    });
+    const raw = await res.text(); let data; try { data = JSON.parse(raw); } catch (e) { data = raw; }
+    if (!res.ok) throw new Error((data && data.error) || "HTTP " + res.status);
+    return pick(data) || "…";
+  }
+
+  async function handle(text) {
     text = (text || "").trim(); if (!text || busy) return;
     add("me", text); history.push({ role: "user", content: text });
     busy = true; $("chatSend").disabled = true;
     const t = typing();
+    let reply;
     try {
-      const res = await fetch(CHAT.endpoint, {
-        method: "POST",
-        headers: Object.assign({ "Content-Type": "application/json" }, CHAT.token ? { "X-Client-Token": CHAT.token } : {}),
-        body: JSON.stringify({ message: text, messages: history.slice(-12), system: CHAT.system }),
-      });
-      const raw = await res.text();
-      let data; try { data = JSON.parse(raw); } catch (e) { data = raw; }
-      t.remove();
-      if (!res.ok) {
-        const code = res.status;
-        const emsg = (data && data.error) ? data.error : ("HTTP " + code);
-        if (code === 401 || /autoriz|token|client/i.test(emsg)) {
-          add("err", "El asistente aún no está configurado: falta el token de ai.tunky.net (X-Client-Token). Cuando lo tengas, se activa.");
-        } else if (code === 403 || /origen/i.test(emsg)) {
-          add("err", "Este dominio no está autorizado en el gateway ai.tunky.net todavía.");
-        } else {
-          add("err", "No pude responder ahora (" + emsg + "). Inténtalo de nuevo en un momento.");
-        }
-        return;
-      }
-      const reply = pick(data) || "…";
-      add("bot", reply); history.push({ role: "assistant", content: reply });
-    } catch (err) {
-      t.remove();
-      add("err", "Sin conexión con el asistente. Revisa tu red e inténtalo otra vez.");
-    } finally {
-      busy = false; $("chatSend").disabled = false; $("chatInput").focus();
-    }
+      if (CHAT.token) { try { reply = await gateway(text); } catch (e) { reply = localAnswer(text); } }
+      else reply = localAnswer(text);
+    } catch (e) { reply = localAnswer(text); }
+    t.remove(); add("bot", reply); history.push({ role: "assistant", content: reply });
+    busy = false; $("chatSend").disabled = false; $("chatInput").focus();
   }
 
   function toggle(v) {
     open = v == null ? !open : v;
     $("chatPanel").hidden = !open;
-    if (open) { greet(); setTimeout(() => $("chatInput").focus(), 50); }
+    $("chatFab").classList.toggle("hide", open);
+    if (open) { greet(); setTimeout(() => $("chatInput").focus(), 60); }
   }
 
   function init() {
-    // añade id al botón de enviar (submit) para poder deshabilitarlo
     const form = $("chatForm"); form.querySelector("button[type=submit]").id = "chatSend";
     $("chatFab").addEventListener("click", () => toggle());
     $("chatClose").addEventListener("click", () => toggle(false));
-    form.addEventListener("submit", (e) => { e.preventDefault(); const i = $("chatInput"); const v = i.value; i.value = ""; send(v); });
+    form.addEventListener("submit", (e) => { e.preventDefault(); const i = $("chatInput"), v = i.value; i.value = ""; handle(v); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) toggle(false); });
   }
 
   window.GLT = window.GLT || {};
-  window.GLT.chat = { init, send };
+  window.GLT.chat = { init, handle };
 })();

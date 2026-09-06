@@ -24,8 +24,8 @@
   <g fill="none" stroke="#fff" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(80,70) scale(1.5)">
     <rect x="20" y="13" width="24" height="27" rx="6"/><path d="M20 28h24"/><path d="M25 46l-4 6M39 46l4 6"/>
   </g>
-  <text x="205" y="120" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="52" font-weight="800" fill="#fff">Lima Transporte</text>
-  <text x="205" y="160" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="26" font-weight="500" fill="#9aa0a6">Gemelo digital · red de transporte urbano</text>
+  <text x="205" y="120" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="52" font-weight="800" fill="#fff">Lima en Movimiento</text>
+  <text x="205" y="160" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="26" font-weight="500" fill="#9aa0a6">Gemelo digital de la red de transporte de Lima y Callao</text>
   <text x="80" y="330" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="70" font-weight="800" fill="#fff">La ciudad,</text>
   <text x="80" y="410" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="70" font-weight="800" fill="#fff">moviéndose en</text>
   <text x="80" y="490" font-family="system-ui,Segoe UI,Helvetica,Arial" font-size="70" font-weight="800" fill="url(#ic)">tiempo simulado</text>

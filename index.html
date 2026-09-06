@@ -3,26 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lima Transporte · Gemelo Digital</title>
-<meta name="description" content="Lima Transporte — gemelo digital de la red de transporte urbano de Lima y Callao: mapa animado de la red masiva (Metro, Metropolitano, corredores) y tablero de datos de movilidad.">
+<title>Lima en Movimiento · Gemelo Digital del transporte</title>
+<meta name="description" content="Lima en Movimiento — gemelo digital de la red de transporte urbano de Lima y Callao: mapa real con la red masiva (Metro, Metropolitano, corredores) animada en tiempo simulado y tablero de datos de movilidad.">
 <meta name="theme-color" content="#0d0d0d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Lima Transporte">
-<meta property="og:title" content="Lima Transporte · Gemelo Digital del transporte urbano">
-<meta property="og:description" content="La red de Lima y Callao moviéndose en tiempo simulado: mapa vivo + tablero de datos de movilidad.">
+<meta property="og:site_name" content="Lima en Movimiento">
+<meta property="og:title" content="Lima en Movimiento · Gemelo Digital del transporte">
+<meta property="og:description" content="La red de Lima y Callao moviéndose en tiempo simulado: mapa real + tablero de datos de movilidad.">
 <meta property="og:url" content="https://unimauro.github.io/gemelo-lima-transporte/">
 <meta property="og:image" content="https://unimauro.github.io/gemelo-lima-transporte/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lima Transporte · Gemelo Digital">
+<meta name="twitter:title" content="Lima en Movimiento · Gemelo Digital">
 <meta name="twitter:description" content="La red de transporte de Lima y Callao moviéndose en tiempo simulado.">
 <meta name="twitter:image" content="https://unimauro.github.io/gemelo-lima-transporte/assets/og.png">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link rel="preconnect" href="https://ai.tunky.net">
+<link rel="preconnect" href="https://basemaps.cartocdn.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
@@ -34,7 +36,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16"/><circle cx="8.5" cy="14" r="1"/><circle cx="15.5" cy="14" r="1"/><path d="M8 21l1.5-3M16 21l-1.5-3"/></svg>
     </span>
-    <div><b>Lima Transporte</b><span>Gemelo digital · Lima y Callao</span></div>
+    <div><b>Lima en Movimiento</b><span>Gemelo digital · Lima y Callao</span></div>
   </a>
 
   <nav class="side-nav">
@@ -62,7 +64,7 @@
 <!-- ===================== MOBILE TOPBAR ===================== -->
 <div class="mtopbar">
   <button class="hamb" id="hambBtn" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
-  <b>Lima Transporte</b>
+  <b>Lima en Movimiento</b>
 </div>
 <div class="scrim" id="scrim"></div>
 
@@ -74,22 +76,26 @@
   <div class="hero-head">
     <div class="eyebrow">Gemelo digital en vivo</div>
     <h1>La red de Lima, moviéndose en tiempo simulado</h1>
-    <p id="heroSub">Una réplica virtual de los corredores de transporte masivo de Lima y Callao.
-      Los vehículos circulan según frecuencias reales que cambian con la hora del día. Pulsa play y avanza el reloj.</p>
+    <p id="heroSub">Una réplica virtual de la red masiva de Lima y Callao sobre el mapa real de la ciudad.
+      Los vehículos circulan según frecuencias que cambian con la hora del día. Pulsa play, avanza el reloj y usa el mapa: acércate, aléjate y navega las calles.</p>
   </div>
 
   <div class="twin">
     <div class="card mapcard">
-      <canvas id="twinCanvas"></canvas>
-      <div class="map-overlay">
-        <span class="chip">Vehículos activos <b id="ovVeh">—</b></span>
-        <span class="chip">Frecuencia <b id="ovFreq">—</b></span>
+      <div id="twinMap"></div>
+      <div class="map-hud">
+        <div class="map-clock">
+          <div class="t tnum" id="ovClock">--:--</div>
+          <div class="d" id="ovPeak">—</div>
+        </div>
+        <div class="hud-chips">
+          <span class="chip">Vehículos <b id="ovVeh">—</b></span>
+          <span class="chip">Frecuencia <b id="ovFreq">—</b></span>
+        </div>
       </div>
-      <div class="map-clock">
-        <div class="t tnum" id="ovClock">--:--</div>
-        <div class="d" id="ovPeak">—</div>
-      </div>
-      <div class="map-tooltip" id="mapTip"></div>
+      <button class="map-fit" id="mapFit" title="Centrar en la red" aria-label="Centrar en la red">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      </button>
       <div class="map-legend" id="mapLegend"></div>
     </div>
 
@@ -244,6 +250,7 @@
   </form>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/twin.js"></script>
