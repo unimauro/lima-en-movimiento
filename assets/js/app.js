@@ -120,8 +120,8 @@
     const map = L.map(el, { zoomControl: true, attributionControl: true, scrollWheelZoom: false });
     map.attributionControl.setPrefix(false);
     let tiles; const setT = () => { if (tiles) map.removeLayer(tiles);
-      const u = dark() ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-      tiles = L.tileLayer(u, { subdomains: "abcd", maxZoom: 18, attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(map); };
+      const u = dark() ? "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}" : "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
+      tiles = L.tileLayer(u, { maxZoom: 19, maxNativeZoom: 16, attribution: 'Tiles &copy; Esri' }).addTo(map); };
     setT();
     const R = { alta: 17, "media-alta": 14, media: 12, baja: 8 }, b = [];
     (S.affected_zones || []).forEach((z) => {

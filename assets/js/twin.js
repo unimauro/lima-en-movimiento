@@ -6,10 +6,10 @@
   "use strict";
 
   const TILES = {
-    dark:  { url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",  sub: "abcd" },
-    light: { url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", sub: "abcd" },
+    dark:  { url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}" },
+    light: { url: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" },
   };
-  const ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+  const ATTR = 'Tiles &copy; <a href="https://www.esri.com/">Esri</a> — Esri, HERE, Garmin, &copy; OpenStreetMap contributors';
   const MODE = {
     metro:{line:5,veh:5}, tren_urbano:{line:5,veh:5}, brt:{line:4,veh:4.4},
     corredor:{line:3.5,veh:3.8}, default:{line:3.5,veh:4},
@@ -88,7 +88,7 @@
     _setTiles() {
       const L = window.L, cfg = this.isDark() ? TILES.dark : TILES.light;
       if (this.tiles) this.map.removeLayer(this.tiles);
-      this.tiles = L.tileLayer(cfg.url, { subdomains: cfg.sub, attribution: ATTR, maxZoom: 19, detectRetina: true }).addTo(this.map);
+      this.tiles = L.tileLayer(cfg.url, { attribution: ATTR, maxZoom: 19, maxNativeZoom: 16 }).addTo(this.map);
     }
     setTheme() {
       this._setTiles();
