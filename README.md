@@ -38,12 +38,23 @@ pico/valle** siguiendo la curva de demanda real.
 │   ├── charts.js           # dashboards (Chart.js)
 │   └── app.js              # orquestador (UI y controles)
 ├── data/
-│   ├── network.json        # líneas + estaciones (coords) + flota + frecuencias
-│   ├── routes.geojson      # polilíneas de cada corredor
+│   ├── network.json        # líneas + estaciones (coords reales OSM) + flota + frecuencias
+│   ├── routes.geojson      # polilíneas de cada corredor (OpenStreetMap)
 │   ├── indicators.json     # KPIs, reparto modal, demanda, series, comparativas
-│   └── context.json        # narrativa e historia
+│   ├── context.json        # narrativa e historia
+│   ├── fleet.json          # parque automotor: histórico + proyección + composición
+│   ├── security.json       # seguridad: extorsión y ataques al transporte (agregado, con fuentes)
+│   ├── lines_detail.json   # ficha por línea (operador, tarifa, material, hitos)
+│   └── osm/                # extractos crudos de OpenStreetMap por sistema
 └── SPEC.md                 # especificación y esquemas de datos
 ```
+
+## Contenido
+- **Gemelo en vivo** — mapa real (Leaflet + OSM/CARTO) con la red masiva animada; zoom, pan, búsqueda de estaciones y ficha al hacer clic en una línea.
+- **Tablero** — reparto modal, demanda horaria, crecimiento de la red y comparativas.
+- **Parque automotor** — histórico del parque vehicular y **simulador de proyección** a futuro.
+- **Seguridad en el transporte** — extorsión (“cupos”) y ataques a transportistas: cifras **agregadas** y **zonas** más afectadas, todo con fuentes públicas. No se atribuyen hechos a rutas o empresas concretas.
+- **Chatbot** — responde con los datos reales del sitio; se conecta al gateway `ai.tunky.net` cuando se configura el token.
 
 ## Uso local
 

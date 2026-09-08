@@ -70,6 +70,19 @@
       if (f.length) return "Proyectos en marcha: " + f.join(", ") + ".";
     }
     if (t.includes("atu") || t.includes("autoridad")) { if (ctx.authority) return ctx.authority.text || ctx.authority.name; }
+    if (/(parque|automotor|autos|vehicul|motoriz|congestion|cuantos carros)/.test(t)) {
+      const F = d.fleet; if (F) {
+        const k = (F.kpis || [])[0]; const p = F.projection || {};
+        return `${F.scope ? "En " + F.scope + ", el" : "El"} parque vehicular ${k ? "es de ~" + GLT.fmt.short(k.value) + " vehículos" : "sigue creciendo"}${p.annual_growth_pct ? ` y crece ~${p.annual_growth_pct}% al año` : ""}. Mira la simulación en la sección “Parque automotor”.`;
+      }
+    }
+    if (/(extorsi|cupos?|asesinat|matan|mataron|crimen|seguridad|violencia|choferes)/.test(t)) {
+      const S = d.security; if (S) {
+        const zonas = (S.affected_zones || []).slice(0, 4).map((z) => z.name).join(", ");
+        const k = (S.kpis || [])[0];
+        return `La extorsión (“cupos”) y los ataques a transportistas golpean sobre todo al transporte convencional (combis y cústers).${k ? " " + k.label + ": " + GLT.fmt.int(k.value) + "." : ""}${zonas ? " Distritos más afectados: " + zonas + "." : ""} Detalles y fuentes en la sección “Seguridad”. (Datos agregados de fuentes públicas, no por ruta.)`;
+      }
+    }
     if (L) return `${L.name} — ${MODEL[L.mode] || L.mode}, ${STATUSL[L.status] || L.status}. ${L.length_km ? L.length_km + " km, " : ""}${est(L)} estaciones${L.daily_riders ? `, ~${GLT.fmt.short(L.daily_riders)} pasajeros/día` : ""}.`;
     if ((t.includes("que es") || t.includes("explica")) && lines.length)
       return "Lima en Movimiento modela la red masiva de Lima y Callao: " + lines.map((l) => l.short || l.id).join(", ") + ". Pregúntame por una línea concreta.";

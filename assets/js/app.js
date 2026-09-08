@@ -27,6 +27,7 @@
       document.querySelector('meta[name=theme-color]').setAttribute("content", next === "dark" ? "#0d0d0d" : "#f4f5f3");
       themeLabel();
       if (window.__twin) window.__twin.setTheme();
+      if (window.__secMapRetile) window.__secMapRetile();
       if (GLT.charts) GLT.charts.retheme();
     });
   }
@@ -71,13 +72,73 @@
       kpis = [{ label: "Red masiva (km)", value: Math.round(km), unit: "km" },
         { label: "Estaciones", value: est, unit: "" }];
     }
-    el.innerHTML = kpis.map((k) => {
-      const big = Number(k.value) >= 100000;
-      const v = big ? GLT.fmt.short(k.value) : GLT.fmt.int(k.value);
-      const u = k.unit && !big ? ` <small>${k.unit}</small>` : "";
-      return `<div class="kpi"><div class="v tnum">${v}${u}</div>
-        <div class="k">${k.label || ""}</div>${k.note ? `<div class="n">${k.note}</div>` : ""}</div>`;
-    }).join("");
+    el.innerHTML = kpis.map(kpiCard).join("");
+  }
+
+  function kpiCard(k) {
+    const n = Number(k.value), big = n >= 100000;
+    const v = big ? GLT.fmt.short(n) : Number.isInteger(n) ? GLT.fmt.int(n) : String(k.value).replace(".", ",");
+    const u = k.unit && !big ? ` <small>${k.unit}</small>` : "";
+    return `<div class="kpi"><div class="v tnum">${v}${u}</div><div class="k">${k.label || ""}</div>${k.note ? `<div class="n">${k.note}</div>` : ""}</div>`;
+  }
+  function hideNav(sel) { const a = document.querySelector(`.side-nav a[href="${sel}"]`); if (a) a.style.display = "none"; }
+
+  /* ---------- parque automotor ---------- */
+  function unhideNew(data) {
+    if (data.fleet) $("parque").hidden = false; else hideNav("#parque");
+    if (data.security) $("seguridad").hidden = false; else hideNav("#seguridad");
+  }
+  function renderFleet(data) {
+    const F = data.fleet; if (!F) return;
+    if (F.scope) $("fleetSub").textContent = `El parque vehicular de ${F.scope} crece más rápido que la red masiva. Proyecta el crecimiento y mira a dónde va la ciudad si nada cambia.`;
+    $("fleetKpis").innerHTML = (F.kpis || []).slice(0, 4).map(kpiCard).join("");
+    const sl = $("fleetYear"), lbl = $("fleetYearLbl"), out = $("fleetProj");
+    if (F.projection) sl.max = 20;
+    const upd = () => { const r = GLT.charts.fleetProject(+sl.value); if (!r) return;
+      lbl.textContent = r.year;
+      out.innerHTML = `En <b>${r.year}</b>: ~<b class="tnum">${GLT.fmt.int(r.veh)}</b> vehículos <span class="up">(+${r.pct}% vs ${F.projection.base_year})</span>`; };
+    sl.addEventListener("input", upd); upd();
+  }
+
+  /* ---------- seguridad ---------- */
+  function renderSecurity(data) {
+    const S = data.security; if (!S) return;
+    if (S.intro) $("secIntro").innerHTML = String(S.intro).split(/\n\n+/).map((p) => `<p>${p}</p>`).join("");
+    $("secKpis").innerHTML = (S.kpis || []).slice(0, 4).map(kpiCard).join("");
+    if (S.modes_note) $("secModes").textContent = S.modes_note;
+    const src = (S.sources || []).map((s) => s.url ? `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>` : s.label).join(" · ");
+    $("secMethod").innerHTML = `<h3 style="font-size:14px;margin-bottom:6px">Metodología y fuentes</h3>
+      <p style="margin:0 0 8px;color:var(--text-2);font-size:13px">${S.methodology || ""}</p>
+      <p style="margin:0;font-size:12px;color:var(--muted)">${src}</p>`;
+    buildSecMap(S);
+  }
+  function buildSecMap(S) {
+    const L = window.L, el = $("secMap"); if (!L || !el) return;
+    const dark = () => { const c = document.documentElement.getAttribute("data-theme"); return c ? c === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+    const map = L.map(el, { zoomControl: true, attributionControl: true, scrollWheelZoom: false });
+    map.attributionControl.setPrefix(false);
+    let tiles; const setT = () => { if (tiles) map.removeLayer(tiles);
+      const u = dark() ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+      tiles = L.tileLayer(u, { subdomains: "abcd", maxZoom: 18, attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(map); };
+    setT();
+    const R = { alta: 17, "media-alta": 14, media: 12, baja: 8 }, b = [];
+    (S.affected_zones || []).forEach((z) => {
+      L.circleMarker([z.lat, z.lng], { radius: R[z.severity] || 10, color: "#d03b3b", weight: 1.5, fillColor: "#d03b3b", fillOpacity: 0.32 })
+        .bindTooltip(`<b>${z.name}</b>${z.note ? `<span>${z.note}</span>` : ""}`, { className: "twin-tt", direction: "top" }).addTo(map);
+      b.push([z.lat, z.lng]);
+    });
+    if (b.length) map.fitBounds(b, { padding: [30, 30] });
+    setTimeout(() => map.invalidateSize(), 90);
+    window.__secMapRetile = setT;
+  }
+
+  /* ---------- buscador de estaciones ---------- */
+  function initSearch(twin) {
+    const dl = $("stationList"), inp = $("stSearch"); if (!dl || !inp) return;
+    dl.innerHTML = twin.stationNames().map((n) => `<option value="${n.replace(/"/g, "&quot;")}"></option>`).join("");
+    const go = () => { const v = inp.value.trim(); if (v) twin.flyToStation(v); };
+    inp.addEventListener("change", go);
+    inp.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); go(); } });
   }
 
   /* ---------- contexto ---------- */
@@ -148,11 +209,15 @@
       const data = await GLT.load();
       renderKPIs(data.indicators, data.network);
       renderContext(data.context);
+      unhideNew(data);
       GLT.charts.buildAll(data);
+      renderFleet(data);
+      renderSecurity(data);
 
       twin = new GLT.Twin($("twinMap"), data);
       window.__twin = twin;
       renderLegend(data.network, twin);
+      initSearch(twin);
       const fit = $("mapFit"); if (fit) fit.addEventListener("click", () => twin.fit());
 
       const ops = (data.network.lines || []).filter((l) => l.status === "operational");

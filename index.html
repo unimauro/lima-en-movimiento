@@ -43,6 +43,8 @@
     <a href="#gemelo" class="active"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Gemelo en vivo</a>
     <a href="#indicadores"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Indicadores</a>
     <a href="#tablero"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/><rect x="3" y="14" width="8" height="7" rx="1"/></svg>Tablero</a>
+    <a href="#parque"><svg viewBox="0 0 24 24"><path d="M5 17h14M6 17l1-5a3 3 0 0 1 3-2h4a3 3 0 0 1 3 2l1 5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/><path d="M4 12h16"/></svg>Parque automotor</a>
+    <a href="#seguridad"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5l8-3z"/></svg>Seguridad</a>
     <a href="#contexto"><svg viewBox="0 0 24 24"><path d="M12 8v5M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg>Contexto</a>
     <a href="#apoyo"><svg viewBox="0 0 24 24"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>Apóyalo</a>
     <a href="#fuentes"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Fuentes</a>
@@ -115,6 +117,11 @@
           <label>Hora del día <b class="tnum" id="hourVal">07:00</b></label>
           <input type="range" id="hour" min="0" max="1439" step="1" value="420">
         </div>
+        <div class="field">
+          <label>Buscar estación</label>
+          <input type="search" id="stSearch" list="stationList" placeholder="Ej.: Gamarra, Naranjal…" autocomplete="off">
+          <datalist id="stationList"></datalist>
+        </div>
       </div>
       <div>
         <h3>Estado de la red</h3>
@@ -172,6 +179,53 @@
       <div class="legend-row" id="lgCompare"></div>
     </div>
   </div>
+</section>
+
+<!-- PARQUE AUTOMOTOR -->
+<section class="wrap" id="parque" hidden>
+  <div class="eyebrow">Simulación · parque automotor</div>
+  <h2 class="sec-title">Cada vez más autos</h2>
+  <p class="sec-sub" id="fleetSub">El parque vehicular de Lima crece más rápido que su red masiva. Proyecta el crecimiento y mira a dónde va la ciudad si nada cambia.</p>
+  <div class="kpis" id="fleetKpis" style="margin-top:18px"></div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card chartcard">
+      <h3>Crecimiento del parque vehicular</h3>
+      <div class="csub" id="fleetChartSub">Vehículos registrados por año · la parte punteada es proyección</div>
+      <div class="chart-holder"><canvas id="chFleet"></canvas></div>
+      <div class="field" style="margin-top:14px">
+        <label>Proyectar a <b class="tnum" id="fleetYearLbl">—</b></label>
+        <input type="range" id="fleetYear" min="0" max="20" step="1" value="10">
+      </div>
+      <div class="proj-callout" id="fleetProj"></div>
+    </div>
+    <div class="card chartcard">
+      <h3>Composición del parque</h3>
+      <div class="csub">Qué tipos de vehículo circulan en la ciudad</div>
+      <div class="chart-holder"><canvas id="chFleetComp"></canvas></div>
+      <div class="legend-row" id="lgFleetComp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGURIDAD -->
+<section class="wrap" id="seguridad" hidden>
+  <div class="eyebrow">Seguridad en el transporte</div>
+  <h2 class="sec-title">Extorsión y violencia sobre las ruedas</h2>
+  <div class="prose" id="secIntro" style="margin-top:12px"></div>
+  <div class="kpis" id="secKpis" style="margin-top:18px"></div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card chartcard">
+      <h3>Denuncias de extorsión por año</h3>
+      <div class="csub">Denuncias registradas — el transporte es de los rubros más golpeados</div>
+      <div class="chart-holder"><canvas id="chSecExt"></canvas></div>
+    </div>
+    <div class="card chartcard">
+      <h3>Zonas más afectadas</h3>
+      <div class="csub" id="secModes">Distritos con más reportes de extorsión y ataques al transporte. El tamaño del círculo indica la severidad relativa según reportes.</div>
+      <div class="sec-map-wrap"><div id="secMap"></div></div>
+    </div>
+  </div>
+  <div class="authority" id="secMethod" style="border-left-color:var(--s8);margin-top:18px"></div>
 </section>
 
 <!-- CONTEXTO -->

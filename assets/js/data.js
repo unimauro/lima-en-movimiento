@@ -25,10 +25,12 @@ GLT.load = async function () {
     if (!r.ok) throw new Error(f + " → " + r.status);
     return r.json();
   });
-  const [network, routes, indicators, context] = await Promise.all([
+  const opt = (f) => grab(f).catch(() => null);   // opcionales: no rompen si faltan
+  const [network, routes, indicators, context, fleet, security, linesDetail] = await Promise.all([
     grab("network.json"), grab("routes.geojson"),
     grab("indicators.json"), grab("context.json"),
+    opt("fleet.json"), opt("security.json"), opt("lines_detail.json"),
   ]);
-  GLT.data = { network, routes, indicators, context };
+  GLT.data = { network, routes, indicators, context, fleet, security, linesDetail };
   return GLT.data;
 };

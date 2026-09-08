@@ -1,0 +1,232 @@
+{
+  "intro": "La extorsión al transporte urbano de Lima y Callao ha escalado a una crisis de seguridad pública desde 2022. Bandas criminales exigen a empresas, choferes y cobradores el pago periódico de 'cupos' (montos que van desde unos cientos hasta miles de soles por semana por unidad o por ruta) a cambio de 'dejarlos trabajar'; quienes se niegan o se atrasan enfrentan amenazas, ataques armados a las unidades y asesinatos selectivos, frecuentemente ejecutados por sicarios en motocicleta. Según el Observatorio de Criminalidad del Ministerio Público, entre agosto de 2024 y diciembre de 2025 se registraron al menos 125 ataques vinculados a extorsión en el transporte público de Lima y Callao, con 169 víctimas (93 fallecidas y 76 heridas); ampliando el periodo a mayo de 2026, la cifra sube a 214 atentados y 283 víctimas (152 fallecidas y 131 heridas). La mayoría de las víctimas mortales son conductores.",
+  "context_extra": "Esta violencia ha desencadenado varios paros del transporte urbano en Lima y Callao en 2024 y 2025, en los que decenas de empresas y gremios exigieron al Estado medidas efectivas contra la extorsión. Gremios reportan que más del 70% de las empresas de transporte formal de Lima y Callao han sido víctimas de extorsión, y las denuncias por extorsión a nivel nacional han batido récords históricos año tras año.",
+  "yearly": [
+    {
+      "year": 2021,
+      "killings": null,
+      "extortion_reports": null,
+      "source_ref": 7,
+      "note": "No se dispone de una serie nacional consolidada y verificable de denuncias de extorsión ni de asesinatos de transportistas para este año en las fuentes consultadas. La crisis en el transporte de Lima se agudiza a partir de 2022-2024."
+    },
+    {
+      "year": 2022,
+      "killings": null,
+      "extortion_reports": 11642,
+      "source_ref": 7,
+      "note": "Denuncias de extorsión a nivel nacional (Perú), serie policial (PNP). Los ataques y muertes de transportistas todavía no estaban sistematizados por año de forma pública."
+    },
+    {
+      "year": 2023,
+      "killings": null,
+      "extortion_reports": 21242,
+      "source_ref": 7,
+      "note": "Denuncias de extorsión a nivel nacional (Perú), serie policial (PNP). Muertes de transportistas por extorsión no aisladas por año en las fuentes consultadas."
+    },
+    {
+      "year": 2024,
+      "killings": null,
+      "extortion_reports": 18215,
+      "source_ref": 5,
+      "note": "Denuncias de extorsión a nivel nacional según el Observatorio Nacional de Seguridad Ciudadana (Mininter); otras series policiales (PNP) reportan alrededor de 21,746 para 2024. La serie del Ministerio Público sobre ataques al transporte de Lima-Callao empieza en agosto de 2024, por lo que no hay un total anual aislado de transportistas asesinados para todo 2024."
+    },
+    {
+      "year": 2025,
+      "killings": null,
+      "extortion_reports": 23213,
+      "source_ref": 5,
+      "note": "Denuncias de extorsión a nivel nacional hasta octubre de 2025 (cifra parcial que ya superó todo 2024 y marcó récord histórico); Lima Metropolitana concentró alrededor de 9,750 casos (más del 30% del total nacional). Los fallecidos de transportistas de 2025 se reflejan en los KPIs acumulados (Ministerio Público), no como total anual aislado y verificado."
+    },
+    {
+      "year": 2026,
+      "killings": 72,
+      "extortion_reports": 13892,
+      "source_ref": 1,
+      "note": "Cifras PARCIALES del año. 72 choferes asesinados entre enero y agosto de 2026 según reportaje de Cuarto Poder citando a gremios de transportistas (cifra de fuente gremial, puede no coincidir con el registro del Ministerio Público, que contabiliza atentados vinculados a extorsión). 13,892 denuncias de extorsión a nivel nacional entre enero y julio de 2026 (Ministerio Público)."
+    }
+  ],
+  "kpis": [
+    {
+      "label": "Personas fallecidas en ataques extorsivos al transporte (Lima-Callao, ago 2024 - may 2026)",
+      "value": 152,
+      "unit": "",
+      "note": "De 283 víctimas totales (152 fallecidas, 131 heridas) en 214 atentados. Incluye conductores (mayoría), pasajeros y cobradores. Fuente: Observatorio de Criminalidad del Ministerio Público.",
+      "source_ref": 1
+    },
+    {
+      "label": "Atentados vinculados a extorsión contra el transporte (Lima-Callao, ago 2024 - may 2026)",
+      "value": 214,
+      "unit": "",
+      "note": "Ataques dirigidos a transportistas por negarse a pagar cupos. Fuente: Ministerio Público.",
+      "source_ref": 1
+    },
+    {
+      "label": "Fallecidos por ataques al transporte (Lima-Callao, ago 2024 - dic 2025)",
+      "value": 93,
+      "unit": "",
+      "note": "De 169 víctimas (93 muertos, 76 heridos) en 125 ataques; 97.6% con arma de fuego y más del 70% de atacantes en motocicleta. Fuente: Observatorio de Criminalidad del Ministerio Público.",
+      "source_ref": 0
+    },
+    {
+      "label": "Choferes asesinados a nivel nacional (ene - ago 2026)",
+      "value": 72,
+      "unit": "",
+      "note": "Cifra parcial del año, de fuente gremial (reportaje de Cuarto Poder). Puede diferir del registro oficial del Ministerio Público por método y alcance.",
+      "source_ref": 1
+    },
+    {
+      "label": "Empresas de transporte formal extorsionadas (Lima-Callao)",
+      "value": 70,
+      "unit": "% (más de)",
+      "note": "Más del 70% de las empresas de transporte público formal de Lima y Callao han sido víctimas de extorsión, según gremios y reportes de prensa.",
+      "source_ref": 6
+    },
+    {
+      "label": "Denuncias de extorsión a nivel nacional (Perú, 2025 a octubre)",
+      "value": 23213,
+      "unit": "denuncias",
+      "note": "Récord histórico; superó las cifras de todo 2024. Fuente: Observatorio Nacional de Seguridad Ciudadana (Mininter).",
+      "source_ref": 5
+    },
+    {
+      "label": "Denuncias de extorsión en Lima Metropolitana (2025 a octubre)",
+      "value": 9750,
+      "unit": "denuncias",
+      "note": "Más del 30% del total nacional se concentró en Lima Metropolitana.",
+      "source_ref": 4
+    },
+    {
+      "label": "Paros del transporte urbano por extorsión (Lima-Callao, 2024-2025)",
+      "value": 6,
+      "unit": "jornadas (al menos)",
+      "note": "Estimación en base a la cronología de paros y protestas convocados por gremios en 2024 (set, oct, dic) y 2025 (feb, abr, may). El número exacto varía según cómo se contabilicen paros parciales y sectoriales.",
+      "source_ref": 7
+    }
+  ],
+  "affected_zones": [
+    {
+      "name": "San Juan de Lurigancho",
+      "lat": -11.96,
+      "lng": -77.00,
+      "severity": "alta",
+      "note": "Distrito con el mayor número de ataques extorsivos al transporte registrados por el Ministerio Público (17 en el periodo ago 2024 - dic 2025) y altos niveles de denuncias por extorsión, homicidio y sicariato. Declarado en emergencia.",
+      "source_ref": 0
+    },
+    {
+      "name": "San Martín de Porres",
+      "lat": -12.00,
+      "lng": -77.08,
+      "severity": "alta",
+      "note": "Uno de los distritos con más ataques al transporte según el Ministerio Público (13 en ago 2024 - dic 2025). Ubicado en Lima Norte, zona que concentra alrededor de un tercio de los ataques.",
+      "source_ref": 0
+    },
+    {
+      "name": "San Juan de Miraflores",
+      "lat": -12.16,
+      "lng": -76.97,
+      "severity": "alta",
+      "note": "Uno de los distritos con más ataques (12 en ago 2024 - dic 2025) y de los más golpeados del cono sur, donde se registró mayor número de víctimas.",
+      "source_ref": 0
+    },
+    {
+      "name": "Comas",
+      "lat": -11.94,
+      "lng": -77.05,
+      "severity": "alta",
+      "note": "Distrito de Lima Norte con alta concentración de ataques al transporte (10 en ago 2024 - dic 2025) y de denuncias de extorsión. Declarado en emergencia.",
+      "source_ref": 0
+    },
+    {
+      "name": "Carabayllo",
+      "lat": -11.86,
+      "lng": -77.03,
+      "severity": "media-alta",
+      "note": "Registró alrededor de 8 ataques al transporte en el periodo ago 2024 - dic 2025 (Ministerio Público); zona de Lima Norte declarada en emergencia.",
+      "source_ref": 0
+    },
+    {
+      "name": "Los Olivos",
+      "lat": -11.97,
+      "lng": -77.07,
+      "severity": "media-alta",
+      "note": "Alrededor de 8 ataques al transporte en ago 2024 - dic 2025 (Ministerio Público). Distrito de Lima Norte declarado en emergencia.",
+      "source_ref": 0
+    },
+    {
+      "name": "Villa El Salvador",
+      "lat": -12.21,
+      "lng": -76.94,
+      "severity": "alta",
+      "note": "Distrito del cono sur muy afectado por la extorsión al transporte; el sur de Lima concentró más víctimas pese a tener menos ataques que el norte. Declarado en emergencia.",
+      "source_ref": 0
+    },
+    {
+      "name": "Villa María del Triunfo",
+      "lat": -12.16,
+      "lng": -76.93,
+      "severity": "media-alta",
+      "note": "Distrito del cono sur incluido entre las zonas más golpeadas por ataques y denuncias de extorsión al transporte. Declarado en emergencia.",
+      "source_ref": 7
+    },
+    {
+      "name": "Callao",
+      "lat": -12.05,
+      "lng": -77.12,
+      "severity": "alta",
+      "note": "La Provincia Constitucional del Callao concentra corredores de transporte de alta demanda y figura de forma sistemática entre las jurisdicciones con más denuncias de extorsión y ataques al transporte.",
+      "source_ref": 4
+    },
+    {
+      "name": "Ate",
+      "lat": -12.03,
+      "lng": -76.90,
+      "severity": "media-alta",
+      "note": "Distrito del este de Lima incluido entre las zonas declaradas en emergencia por la violencia extorsiva contra el transporte.",
+      "source_ref": 7
+    }
+  ],
+  "modes_note": "Los modos más golpeados son el transporte convencional de rutas: combis, cústers y buses de empresas formales e informales que operan corredores urbanos de alta demanda, especialmente entre los conos (norte, sur y este) y el centro de Lima y el Callao. Estos servicios son extorsionados por ruta o por unidad, y sus paraderos y recorridos fijos los hacen vulnerables a los ataques. El transporte masivo bajo control público (Metro de Lima, Metropolitano y corredores complementarios) aparece menos citado en los reportes de ataques mortales, que se concentran en el transporte convencional. NOTA: los reportes describen los modos y corredores en términos agregados; no se atribuyen muertes a rutas concretas ni a empresas específicas.",
+  "methodology": "Datos AGREGADOS de fuentes públicas (Ministerio Público / Observatorio de Criminalidad, Ministerio del Interior / Observatorio Nacional de Seguridad Ciudadana, PNP y prensa seria). Límites importantes: (1) Las zonas señaladas marcan los DISTRITOS más reportados por ataques y denuncias, NO rutas, empresas ni responsables. (2) Las cifras varían entre fuentes por diferencias de periodo, alcance (transporte vs. total nacional), y método de conteo; por ejemplo, las denuncias nacionales de extorsión difieren entre la serie del Mininter y la de la PNP. (3) Los conteos de transportistas asesinados de fuente gremial pueden no coincidir con el registro oficial de atentados del Ministerio Público. (4) Muchos casos permanecen sin denunciar por temor de las víctimas, por lo que las cifras reales podrían ser mayores (subregistro). (5) Las coordenadas son aproximadas al centro de cada distrito, con fines ilustrativos. No se nombran víctimas ni se acusa a personas o empresas.",
+  "sources": [
+    {
+      "label": "Gestión - Extorsión en el transporte público de Lima y Callao 2024-2025 (Ministerio Público / Observatorio de Criminalidad: 125 ataques, 93 muertos, distritos)",
+      "url": "https://gestion.pe/peru/extorsion-en-el-transporte-publico-de-lima-y-callao-entre-2024-y-2025-las-cifras-que-deja-noticia/"
+    },
+    {
+      "label": "Infobae - 72 transportistas asesinados en lo que va de 2026; Ministerio Público: 214 atentados y 283 víctimas (ago 2024 - may 2026)",
+      "url": "https://www.infobae.com/peru/2026/08/26/72-transportistas-asesinados-en-lo-que-va-del-2026-y-algunos-ya-optan-por-portar-armas-de-fuego-ante-extorsiones/"
+    },
+    {
+      "label": "La República - Los extorsionadores matan a 7 transportistas cada mes",
+      "url": "https://larepublica.pe/politica/2026/06/27/los-extorsionadores-matan-a-7-transportistas-cada-mes-extorsion-hnews-866528"
+    },
+    {
+      "label": "TVPerú - Lima y Callao: 152 muertos en ataques extorsivos contra el transporte en los últimos dos años",
+      "url": "https://www.tvperu.gob.pe/noticias/locales/lima-y-callao-152-muertos-en-ataques-extorsivos-contra-el-transporte-en-los-ultimos-dos-anos"
+    },
+    {
+      "label": "El Comercio - Más de 20 mil denuncias por extorsión en 2025; Lima Metropolitana ~9,750 (más del 30% nacional)",
+      "url": "https://elcomercio.pe/peru/mas-de-20-mil-denuncias-por-extorsion-en-el-2025-lima-y-las-regiones-que-viven-al-limite-la-crisis-extorsion-dina-boluarte-transportistas-policia-nacional-paro-noticia/"
+    },
+    {
+      "label": "Infobae - Denuncias por extorsión rompen récord histórico: más de 23 mil hasta octubre de 2025 (Mininter); 18,215 en todo 2024",
+      "url": "https://www.infobae.com/peru/2025/11/05/denuncias-por-extorsion-rompen-record-historico-mas-de-23-mil-solo-hasta-octubre-del-2025-segun-mininter/"
+    },
+    {
+      "label": "RPP - Más del 70% de empresas de transporte público formal en Lima y Callao son extorsionadas",
+      "url": "https://rpp.pe/peru/actualidad/mas-del-70-de-empresas-de-transporte-publico-formal-en-lima-y-callao-son-extorsionadas-noticia-1627164"
+    },
+    {
+      "label": "Wikipedia - Crisis de extorsiones al transporte público en el Perú (cronología de paros y distritos en emergencia)",
+      "url": "https://es.wikipedia.org/wiki/Crisis_de_extorsiones_al_transporte_p%C3%BAblico_en_el_Per%C3%BA"
+    },
+    {
+      "label": "PuntoEdu (PUCP) - Paro de transportistas: cuando el crimen es más rápido que el Estado (contexto)",
+      "url": "https://puntoedu.pucp.edu.pe/actualidad/extorsiones-aumentaron-criminalidad-avanza-mas-rapido-estado/"
+    },
+    {
+      "label": "Infobae - Perú registra más de 13.000 denuncias por extorsión entre enero y julio de 2026 (Ministerio Público: 13,892)",
+      "url": "https://www.infobae.com/america/agencias/2026/09/02/peru-registra-mas-de-13000-denuncias-por-extorsion-entre-enero-y-julio-de-2026/"
+    }
+  ]
+}

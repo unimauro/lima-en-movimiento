@@ -57,18 +57,23 @@
       this._setTiles();
 
       // rutas + estaciones como capas Leaflet (pan/zoom nativo)
-      this.routeLayer = {}; this.stationLayer = {};
+      this.routeLayer = {}; this.stationLayer = {}; this.stationIndex = {};
       const bounds = [];
       this.lines.forEach((Ln) => {
         const planned = Ln.def.status !== "operational";
         const poly = L.polyline(Ln.ll, { color: Ln.def.color || "#888", weight: Ln.sty.line,
           opacity: planned ? 0.55 : 0.92, dashArray: planned ? "3 8" : null, lineJoin: "round", lineCap: "round" });
+        poly.on("click", (e) => { this._lineDetail(Ln, e.latlng); });
+        poly.on("mouseover", () => poly.setStyle({ weight: Ln.sty.line + 2 }));
+        poly.on("mouseout", () => poly.setStyle({ weight: Ln.sty.line }));
         const grp = L.layerGroup();
         (Ln.def.stations || []).forEach((s) => {
           const cm = L.circleMarker([s.lat, s.lng], { radius: Ln.def.mode === "metro" ? 4.5 : 3.5,
             color: Ln.def.color || "#888", weight: 2, fillColor: this.isDark() ? "#111" : "#fff", fillOpacity: 1 });
           cm.bindTooltip(`<b>${s.name}</b><span>${Ln.def.short || Ln.def.name}</span>`, { direction: "top", className: "twin-tt", offset: [0, -4] });
+          cm.on("click", () => this._lineDetail(Ln, [s.lat, s.lng]));
           cm.addTo(grp);
+          this.stationIndex[`${s.name} · ${Ln.def.short || Ln.def.id}`] = { ll: [s.lat, s.lng], cm, id: Ln.def.id };
         });
         if (!this.hidden.has(Ln.def.id)) { poly.addTo(this.map); grp.addTo(this.map); }
         this.routeLayer[Ln.def.id] = poly; this.stationLayer[Ln.def.id] = grp;
@@ -167,6 +172,35 @@
       if (this.hidden.has(id)) { this.hidden.delete(id); this.routeLayer[id]&&this.routeLayer[id].addTo(this.map); this.stationLayer[id]&&this.stationLayer[id].addTo(this.map); }
       else { this.hidden.add(id); this.routeLayer[id]&&this.map.removeLayer(this.routeLayer[id]); this.stationLayer[id]&&this.map.removeLayer(this.stationLayer[id]); }
       this._draw();
+    }
+    _lineDetail(Ln, at) {
+      const d = (this.data.linesDetail || {})[Ln.def.id] || {};
+      const def = Ln.def, esc = (s) => String(s).replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]));
+      const STATUS = { operational: "En operación", construction: "En construcción", planned: "En planificación" };
+      const rows = [];
+      const add = (k, v) => { if (v != null && v !== "") rows.push(`<tr><td>${k}</td><td>${esc(v)}</td></tr>`); };
+      add("Estado", STATUS[def.status] || def.status);
+      add("Longitud", def.length_km ? def.length_km + " km" : null);
+      add("Estaciones", def.stations_count || (def.stations || []).length);
+      add("Operador", d.operator);
+      add("Tarifa", d.fare_soles != null ? "S/ " + Number(d.fare_soles).toFixed(2) : null);
+      add("Material", d.rolling_stock);
+      add("Inauguración", d.opened);
+      if (d.progress_pct != null) add("Avance", d.progress_pct + "%");
+      if (d.eta) add("Operación estimada", d.eta);
+      add("Pasajeros/día", def.daily_riders ? GLT.fmt.short(def.daily_riders) : null);
+      const facts = (d.facts || []).length ? `<ul class="pop-facts">${d.facts.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>` : "";
+      const html = `<div class="pop"><div class="pop-h"><span class="pop-sw" style="background:${def.color}"></span><b>${esc(def.name)}</b></div>
+        <table class="pop-t">${rows.join("")}</table>${facts}${d.operator || d.fare_soles ? "" : '<div class="pop-note">Ficha detallada en preparación.</div>'}</div>`;
+      L.popup({ maxWidth: 300, className: "twin-pop" }).setLatLng(at || Ln.ll[Math.floor(Ln.ll.length / 2)]).setContent(html).openOn(this.map);
+    }
+    stationNames() { return Object.keys(this.stationIndex); }
+    flyToStation(name) {
+      const s = this.stationIndex[name]; if (!s) return false;
+      if (this.hidden.has(s.id)) this.toggleLine(s.id);
+      this.map.flyTo(s.ll, Math.max(this.map.getZoom(), 14), { duration: 0.6 });
+      setTimeout(() => { s.cm.openTooltip && s.cm.openTooltip(); this._draw(); }, 650);
+      return true;
     }
     zoomIn(){ this.map.zoomIn(); } zoomOut(){ this.map.zoomOut(); }
     fit(){ const b=[]; this.lines.forEach((L)=>{ if(!this.hidden.has(L.def.id)) L.ll.forEach((p)=>b.push(p)); }); if(b.length) this.map.fitBounds(b,{padding:[40,40]}); }

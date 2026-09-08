@@ -6,7 +6,7 @@
   "use strict";
   const CAT = ["--s1", "--s2", "--s3", "--s4", "--s5", "--s6", "--s7", "--s8"];
   const store = {};              // instancias Chart
-  let DATA = null;
+  let DATA = null, FLEET = null;
 
   const T = () => ({
     ink: GLT.css("--text-1"), ink2: GLT.css("--text-2"), muted: GLT.css("--muted"),
@@ -139,6 +139,70 @@
     });
     legendRow(document.getElementById("lgCompare"),
       [{ label: "Metro (km)", color: t.cat[0] }, { label: "BRT (km)", color: t.cat[1] }]);
+
+    buildFleet(data, t);
+    buildSecurity(data, t);
+  }
+
+  /* --------- Parque automotor --------- */
+  function buildFleet(data, t) {
+    const F = data.fleet, cv = document.getElementById("chFleet"); if (!F || !cv) return;
+    const hist = (F.history || []).map((h) => ({ x: h.year, y: h.vehicles }));
+    const p = F.projection || {}, by = p.base_year, bv = p.base_vehicles, g = (p.annual_growth_pct || 0) / 100;
+    const proj = []; for (let k = 0; k <= 20; k++) proj.push({ x: by + k, y: Math.round(bv * Math.pow(1 + g, k)) });
+    FLEET = { by, bv, g: p.annual_growth_pct || 0 };
+    const yFmt = (v) => GLT.fmt.short(v);
+    store.fleet = new Chart(cv, {
+      type: "line",
+      data: { datasets: [
+        { label: "Histórico", data: hist, borderColor: t.cat[0], backgroundColor: t.cat[0] + "22", borderWidth: 2, fill: true, tension: 0.3, pointRadius: 2 },
+        { label: "Proyección", data: proj, borderColor: t.cat[1], borderDash: [6, 5], borderWidth: 2, fill: false, tension: 0.2, pointRadius: 0 },
+        { label: "Meta", data: [], borderColor: t.cat[1], backgroundColor: t.surface, pointBackgroundColor: t.cat[1], pointBorderColor: t.surface, pointBorderWidth: 2, pointRadius: 6, showLine: false, order: -1 },
+      ] },
+      options: Object.assign(baseOpts(t), {
+        scales: { x: axis(t, { type: "linear", ticks: { color: t.muted, font: { ...font, size: 11 }, stepSize: 3, callback: (v) => v } }),
+                  y: axis(t, { ticks: { color: t.muted, font: { ...font, size: 11 }, callback: yFmt } }) },
+        plugins: Object.assign(baseOpts(t).plugins, {
+          tooltip: Object.assign(baseOpts(t).plugins.tooltip, { callbacks: { title: (c) => "Año " + c[0].parsed.x, label: (c) => " " + GLT.fmt.int(c.parsed.y) + " vehículos" } }) }),
+      }),
+    });
+    const comp = F.composition || [], cc = document.getElementById("chFleetComp");
+    if (comp.length && cc) {
+      store.fleetComp = new Chart(cc, {
+        type: "doughnut",
+        data: { labels: comp.map((c) => c.type), datasets: [{ data: comp.map((c) => c.pct), backgroundColor: comp.map((_, i) => t.cat[i % 8]), borderColor: t.surface, borderWidth: 2 }] },
+        options: Object.assign(baseOpts(t), { cutout: "60%", plugins: Object.assign(baseOpts(t).plugins, {
+          tooltip: Object.assign(baseOpts(t).plugins.tooltip, { callbacks: { label: (c) => " " + c.label + ": " + c.parsed + "%" } }) }) }),
+      });
+      legendRow(document.getElementById("lgFleetComp"), comp.map((c, i) => ({ label: c.type, color: t.cat[i % 8], val: c.pct + "%" })));
+    }
+  }
+  function fleetProject(off) {
+    if (!FLEET || !store.fleet) return null;
+    const year = FLEET.by + off, veh = Math.round(FLEET.bv * Math.pow(1 + FLEET.g / 100, off));
+    store.fleet.data.datasets[2].data = [{ x: year, y: veh }]; store.fleet.update("none");
+    return { year, veh, pct: Math.round((veh / FLEET.bv - 1) * 100) };
+  }
+
+  /* --------- Seguridad --------- */
+  function buildSecurity(data, t) {
+    const S = data.security; if (!S) return;
+    const yr = S.yearly || [];
+    const mk = (id, key, color, unitLabel) => {
+      const cv = document.getElementById(id); if (!cv) return;
+      store[id] = new Chart(cv, {
+        type: "bar",
+        data: { labels: yr.map((y) => y.year), datasets: [{ data: yr.map((y) => y[key]), backgroundColor: color, borderRadius: 4, borderSkipped: false, maxBarThickness: 46 }] },
+        options: Object.assign(baseOpts(t), {
+          scales: { x: axis(t, { grid: { display: false }, ticks: { color: t.ink2, font: { ...font, size: 11 } } }),
+                    y: axis(t, { ticks: { color: t.muted, font: { ...font, size: 11 }, callback: (v) => GLT.fmt.short(v) } }) },
+          plugins: Object.assign(baseOpts(t).plugins, {
+            tooltip: Object.assign(baseOpts(t).plugins.tooltip, { callbacks: { label: (c) => " " + GLT.fmt.int(c.parsed.y) + " " + unitLabel } }) }),
+        }),
+      });
+    };
+    mk("chSecKill", "killings", "#d03b3b", "transportistas");
+    mk("chSecExt", "extortion_reports", t.cat[3], "denuncias");
   }
 
   /* --------- marcador de hora en la curva de demanda --------- */
@@ -154,5 +218,5 @@
   function retheme() { if (!DATA) return; Object.values(store).forEach((c) => c.destroy()); buildAll(DATA); }
 
   window.GLT = window.GLT || {};
-  window.GLT.charts = { buildAll, setHour, retheme };
+  window.GLT.charts = { buildAll, setHour, retheme, fleetProject };
 })();

@@ -1,0 +1,168 @@
+{
+ "L1": {
+  "operator": "GyM Ferrovías (concesionario); opera bajo la marca Metro de Lima Línea 1 / Tren Urbano de Lima",
+  "fare_soles": 1.50,
+  "rolling_stock": "44 trenes: 19 Alstom Metropolis (5 coches) + 5 AnsaldoBreda (6 coches) iniciales, ampliados con trenes adicionales Alstom Metropolis",
+  "length_km": 34.71,
+  "stations_count": 26,
+  "opened": "2011 (Tramo 1: Villa El Salvador–Grau), 2014 (Tramo 2 completo hasta San Juan de Lurigancho / Bayóvar)",
+  "daily_riders": 700000,
+  "operating_hours": "Lun-Sáb 05:00–23:00 aprox. (domingos y feriados con horario reducido)",
+  "status": "operational",
+  "status_note": "En operación; pasaje S/ 1.50 subsidiado por el Estado. La concesionaria ha planteado elevar la tarifa base (hasta S/ 3.00) para financiar mejoras, decisión final del MTC (2025).",
+  "facts": [
+   "Fue el primer sistema de metro (tren eléctrico) del Perú; su tramo inicial se concesionó a GyM Ferrovías el 11 de abril de 2011.",
+   "Es una línea totalmente elevada (viaducto) de ~34,7 km, una de las más largas de su tipo en Sudamérica.",
+   "Su pasaje de S/ 1.50 es el más barato del transporte masivo de Lima gracias al subsidio estatal, frente a los S/ 3.50 del Metropolitano."
+  ],
+  "source_refs": [0, 1, 11]
+ },
+ "L2": {
+  "operator": "Consorcio Nuevo Metro de Lima (concesión); infraestructura del MTC/ATU",
+  "fare_soles": 1.50,
+  "rolling_stock": "Flota de 42 trenes AnsaldoBreda / Hitachi Rail Italy, driverless (GoA4, sin conductor); 35 destinados a la L2 y 7 al primer tramo de la L4",
+  "length_km": 26.74,
+  "stations_count": 27,
+  "opened": "2023 (Etapa 1A: 5 estaciones en Santa Anita, marcha blanca desde el 21 de diciembre de 2023)",
+  "daily_riders": 140000,
+  "operating_hours": "Etapa 1A operativa 06:00–22:00 aprox.",
+  "status": "construction",
+  "progress_pct": 90,
+  "eta": "Etapa 1B ~2029 y Etapa 2 ~2030 (los pasajeros esperarían hasta 2030 para la operación total)",
+  "status_note": "En construcción; Etapa 1A (5 estaciones) en servicio. A mediados de 2026 la obra civil de la Etapa 1B llegó a ~96% y la Etapa 2 a ~91%.",
+  "facts": [
+   "Será el primer metro totalmente subterráneo del Perú, excavado con tuneladoras (TBM).",
+   "El 2 de julio de 2026 concluyó la excavación de ~27 km de túnel con la llegada de la tuneladora 'Delia', un hito del proyecto.",
+   "Sus trenes operan sin conductor (automatización GoA4) y en la Estación Central conectará con el Metropolitano."
+  ],
+  "source_refs": [2, 3, 4]
+ },
+ "L3": {
+  "operator": null,
+  "fare_soles": null,
+  "rolling_stock": null,
+  "length_km": 34.8,
+  "stations_count": null,
+  "opened": null,
+  "daily_riders": null,
+  "operating_hours": null,
+  "status": "planned",
+  "progress_pct": null,
+  "eta": "Adjudicación prevista en 2026 (recién iniciaría construcción tras adjudicar)",
+  "status_note": "En fase de estructuración; línea proyectada totalmente subterránea (~34,8 km). El MEF/Proinversión prevé adjudicar las Líneas 3 y 4 en 2026 con una inversión conjunta superior a US$ 10 600 millones.",
+  "facts": [
+   "Recorrería el eje norte–sur de Lima (Comas / Independencia hacia el sur) de forma totalmente subterránea.",
+   "Cuenta con estudio de preinversión aprobado, lo que le permite pasar directo a la fase de estructuración.",
+   "Se ejecutaría bajo un esquema híbrido de Asociación Público-Privada (APP) y Gobierno a Gobierno (G2G), con interés de empresas japonesas."
+  ],
+  "source_refs": [9, 10]
+ },
+ "L4": {
+  "operator": null,
+  "fare_soles": null,
+  "rolling_stock": "7 trenes AnsaldoBreda / Hitachi Rail Italy previstos para el primer tramo (parte del pedido común con la L2)",
+  "length_km": 32.0,
+  "stations_count": null,
+  "opened": null,
+  "daily_riders": null,
+  "operating_hours": null,
+  "status": "planned",
+  "progress_pct": null,
+  "eta": "Adjudicación prevista en 2026 (junto con la Línea 3)",
+  "status_note": "En fase de estructuración; proyecto con eje asociado al Aeropuerto Jorge Chávez y la avenida Faucett. El MEF prevé adjudicar Líneas 3 y 4 en 2026 bajo esquema híbrido APP + G2G.",
+  "facts": [
+   "Su trazado busca conectar el Aeropuerto Internacional Jorge Chávez con la red de metro.",
+   "Comparte pedido de material rodante con la L2: 7 de los 42 trenes AnsaldoBreda/Hitachi están destinados al primer tramo de la L4.",
+   "Se adjudicaría en paralelo con la Línea 3 como parte de la mayor inversión en transporte del país (>US$ 10 600 M combinada)."
+  ],
+  "source_refs": [9]
+ },
+ "MET": {
+  "operator": "Protransporte (gestor público, ATU) + 4 consorcios concesionarios que operan la flota",
+  "fare_soles": 3.50,
+  "rolling_stock": "Buses articulados de 18 m (troncal) más buses alimentadores; flota total de ~550 unidades (~300 articulados), en gran parte con vida útil vencida",
+  "length_km": 34.9,
+  "stations_count": 44,
+  "opened": "2010 (inaugurado el 28 de julio de 2010)",
+  "daily_riders": 700000,
+  "operating_hours": "05:00–23:00 aprox.",
+  "status": "operational",
+  "status_note": "En operación; primer BRT de Lima. A 15 años de operación casi toda la flota superó su vida útil; la ATU gestionó un préstamo (Banco Mundial) para nuevos buses y modernización.",
+  "facts": [
+   "Fue el primer sistema BRT (Bus Rapid Transit) de Lima, inaugurado el 28 de julio de 2010.",
+   "Su flota inicial (≈300 articulados + alimentadores) se financió con créditos de COFIDE (≈US$ 50 millones a cada uno de los 4 consorcios ganadores).",
+   "Con S/ 3.50 tiene una de las tarifas de BRT más altas de la región y opera sin subsidio, a diferencia de la Línea 1 del Metro."
+  ],
+  "source_refs": [5, 6, 13]
+ },
+ "CR": {
+  "operator": "Concesionarios privados regulados por la ATU (corredores complementarios)",
+  "fare_soles": 2.40,
+  "rolling_stock": "Buses convencionales y padrones a nivel de calzada (sin carril exclusivo continuo)",
+  "length_km": 29.4,
+  "stations_count": 12,
+  "opened": "2014",
+  "daily_riders": 300000,
+  "operating_hours": "05:00–23:00 aprox.",
+  "status": "operational",
+  "status_note": "En operación; tarifa general S/ 2.40 (desde el 30 de enero de 2025, antes S/ 2.35). Mantiene tarifas promocionales 'Aquisito nomás' de S/ 1.00–1.50 para viajes cortos.",
+  "facts": [
+   "Recorre el eje Javier Prado–La Marina–Faucett, uniendo Ate y La Molina con Callao y San Miguel; moviliza más de 170 000 usuarios al día.",
+   "Permite conexión integrada con otros corredores pagando una sola tarifa (p.ej. S/ 3.50 con el Corredor Azul).",
+   "Es uno de los corredores complementarios creados para formalizar y ordenar el transporte por avenidas troncales de Lima."
+  ],
+  "source_refs": [7, 8, 13]
+ },
+ "CA": {
+  "operator": "Concesionarios privados regulados por la ATU (corredores complementarios)",
+  "fare_soles": 2.40,
+  "rolling_stock": "Aproximadamente 140 buses convencionales a nivel de calzada",
+  "length_km": 10.4,
+  "stations_count": 11,
+  "opened": "2015",
+  "daily_riders": 250000,
+  "operating_hours": "05:00–23:00 aprox.",
+  "status": "operational",
+  "status_note": "En operación; tarifa general S/ 2.40 (desde enero de 2025). Mantiene tarifas promocionales de S/ 1.00–1.50 para tramos cortos.",
+  "facts": [
+   "Circula por el eje Tacna–Garcilaso de la Vega–Arequipa, uniendo el Rímac con Miraflores y Barranco.",
+   "Opera con unos 140 buses que transportan alrededor de 75 000 pasajeros al día por uno de los ejes más transitados de Lima.",
+   "Permite viajes integrados con el Corredor Rojo pagando una sola tarifa, con trasbordo cerca de Javier Prado con Arequipa."
+  ],
+  "source_refs": [7, 8]
+ },
+ "CM": {
+  "operator": "Concesionarios privados regulados por la ATU (corredores complementarios)",
+  "fare_soles": 2.80,
+  "rolling_stock": "Buses convencionales a nivel de calzada",
+  "length_km": 10.3,
+  "stations_count": 10,
+  "opened": "2020",
+  "daily_riders": 130000,
+  "operating_hours": "05:00–23:00 aprox.",
+  "status": "operational",
+  "status_note": "En operación; tarifa general S/ 2.80 y medio pasaje S/ 1.40 (escolares/universitarios). La ATU ha sumado nuevos servicios que conectan SJL directamente con San Isidro.",
+  "facts": [
+   "Conecta San Juan de Lurigancho (Bayóvar) con el Centro de Lima, uno de los ejes con mayor demanda de la ciudad.",
+   "Enlaza en Bayóvar con la Línea 1 del Metro, integrando el corredor con la red férrea.",
+   "En 2025 la ATU lanzó el servicio SE-09 que une SJL con San Isidro (Canaval y Moreyra) en un solo vehículo para reducir el transporte informal."
+  ],
+  "source_refs": [12, 7]
+ },
+ "sources": [
+  {"label": "Wikipedia — Línea 1 del Metro de Lima y Callao", "url": "https://es.wikipedia.org/wiki/L%C3%ADnea_1_del_Metro_de_Lima_y_Callao"},
+  {"label": "Ositran — Línea 1 del Metro de Lima", "url": "https://www.ositran.gob.pe/anterior/vias-ferreas/linea-uno-metro-de-lima/"},
+  {"label": "Wikipedia — Línea 2 del Metro de Lima y Callao", "url": "https://es.wikipedia.org/wiki/L%C3%ADnea_2_del_Metro_de_Lima_y_Callao"},
+  {"label": "Infobae — Línea 2 alcanza hasta 96% de avance (ago-2026)", "url": "https://www.infobae.com/peru/2026/08/07/linea-2-del-metro-de-lima-alcanza-hasta-96-de-avance-estas-son-las-fechas-previstas-para-su-operacion/"},
+  {"label": "La República — Línea 2 supera el 90%, operación hacia 2030", "url": "https://larepublica.pe/sociedad/2026/08/12/linea-2-del-metro-supera-el-90-en-sus-etapas-1b-y-2-pero-los-pasajeros-aun-tendran-que-esperar-hasta-2030-303072"},
+  {"label": "Wikipedia — Sistema Metropolitano de Transporte (Metropolitano)", "url": "https://es.wikipedia.org/wiki/Sistema_Metropolitano_de_Transporte"},
+  {"label": "El Comercio — Metropolitano y los aumentos de pasajes desde 2010", "url": "https://elcomercio.pe/lima/transporte/metropolitano-aumento-precio-pasajes-2010-noticia-nndc-571664-noticia/"},
+  {"label": "La República — Nuevas rutas de los corredores Azul, Morado y Rojo", "url": "https://larepublica.pe/sociedad/2025/01/01/las-nuevas-rutas-que-esperan-cubrir-los-corredores-azul-morado-y-rojo-46070"},
+  {"label": "Gob.pe / ATU — Tarifa integrada S/ 3.50 corredores Rojo y Azul", "url": "https://www.gob.pe/institucion/atu/noticias/890391-atu-usuarios-de-los-corredores-rojo-y-azul-podran-conectar-sus-viajes-pagando-una-sola-tarifa-de-s-3-50"},
+  {"label": "Infobae — Líneas 3 y 4 se adjudicarían en 2026 (MEF)", "url": "https://www.infobae.com/peru/2025/03/11/lineas-3-y-4-del-metro-de-lima-se-adjudicarian-en-2026-anuncia-ministerio-de-economia/"},
+  {"label": "Wikipedia — Línea 3 del Metro de Lima y Callao", "url": "https://es.wikipedia.org/wiki/L%C3%ADnea_3_del_Metro_de_Lima_y_Callao"},
+  {"label": "Gestión — Línea 1 plantea subir pasaje, decisión del MTC", "url": "https://gestion.pe/economia/linea-1-del-metro-de-lima-plantea-subir-pasaje-pero-decision-final-en-manos-del-mtc-noticia/"},
+  {"label": "metrolima.info — Corredor Morado (rutas, paraderos y tarifas)", "url": "https://metrolima.info/corredor-morado/"},
+  {"label": "RPP — Tarifa del Metropolitano y corredores 2025 (ATU)", "url": "https://rpp.pe/economia/economia/la-tarifa-del-metropolitano-y-los-corredores-se-incrementara-este-2025-atu-noticia-1609327"}
+ ]
+}
