@@ -190,13 +190,14 @@
   <div class="grid2" style="margin-top:16px">
     <div class="card chartcard">
       <h3>Crecimiento del parque vehicular</h3>
-      <div class="csub" id="fleetChartSub">Vehículos registrados por año · la parte punteada es proyección</div>
+      <div class="csub" id="fleetChartSub">Vehículos en circulación · punto grande = dato oficial; punteado = proyección</div>
       <div class="chart-holder"><canvas id="chFleet"></canvas></div>
       <div class="field" style="margin-top:14px">
         <label>Proyectar a <b class="tnum" id="fleetYearLbl">—</b></label>
         <input type="range" id="fleetYear" min="0" max="20" step="1" value="10">
       </div>
       <div class="proj-callout" id="fleetProj"></div>
+      <p class="fleet-note" id="fleetNote"></p>
     </div>
     <div class="card chartcard">
       <h3>Composición del parque</h3>

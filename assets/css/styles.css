@@ -306,6 +306,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: basel
   border: 1px solid var(--border); font-size: 14px; color: var(--text-2); }
 .proj-callout b { font-weight: 700; color: var(--text-1); }
 .proj-callout .up { color: var(--warn); font-weight: 650; font-size: 13px; }
+.fleet-note { margin: 10px 2px 0; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
 input[type=search] { width: 100%; border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--text-1);
   border-radius: 9px; padding: 8px 11px; font-size: 13px; font-family: inherit; }
 input[type=search]:focus { outline: none; border-color: var(--accent); }

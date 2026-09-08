@@ -148,6 +148,9 @@
   function buildFleet(data, t) {
     const F = data.fleet, cv = document.getElementById("chFleet"); if (!F || !cv) return;
     const hist = (F.history || []).map((h) => ({ x: h.year, y: h.vehicles }));
+    const official = (F.history || []).map((h) => h.estimated === false);
+    const offYears = new Set((F.history || []).filter((h) => h.estimated === false).map((h) => h.year));
+    const ptR = official.map((o) => (o ? 6 : 2)), ptBg = official.map((o) => (o ? t.cat[3] : t.cat[0]));
     const p = F.projection || {}, by = p.base_year, bv = p.base_vehicles, g = (p.annual_growth_pct || 0) / 100;
     const proj = []; for (let k = 0; k <= 20; k++) proj.push({ x: by + k, y: Math.round(bv * Math.pow(1 + g, k)) });
     FLEET = { by, bv, g: p.annual_growth_pct || 0 };
@@ -155,7 +158,8 @@
     store.fleet = new Chart(cv, {
       type: "line",
       data: { datasets: [
-        { label: "Histórico", data: hist, borderColor: t.cat[0], backgroundColor: t.cat[0] + "22", borderWidth: 2, fill: true, tension: 0.3, pointRadius: 2 },
+        { label: "Histórico", data: hist, borderColor: t.cat[0], backgroundColor: t.cat[0] + "22", borderWidth: 2, fill: true, tension: 0.3,
+          pointRadius: ptR, pointBackgroundColor: ptBg, pointBorderColor: t.surface, pointBorderWidth: 2, pointHoverRadius: 6 },
         { label: "Proyección", data: proj, borderColor: t.cat[1], borderDash: [6, 5], borderWidth: 2, fill: false, tension: 0.2, pointRadius: 0 },
         { label: "Meta", data: [], borderColor: t.cat[1], backgroundColor: t.surface, pointBackgroundColor: t.cat[1], pointBorderColor: t.surface, pointBorderWidth: 2, pointRadius: 6, showLine: false, order: -1 },
       ] },
@@ -163,7 +167,11 @@
         scales: { x: axis(t, { type: "linear", ticks: { color: t.muted, font: { ...font, size: 11 }, stepSize: 3, callback: (v) => v } }),
                   y: axis(t, { ticks: { color: t.muted, font: { ...font, size: 11 }, callback: yFmt } }) },
         plugins: Object.assign(baseOpts(t).plugins, {
-          tooltip: Object.assign(baseOpts(t).plugins.tooltip, { callbacks: { title: (c) => "Año " + c[0].parsed.x, label: (c) => " " + GLT.fmt.int(c.parsed.y) + " vehículos" } }) }),
+          tooltip: Object.assign(baseOpts(t).plugins.tooltip, { callbacks: {
+            title: (c) => "Año " + c[0].parsed.x,
+            label: (c) => " " + GLT.fmt.int(c.parsed.y) + " vehículos",
+            afterLabel: (c) => c.datasetIndex === 0 ? (offYears.has(c.parsed.x) ? "Dato oficial (MTC)" : "Estimación") : (c.datasetIndex === 1 ? "Proyección" : ""),
+          } }) }),
       }),
     });
     const comp = F.composition || [], cc = document.getElementById("chFleetComp");

@@ -98,6 +98,8 @@
       lbl.textContent = r.year;
       out.innerHTML = `En <b>${r.year}</b>: ~<b class="tnum">${GLT.fmt.int(r.veh)}</b> vehículos <span class="up">(+${r.pct}% vs ${F.projection.base_year})</span>`; };
     sl.addEventListener("input", upd); upd();
+    const note = $("fleetNote");
+    if (note) note.textContent = F.notes_scope || (F.projection && F.projection.note) || "";
   }
 
   /* ---------- seguridad ---------- */
