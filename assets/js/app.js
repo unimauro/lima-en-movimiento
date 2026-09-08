@@ -53,7 +53,7 @@
     }));
     const share = $("shareBtn");
     if (share) share.addEventListener("click", async () => {
-      const d = { title: "Lima Transporte", text: "Gemelo digital del transporte urbano de Lima", url: location.href };
+      const d = { title: "Lima en Movimiento", text: "Gemelo digital del transporte urbano de Lima", url: location.href };
       try { if (navigator.share) await navigator.share(d); else { await navigator.clipboard.writeText(location.href); share.textContent = "Enlace copiado"; setTimeout(() => (share.textContent = "Compartir"), 1500); } } catch (e) {}
     });
     const coffee = $("coffeeCard");
