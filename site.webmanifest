@@ -1,0 +1,16 @@
+{
+  "name": "Lima en Movimiento",
+  "short_name": "Lima en Mov.",
+  "description": "Gemelo digital del transporte urbano de Lima y Callao: mapa real de la red masiva, tablero de movilidad, parque automotor y seguridad.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "lang": "es-PE",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+  ]
+}
