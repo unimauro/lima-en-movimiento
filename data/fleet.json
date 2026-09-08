@@ -1,57 +1,233 @@
 {
-  "scope": "Lima Metropolitana y Callao",
-  "notes_scope": "El único dato duro de Lima+Callao es 1,752,919 vehículos en circulación en 2016 (MTC, = 66% del parque nacional estimado de 2,661,719). Los demás años de 'history' se derivan de forma transparente anclando ese valor 2016 y aplicando la tendencia observada (IPE: el parque de Lima creció ~40% en 2015-2024) y la serie nacional SUNARP/MTC. Cifras redondeadas; ver 'projection.note'.",
-  "history": [
-    {"year": 2010, "vehicles": 1385400, "source_ref": 0, "estimated": true},
-    {"year": 2011, "vehicles": 1440800, "source_ref": 0, "estimated": true},
-    {"year": 2012, "vehicles": 1498400, "source_ref": 0, "estimated": true},
-    {"year": 2013, "vehicles": 1558400, "source_ref": 0, "estimated": true},
-    {"year": 2014, "vehicles": 1620700, "source_ref": 0, "estimated": true},
-    {"year": 2015, "vehicles": 1685500, "source_ref": 0, "estimated": true},
-    {"year": 2016, "vehicles": 1752919, "source_ref": 0, "estimated": false},
-    {"year": 2017, "vehicles": 1814300, "source_ref": 0, "estimated": true},
-    {"year": 2018, "vehicles": 1877800, "source_ref": 0, "estimated": true},
-    {"year": 2019, "vehicles": 1943500, "source_ref": 0, "estimated": true},
-    {"year": 2020, "vehicles": 1972700, "source_ref": 0, "estimated": true},
-    {"year": 2021, "vehicles": 2041700, "source_ref": 4, "estimated": true},
-    {"year": 2022, "vehicles": 2113200, "source_ref": 2, "estimated": true},
-    {"year": 2023, "vehicles": 2187200, "source_ref": 2, "estimated": true},
-    {"year": 2024, "vehicles": 2263800, "source_ref": 2, "estimated": true}
-  ],
-  "motorization": [
-    {"year": 2016, "per_1000": 183, "source_ref": 0, "estimated": true},
-    {"year": 2024, "per_1000": 216, "source_ref": 6, "estimated": false}
-  ],
-  "composition": [
-    {"type": "Autos particulares", "pct": 60, "source_ref": 0, "estimated": true},
-    {"type": "Taxis", "pct": 12, "source_ref": 6, "estimated": true},
-    {"type": "Transporte público", "pct": 8, "source_ref": 0, "estimated": true},
-    {"type": "Mototaxis/Motos", "pct": 12, "source_ref": 4, "estimated": true},
-    {"type": "Carga/otros", "pct": 8, "source_ref": 0, "estimated": true}
-  ],
-  "projection": {
-    "base_year": 2024,
-    "base_vehicles": 2263800,
-    "annual_growth_pct": 3.5,
-    "note": "CAGR ~3.5% derivado del dato del IPE de que el parque de Lima creció ~40% entre 2015 y 2024 (40% en 10 años = 3.4%/año), coherente con la tasa de motorización de Lima (183/1000 en 2016 -> 216/1000 en 2024) y con las inmatriculaciones nacionales récord (517,707 en 2024 y 648,497 en 2025, SUNARP/AAP). Proyección = base_vehicles * (1+0.035)^(año-2024). Solo 2016 (1,752,919) es dato oficial MTC de Lima+Callao; el resto de la serie es estimación transparente anclada a ese valor y a la tendencia observada."
+ "scope": "Lima Metropolitana y Callao",
+ "notes_scope": "El único dato duro de Lima+Callao es 1,752,919 vehículos en circulación en 2016 (MTC, = 66% del parque nacional estimado de 2,661,719). Los demás años de 'history' se derivan de forma transparente anclando ese valor 2016 y aplicando la tendencia observada (IPE: el parque de Lima creció ~40% en 2015-2024) y la serie nacional SUNARP/MTC. Cifras redondeadas; ver 'projection.note'.",
+ "history": [
+  {
+   "year": 2010,
+   "vehicles": 1385400,
+   "source_ref": 0,
+   "estimated": true
   },
-  "kpis": [
-    {"label": "Parque vehicular Lima+Callao (aprox. 2024)", "value": 2263800, "unit": "veh", "source_ref": 0},
-    {"label": "Concentración de Lima+Callao en el parque nacional", "value": 66, "unit": "%", "source_ref": 0},
-    {"label": "Crecimiento anual del parque de Lima", "value": 3.5, "unit": "%", "source_ref": 2},
-    {"label": "Antigüedad promedio (parque liviano de Lima)", "value": 14.5, "unit": "años", "source_ref": 7},
-    {"label": "Flota que supera 10 años de antigüedad (carga/transporte)", "value": 52, "unit": "%", "source_ref": 7},
-    {"label": "Inmatriculaciones nacionales de vehículos nuevos 2024", "value": 517707, "unit": "veh", "source_ref": 4}
-  ],
-  "sources": [
-    {"label": "MTC — Parque automotor nacional 1995-2015 (fuente SUNARP) y dato Lima+Callao 2016 (1,752,919 = 66% del nacional 2,661,719)", "url": "https://www.mtc.gob.pe/cnsv/documentos/Parque%20vehicular%20nacional%201995-2015.pdf"},
-    {"label": "INEI — Parque automotor en circulación a nivel nacional por departamento", "url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1829/cap20/cap20.htm"},
-    {"label": "IPE — En los últimos 10 años el parque automotor de Lima creció 40% pero la red vial apenas 7%", "url": "https://ipe.org.pe/en-los-ultimos-diez-anos-el-parque-automotor-en-lima-crecio-40-pero-la-red-vial-apenas-7/"},
-    {"label": "Gestión — Parque automotor en Lima creció 40% en los últimos 10 años (2015-2024)", "url": "https://gestion.pe/economia/parque-automotor-en-lima-crecio-40-pero-red-vial-se-quedo-muy-lejos-de-seguirle-el-paso-en-ultimos-10-anos-noticia/"},
-    {"label": "AAP — Venta e inmatriculación de vehículos nuevos (517,707 en 2024)", "url": "https://aap.org.pe/estadisticas/ventas_inmatriculaciones_vehiculos_nuevos/"},
-    {"label": "SUNARP vía RPP — 648,497 vehículos nuevos inmatriculados en 2025 (+25.26% vs 2024)", "url": "https://rpp.pe/peru/actualidad/sunarp-en-el-2025-un-total-de-648-497-autos-nuevos-se-incorporaron-al-sistema-nacional-de-transporte-terrestre-noticia-1671459"},
-    {"label": "El Comercio — La congestión vehicular en Lima (tasa de motorización ~216 veh/1000 hab)", "url": "https://elcomercio.pe/lima/transporte/la-congestion-vehicular-en-lima-por-david-fairlie-lima-metropolitana-asociacion-automotriz-del-peru-camionjes-camionetas-noticia/"},
-    {"label": "Infobae — Antigüedad del parque automotor en Perú (14.5 años; 52% de carga/transporte supera 10 años)", "url": "https://www.infobae.com/peru/2025/09/23/antiguedad-del-parque-automotor-en-peru-su-contaminacion-genera-costo-de-us-12800-millones-y-10000-muertes-anuales/"},
-    {"label": "Comunidad Andina — Parque vehicular de la CAN 2023", "url": "https://www.comunidadandina.org/DocOficialesFiles/DEstadisticos/SGDE1037.pdf"}
-  ]
+  {
+   "year": 2011,
+   "vehicles": 1440800,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2012,
+   "vehicles": 1498400,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2013,
+   "vehicles": 1558400,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2014,
+   "vehicles": 1620700,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2015,
+   "vehicles": 1685500,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2016,
+   "vehicles": 1752919,
+   "source_ref": 0,
+   "estimated": false
+  },
+  {
+   "year": 2017,
+   "vehicles": 1814300,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2018,
+   "vehicles": 1877800,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2019,
+   "vehicles": 1943500,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2020,
+   "vehicles": 1972700,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2021,
+   "vehicles": 2041700,
+   "source_ref": 4,
+   "estimated": true
+  },
+  {
+   "year": 2022,
+   "vehicles": 2113200,
+   "source_ref": 2,
+   "estimated": true
+  },
+  {
+   "year": 2023,
+   "vehicles": 2187200,
+   "source_ref": 2,
+   "estimated": true
+  },
+  {
+   "year": 2024,
+   "vehicles": 2263800,
+   "source_ref": 2,
+   "estimated": true
+  }
+ ],
+ "motorization": [
+  {
+   "year": 2016,
+   "per_1000": 183,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "year": 2024,
+   "per_1000": 216,
+   "source_ref": 6,
+   "estimated": false
+  }
+ ],
+ "composition": [
+  {
+   "type": "Autos particulares",
+   "pct": 60,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "type": "Taxis",
+   "pct": 12,
+   "source_ref": 6,
+   "estimated": true
+  },
+  {
+   "type": "Transporte público",
+   "pct": 8,
+   "source_ref": 0,
+   "estimated": true
+  },
+  {
+   "type": "Mototaxis/Motos",
+   "pct": 12,
+   "source_ref": 4,
+   "estimated": true
+  },
+  {
+   "type": "Carga/otros",
+   "pct": 8,
+   "source_ref": 0,
+   "estimated": true
+  }
+ ],
+ "projection": {
+  "base_year": 2024,
+  "base_vehicles": 2263800,
+  "annual_growth_pct": 3.5,
+  "note": "CAGR ~3.5% derivado del dato del IPE de que el parque de Lima creció ~40% entre 2015 y 2024 (40% en 10 años = 3.4%/año), coherente con la tasa de motorización de Lima (183/1000 en 2016 -> 216/1000 en 2024) y con las inmatriculaciones nacionales récord (517,707 en 2024 y 648,497 en 2025, SUNARP/AAP). Proyección = base_vehicles * (1+0.035)^(año-2024). Solo 2016 (1,752,919) es dato oficial MTC de Lima+Callao; el resto de la serie es estimación transparente anclada a ese valor y a la tendencia observada."
+ },
+ "kpis": [
+  {
+   "label": "Parque vehicular Lima+Callao (aprox. 2024)",
+   "value": 2263800,
+   "unit": "veh",
+   "source_ref": 0
+  },
+  {
+   "label": "Concentración de Lima+Callao en el parque nacional",
+   "value": 66,
+   "unit": "%",
+   "source_ref": 0
+  },
+  {
+   "label": "Crecimiento anual del parque de Lima",
+   "value": 3.5,
+   "unit": "%",
+   "source_ref": 2
+  },
+  {
+   "label": "Antigüedad promedio (parque liviano de Lima)",
+   "value": 14.5,
+   "unit": "años",
+   "source_ref": 7
+  },
+  {
+   "label": "Flota que supera 10 años de antigüedad (carga/transporte)",
+   "value": 52,
+   "unit": "%",
+   "source_ref": 7
+  },
+  {
+   "label": "Inmatriculaciones nacionales de vehículos nuevos 2024",
+   "value": 517707,
+   "unit": "veh",
+   "source_ref": 4
+  }
+ ],
+ "sources": [
+  {
+   "label": "MTC — Parque automotor nacional 1995-2015 (fuente SUNARP) y dato Lima+Callao 2016 (1,752,919 = 66% del nacional 2,661,719)",
+   "url": "https://www.mtc.gob.pe/cnsv/documentos/Parque%20vehicular%20nacional%201995-2015.pdf"
+  },
+  {
+   "label": "INEI — Parque automotor en circulación a nivel nacional por departamento",
+   "url": "https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1829/cap20/cap20.htm"
+  },
+  {
+   "label": "IPE — En los últimos 10 años el parque automotor de Lima creció 40% pero la red vial apenas 7%",
+   "url": "https://ipe.org.pe/en-los-ultimos-diez-anos-el-parque-automotor-en-lima-crecio-40-pero-la-red-vial-apenas-7/"
+  },
+  {
+   "label": "Gestión — Parque automotor en Lima creció 40% en los últimos 10 años (2015-2024)",
+   "url": "https://gestion.pe/economia/parque-automotor-en-lima-crecio-40-pero-red-vial-se-quedo-muy-lejos-de-seguirle-el-paso-en-ultimos-10-anos-noticia/"
+  },
+  {
+   "label": "AAP — Venta e inmatriculación de vehículos nuevos (517,707 en 2024)",
+   "url": "https://aap.org.pe/estadisticas/ventas_inmatriculaciones_vehiculos_nuevos/"
+  },
+  {
+   "label": "SUNARP vía RPP — 648,497 vehículos nuevos inmatriculados en 2025 (+25.26% vs 2024)",
+   "url": "https://rpp.pe/peru/actualidad/sunarp-en-el-2025-un-total-de-648-497-autos-nuevos-se-incorporaron-al-sistema-nacional-de-transporte-terrestre-noticia-1671459"
+  },
+  {
+   "label": "El Comercio — La congestión vehicular en Lima (tasa de motorización ~216 veh/1000 hab)",
+   "url": "https://elcomercio.pe/lima/transporte/la-congestion-vehicular-en-lima-por-david-fairlie-lima-metropolitana-asociacion-automotriz-del-peru-camionjes-camionetas-noticia/"
+  },
+  {
+   "label": "Infobae — Antigüedad del parque automotor en Perú (14.5 años; 52% de carga/transporte supera 10 años)",
+   "url": "https://www.infobae.com/peru/2025/09/23/antiguedad-del-parque-automotor-en-peru-su-contaminacion-genera-costo-de-us-12800-millones-y-10000-muertes-anuales/"
+  },
+  {
+   "label": "Comunidad Andina — Parque vehicular de la CAN 2023",
+   "url": "https://www.comunidadandina.org/DocOficialesFiles/DEstadisticos/SGDE1037.pdf"
+  },
+  {
+   "label": "TomTom Traffic Index — Lima (2024)",
+   "url": "https://www.tomtom.com/traffic-index/city/lima/"
+  }
+ ],
+ "congestion": {
+  "hours_lost_year": 155,
+  "note": "Horas al año perdidas en congestión en un viaje típico de 10 km en hora punta (Lima, TomTom Traffic Index 2024). Lima está entre las ciudades con más tiempo perdido en tráfico del mundo.",
+  "source_ref": 9
+ }
 }

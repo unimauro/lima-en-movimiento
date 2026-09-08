@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C2QGTKK4DV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C2QGTKK4DV');
+</script>
 <title>Lima en Movimiento · Transporte de Lima</title>
 <meta name="description" content="Lima en Movimiento — una mirada viva a la red de transporte urbano de Lima y Callao: mapa real con la red masiva (Metro, Metropolitano, corredores) animada en tiempo simulado, tablero de movilidad, parque automotor y seguridad, con datos de fuentes públicas.">
 <link rel="canonical" href="https://unimauro.github.io/lima-en-movimiento/">
@@ -209,6 +217,7 @@
   <h2 class="sec-title">Cada vez más autos</h2>
   <p class="sec-sub" id="fleetSub">El parque vehicular de Lima crece más rápido que su red masiva. Proyecta el crecimiento y mira a dónde va la ciudad si nada cambia.</p>
   <div class="kpis" id="fleetKpis" style="margin-top:18px"></div>
+  <div class="traffic-stat" id="trafficStat" hidden></div>
   <div class="grid2" style="margin-top:16px">
     <div class="card chartcard">
       <h3>Crecimiento del parque vehicular</h3>
@@ -334,7 +343,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Recopila datos de los visitantes?</summary>
-      <div>El sitio es <b>estático</b> y no te pide datos personales ni usa formularios de registro. Puede emplear analítica de tráfico <b>agregada</b> (conteo de visitas) para saber qué contenido es útil, sin identificarte. El chatbot procesa tu pregunta para responderte; no guarda un perfil tuyo.</div>
+      <div>El sitio es <b>estático</b> y no te pide datos personales ni usa formularios de registro. Usa <b>Google Analytics (GA4)</b> para medir el tráfico de forma <b>agregada</b> (visitas, páginas vistas), lo que implica cookies de medición; no vendemos datos ni construimos un perfil tuyo. El chatbot procesa tu pregunta solo para responderte.</div>
     </details>
     <details class="faq-item">
       <summary>¿Quién está detrás?</summary>

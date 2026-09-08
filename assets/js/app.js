@@ -100,6 +100,14 @@
     sl.addEventListener("input", upd); upd();
     const note = $("fleetNote");
     if (note) note.textContent = F.notes_scope || (F.projection && F.projection.note) || "";
+    const cg = F.congestion, ts = $("trafficStat");
+    if (cg && cg.hours_lost_year && ts) {
+      const src = (F.sources || [])[cg.source_ref];
+      const link = src && src.url ? ` <a href="${src.url}" target="_blank" rel="noopener">${src.label || "Fuente"} ↗</a>` : "";
+      ts.hidden = false;
+      ts.innerHTML = `<div class="ts-big tnum">${cg.hours_lost_year}<small>h</small></div>
+        <div class="ts-txt"><b>al año perdidas en el tráfico</b><span>${cg.note || ""}${link}</span></div>`;
+    }
   }
 
   /* ---------- seguridad ---------- */
@@ -147,19 +155,40 @@
   function renderFaqSources(data) {
     const el = $("faqSources"); if (!el) return;
     const groups = [
-      { title: "Mapa, líneas y estaciones", items: [{ label: "OpenStreetMap (colaboradores) — vía Overpass API", url: "https://www.openstreetmap.org/copyright" }] },
-      { title: "Indicadores de movilidad", items: (data.indicators && data.indicators.sources) || [] },
-      { title: "Parque automotor", items: (data.fleet && data.fleet.sources) || [] },
-      { title: "Seguridad en el transporte", items: (data.security && data.security.sources) || [] },
-      { title: "Fichas por línea", items: (data.linesDetail && data.linesDetail.sources) || [] },
-      { title: "Contexto e historia", items: (data.context && data.context.sources) || [] },
+      { key: "mapa", title: "Mapa, líneas y estaciones", items: [{ label: "OpenStreetMap (colaboradores) — vía Overpass API", url: "https://www.openstreetmap.org/copyright" }] },
+      { key: "indicadores", title: "Indicadores de movilidad", items: (data.indicators && data.indicators.sources) || [] },
+      { key: "parque", title: "Parque automotor y tráfico", items: (data.fleet && data.fleet.sources) || [] },
+      { key: "seguridad", title: "Seguridad en el transporte", items: (data.security && data.security.sources) || [] },
+      { key: "fichas", title: "Fichas por línea", items: (data.linesDetail && data.linesDetail.sources) || [] },
+      { key: "contexto", title: "Contexto e historia", items: (data.context && data.context.sources) || [] },
     ];
     el.innerHTML = groups.filter((g) => g.items.length).map((g) => {
       const seen = new Set();
       const lis = g.items.filter((s) => s && s.label && !seen.has(s.label) && seen.add(s.label))
         .map((s) => `<li>${s.url ? `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>` : s.label}</li>`).join("");
-      return `<div class="src-group"><h4>${g.title}</h4><ul>${lis}</ul></div>`;
+      return `<div class="src-group" id="src-${g.key}"><h4>${g.title}</h4><ul>${lis}</ul></div>`;
     }).join("");
+  }
+
+  /* enlaza cada gráfico/tablero con su grupo de fuentes en el FAQ */
+  function attachSources() {
+    const chartMap = { chModal: "indicadores", chRider: "indicadores", chDemand: "indicadores", chGrowth: "indicadores", chCompare: "indicadores",
+      chFleet: "parque", chFleetComp: "parque", chSecExt: "seguridad", secMap: "seguridad" };
+    Object.keys(chartMap).forEach((cid) => {
+      const cv = $(cid); if (!cv) return;
+      const card = cv.closest(".chartcard"); if (!card || card.querySelector(".chart-src")) return;
+      const d = document.createElement("div"); d.className = "chart-src";
+      d.innerHTML = `<a href="#src-${chartMap[cid]}">Fuente de los datos ↗</a>`;
+      card.appendChild(d);
+    });
+    [["kpiStrip", "indicadores"], ["fleetKpis", "parque"], ["secKpis", "seguridad"]].forEach(([id, key]) => {
+      const el = $(id); if (!el) return;
+      const nx = el.nextElementSibling;
+      if (nx && nx.classList && nx.classList.contains("kpi-src")) return;
+      const d = document.createElement("div"); d.className = "chart-src kpi-src";
+      d.innerHTML = `<a href="#src-${key}">Fuente de los datos ↗</a>`;
+      el.parentNode.insertBefore(d, el.nextSibling);
+    });
   }
 
   /* ---------- contexto ---------- */
@@ -235,6 +264,7 @@
       renderFleet(data);
       renderSecurity(data);
       renderFaqSources(data);
+      attachSources();
 
       twin = new GLT.Twin($("twinMap"), data);
       window.__twin = twin;
