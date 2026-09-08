@@ -116,11 +116,11 @@ a { color: var(--accent-ink); }
 /* ---------- Layout ---------- */
 .main { margin-left: var(--sbw); }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 26px; }
-section { padding: 40px 0; }
+section { padding: 58px 0; scroll-margin-top: 20px; }
 .eyebrow { font-size: 12px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--accent-ink); margin-bottom: 8px; }
+  color: var(--accent-ink); margin-bottom: 12px; }
 .sec-title { font-size: clamp(22px, 3vw, 30px); }
-.sec-sub { color: var(--text-2); max-width: 62ch; margin-top: 8px; }
+.sec-sub { color: var(--text-2); max-width: 62ch; margin-top: 10px; }
 
 /* ---------- Hero / Twin ---------- */
 .hero { padding-top: 26px; }
