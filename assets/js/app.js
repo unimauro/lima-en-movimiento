@@ -143,6 +143,25 @@
     inp.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); go(); } });
   }
 
+  /* ---------- FAQ · fuentes por tema ---------- */
+  function renderFaqSources(data) {
+    const el = $("faqSources"); if (!el) return;
+    const groups = [
+      { title: "Mapa, líneas y estaciones", items: [{ label: "OpenStreetMap (colaboradores) — vía Overpass API", url: "https://www.openstreetmap.org/copyright" }] },
+      { title: "Indicadores de movilidad", items: (data.indicators && data.indicators.sources) || [] },
+      { title: "Parque automotor", items: (data.fleet && data.fleet.sources) || [] },
+      { title: "Seguridad en el transporte", items: (data.security && data.security.sources) || [] },
+      { title: "Fichas por línea", items: (data.linesDetail && data.linesDetail.sources) || [] },
+      { title: "Contexto e historia", items: (data.context && data.context.sources) || [] },
+    ];
+    el.innerHTML = groups.filter((g) => g.items.length).map((g) => {
+      const seen = new Set();
+      const lis = g.items.filter((s) => s && s.label && !seen.has(s.label) && seen.add(s.label))
+        .map((s) => `<li>${s.url ? `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>` : s.label}</li>`).join("");
+      return `<div class="src-group"><h4>${g.title}</h4><ul>${lis}</ul></div>`;
+    }).join("");
+  }
+
   /* ---------- contexto ---------- */
   function renderContext(ctx) {
     if (!ctx) return;
@@ -215,6 +234,7 @@
       GLT.charts.buildAll(data);
       renderFleet(data);
       renderSecurity(data);
+      renderFaqSources(data);
 
       twin = new GLT.Twin($("twinMap"), data);
       window.__twin = twin;

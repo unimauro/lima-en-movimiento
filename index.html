@@ -46,6 +46,7 @@
     <a href="#parque"><svg viewBox="0 0 24 24"><path d="M5 17h14M6 17l1-5a3 3 0 0 1 3-2h4a3 3 0 0 1 3 2l1 5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/><path d="M4 12h16"/></svg>Parque automotor</a>
     <a href="#seguridad"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5l8-3z"/></svg>Seguridad</a>
     <a href="#contexto"><svg viewBox="0 0 24 24"><path d="M12 8v5M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg>Contexto</a>
+    <a href="#faq"><svg viewBox="0 0 24 24"><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>FAQ · Fuentes</a>
     <a href="#apoyo"><svg viewBox="0 0 24 24"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>Apóyalo</a>
     <a href="#fuentes"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Fuentes</a>
   </nav>
@@ -269,6 +270,52 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- FAQ -->
+<section class="wrap" id="faq">
+  <div class="eyebrow">Preguntas frecuentes</div>
+  <h2 class="sec-title">Qué es esto y de dónde salen los datos</h2>
+  <p class="sec-sub">Todo lo que se muestra es una maqueta educativa con datos de fuentes públicas. Aquí explicamos qué es real, qué es estimado y de dónde viene cada cifra.</p>
+
+  <div class="faq" style="margin-top:20px">
+    <details class="faq-item" open>
+      <summary>¿Qué es “Lima en Movimiento”?</summary>
+      <div>Un proyecto independiente y educativo: una réplica virtual (“gemelo digital”) de la red de transporte masivo de Lima y Callao, sobre el mapa real de la ciudad, con un tablero de datos de movilidad, parque automotor y seguridad. <b>No es un sitio oficial</b> ni está afiliado a la ATU ni a ninguna entidad del Estado.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Los datos son reales?</summary>
+      <div>Sí, en su mayoría, y siempre con fuente. La geometría de las líneas y las estaciones vienen de <b>OpenStreetMap</b>. Las cifras (demanda, reparto modal, parque vehicular, seguridad, fichas por línea) provienen de <b>fuentes públicas</b> (ATU, MTC, INEI, IPE, SUNARP/AAP, Ministerio Público/Mininter y prensa seria). Lo que es estimación está marcado como tal.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué es “oficial” y qué es “estimado”?</summary>
+      <div>Marcamos la diferencia explícitamente. Ejemplos: en el <b>parque automotor</b>, solo el punto de <b>2016 es dato oficial del MTC</b> (se resalta en el gráfico); el resto de la serie es una estimación anclada a ese valor. En el <b>Metro Línea 2</b>, 7 de 27 estaciones tienen coordenadas reales de OSM (el resto está aún en obra y va aproximado). Las <b>Líneas 3 y 4</b> son trazados proyectados.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cómo funciona la simulación del mapa?</summary>
+      <div>No es rastreo GPS en vivo. Los vehículos se generan según las <b>frecuencias (headways) por hora</b> de cada línea, moduladas por la curva de demanda real de la ciudad. El reloj y la velocidad son controlables. Es una representación del <b>comportamiento típico</b> de la red, no la posición real de cada unidad.</div>
+    </details>
+    <details class="faq-item">
+      <summary>La sección de seguridad, ¿señala rutas o empresas?</summary>
+      <div><b>No.</b> Solo mostramos cifras <b>agregadas</b> (por año) y los <b>distritos</b> más reportados, con fuentes públicas. No atribuimos hechos a rutas, empresas ni personas concretas, y no nombramos víctimas. Las cifras pueden variar entre fuentes y hay subregistro; lo indicamos en la metodología.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿El chatbot usa inteligencia artificial?</summary>
+      <div>Responde con los <b>datos reales del propio sitio</b> (estaciones, demanda, parque, seguridad). Opcionalmente se conecta a un gateway de IA para respuestas más abiertas. En ambos casos, las cifras salen de las mismas fuentes citadas aquí.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cada cuánto se actualiza?</summary>
+      <div>Es una <b>instantánea</b> con datos de referencia (mayormente 2024–2026). Se actualiza de forma manual. Antes de un uso oficial, verifica cada cifra en su fuente original.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Puedo reutilizar o citar los datos?</summary>
+      <div>Sí. El código es abierto (MIT) y los datos citan sus fuentes; te pedimos citar tanto este proyecto como la fuente original de cada cifra. El repositorio está en <a href="https://github.com/unimauro/lima-en-movimiento" target="_blank" rel="noopener">GitHub</a>.</div>
+    </details>
+  </div>
+
+  <h3 style="margin-top:32px; font-size:19px">¿De dónde vienen los datos?</h3>
+  <p class="sec-sub" style="margin-bottom:6px">Fuentes agrupadas por sección, tomadas directamente de los archivos de datos del sitio.</p>
+  <div id="faqSources" class="faq-sources"></div>
 </section>
 
 <!-- FUENTES -->
