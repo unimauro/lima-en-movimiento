@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lima en Movimiento · Gemelo Digital del transporte</title>
-<meta name="description" content="Lima en Movimiento — gemelo digital de la red de transporte urbano de Lima y Callao: mapa real con la red masiva (Metro, Metropolitano, corredores) animada en tiempo simulado y tablero de datos de movilidad.">
+<title>Lima en Movimiento · Transporte de Lima</title>
+<meta name="description" content="Lima en Movimiento — una mirada viva a la red de transporte urbano de Lima y Callao: mapa real con la red masiva (Metro, Metropolitano, corredores) animada en tiempo simulado y tablero de datos de movilidad.">
 <meta name="theme-color" content="#0d0d0d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Lima en Movimiento">
-<meta property="og:title" content="Lima en Movimiento · Gemelo Digital del transporte">
+<meta property="og:title" content="Lima en Movimiento · Transporte de Lima">
 <meta property="og:description" content="La red de Lima y Callao moviéndose en tiempo simulado: mapa real + tablero de datos de movilidad.">
 <meta property="og:url" content="https://unimauro.github.io/gemelo-lima-transporte/">
 <meta property="og:image" content="https://unimauro.github.io/gemelo-lima-transporte/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lima en Movimiento · Gemelo Digital">
+<meta name="twitter:title" content="Lima en Movimiento">
 <meta name="twitter:description" content="La red de transporte de Lima y Callao moviéndose en tiempo simulado.">
 <meta name="twitter:image" content="https://unimauro.github.io/gemelo-lima-transporte/assets/og.png">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -36,11 +36,11 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16"/><circle cx="8.5" cy="14" r="1"/><circle cx="15.5" cy="14" r="1"/><path d="M8 21l1.5-3M16 21l-1.5-3"/></svg>
     </span>
-    <div><b>Lima en Movimiento</b><span>Gemelo digital · Lima y Callao</span></div>
+    <div><b>Lima en Movimiento</b><span>Transporte urbano · Lima y Callao</span></div>
   </a>
 
   <nav class="side-nav">
-    <a href="#gemelo" class="active"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Gemelo en vivo</a>
+    <a href="#gemelo" class="active"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>Mapa en vivo</a>
     <a href="#indicadores"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Indicadores</a>
     <a href="#tablero"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="11" width="8" height="10" rx="1"/><rect x="3" y="14" width="8" height="7" rx="1"/></svg>Tablero</a>
     <a href="#parque"><svg viewBox="0 0 24 24"><path d="M5 17h14M6 17l1-5a3 3 0 0 1 3-2h4a3 3 0 0 1 3 2l1 5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/><path d="M4 12h16"/></svg>Parque automotor</a>
@@ -76,7 +76,7 @@
 <!-- HERO / GEMELO -->
 <section class="hero wrap" id="gemelo">
   <div class="hero-head">
-    <div class="eyebrow">Gemelo digital en vivo</div>
+    <div class="eyebrow">La red en vivo</div>
     <h1>La red de Lima, moviéndose en tiempo simulado</h1>
     <p id="heroSub">Una réplica virtual de la red masiva de Lima y Callao sobre el mapa real de la ciudad.
       Los vehículos circulan según frecuencias que cambian con la hora del día. Pulsa play, avanza el reloj y usa el mapa: acércate, aléjate y navega las calles.</p>
@@ -164,7 +164,7 @@
     </div>
     <div class="card chartcard">
       <h3>Demanda a lo largo del día</h3>
-      <div class="csub">Índice de demanda relativa por hora — el marcador sigue el reloj del gemelo</div>
+      <div class="csub">Índice de demanda relativa por hora — el marcador sigue el reloj de la simulación</div>
       <div class="chart-holder"><canvas id="chDemand"></canvas></div>
     </div>
     <div class="card chartcard">
@@ -247,7 +247,7 @@
 <section class="wrap" id="apoyo">
   <div class="eyebrow">Apoya el proyecto</div>
   <h2 class="sec-title">Invítame un café ☕</h2>
-  <p class="sec-sub">Este gemelo digital es un proyecto abierto y educativo. Si te fue útil, puedes apoyar su mantenimiento y que sume más líneas y datos reales.</p>
+  <p class="sec-sub">Lima en Movimiento es un proyecto abierto y educativo. Si te fue útil, puedes apoyar su mantenimiento y que sume más líneas y datos reales.</p>
   <div class="support" id="support">
     <div class="sup-card yape">
       <div class="sup-h"><span class="sup-ic">Y</span><b>Yape</b></div>
@@ -281,7 +281,7 @@
 
 <footer>
   <div class="wrap">
-    <span class="badge">Gemelo digital · maqueta educativa</span>
+    <span class="badge">Lima en Movimiento · maqueta educativa</span>
     <span>Datos de referencia de fuentes públicas (ATU, operadores, estudios de movilidad).</span>
     <span style="margin-left:auto">Lima en Movimiento · <span id="year"></span></span>
   </div>
