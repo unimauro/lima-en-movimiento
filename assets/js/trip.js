@@ -41,8 +41,8 @@
   const GCELL = 0.0009;
   const gkey = (lat, lng) => Math.floor(lat / GCELL) + "," + Math.floor(lng / GCELL);
   function neighborsOf(grid, lat, lng, R) {
-    const out = [], ci = Math.floor(lat / GCELL), cj = Math.floor(lng / GCELL);
-    for (let i = ci - 1; i <= ci + 1; i++) for (let j = cj - 1; j <= cj + 1; j++) {
+    const out = [], ci = Math.floor(lat / GCELL), cj = Math.floor(lng / GCELL), span = Math.ceil(R / 95); // celdas ≈100 m
+    for (let i = ci - span; i <= ci + span; i++) for (let j = cj - span; j <= cj + span; j++) {
       const cell = grid.get(i + "," + j); if (!cell) continue;
       for (const id of cell) { const n = G.nodes[id], d = hav([lat, lng], [n.lat, n.lng]); if (d <= R) out.push([d, id]); }
     }
@@ -121,11 +121,17 @@
     pop(){ const a=this.a; const top=a[0], last=a.pop(); if(a.length){ a[0]=last; let i=0; for(;;){ const l=2*i+1,r=l+1; let m=i; if(l<a.length&&a[l][0]<a[m][0]) m=l; if(r<a.length&&a[r][0]<a[m][0]) m=r; if(m===i) break; [a[m],a[i]]=[a[i],a[m]]; i=m; } } return top; }
     get size(){ return this.a.length; } }
 
+  // k nodos más cercanos, pero como máximo 2 por vía (src) para que un fragmento
+  // aislado no monopolice el acceso/egreso del viaje.
   function nearest(ll, filter, k, maxM) {
     const out = [];
     for (let i = 0; i < G.nodes.length; i++) { const n = G.nodes[i]; if (filter && !filter(n)) continue;
       const d = hav(ll, [n.lat, n.lng]); if (d <= maxM) out.push([d, i]); }
-    out.sort((x, y) => x[0] - y[0]); return out.slice(0, k);
+    out.sort((x, y) => x[0] - y[0]);
+    const per = {}, pick = [];
+    for (const e of out) { const s = G.nodes[e[1]].src || "station"; per[s] = (per[s] || 0) + 1;
+      if (per[s] <= 2) pick.push(e); if (pick.length >= k) break; }
+    return pick;
   }
 
   function route(A, B, mode, t, sfOverride) {
@@ -270,5 +276,5 @@
   }
 
   window.GLT = window.GLT || {};
-  window.GLT.trip = { init, compute, route, PRESETS };
+  window.GLT.trip = { init, compute, route, PRESETS, _debug: { G, nearest, arteryConnected } };
 })();
