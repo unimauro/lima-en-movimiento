@@ -251,13 +251,16 @@
     $("hour").value = Math.floor(t);
   }
 
+  const ICON_PLAY = '<path d="M8 5v14l11-7z"/>', ICON_PAUSE = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+  function setPlaying(v) {
+    playing = v;
+    $("playIcon").innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+    $("playBtn").setAttribute("aria-label", playing ? "Pausar" : "Reproducir");
+    if (playing) twin.play(); else twin.pause();
+  }
   function wireControls() {
     $("playBtn").addEventListener("click", () => {
-      playing = !playing;
-      $("playIcon").innerHTML = playing
-        ? '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>'
-        : '<path d="M8 5v14l11-7z"/>';
-      if (playing) twin.play(); else twin.pause();
+      setPlaying(!playing);
       GLT.track(playing ? "map_play" : "map_pause");
     });
     $("speed").addEventListener("input", (e) => {
@@ -302,6 +305,8 @@
       GLT.charts.setHour(420);
       syncStats();
       twin.draw();
+      // El gemelo arranca "en vivo" (salvo que el sistema pida menos movimiento; Play sigue funcionando igual).
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setPlaying(true);
     } catch (err) {
       console.error(err);
       $("kpiStrip").innerHTML = `<div class="loading">No se pudieron cargar los datos (${err.message}).<br>

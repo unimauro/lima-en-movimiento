@@ -160,10 +160,15 @@
     }
     draw() { this._draw(); }
 
-    _loop(now){ if(!this.playing)return; const dt=Math.min(0.05,(now-this._last)/1000); this._last=now;
-      this.t=(this.t+(dt*this.speed)/60+1440)%1440; this._draw(); this.onTick&&this.onTick(this.t);
+    // Loop robusto: un error en un frame nunca detiene la simulación.
+    _loop(now){ if(!this.playing)return;
+      const dt=Math.min(0.05,(now-this._last)/1000); this._last=now;
+      this.t=(this.t+(dt*this.speed)/60+1440)%1440;
+      try { this._draw(); } catch(e){ console.error("[twin] draw", e); }
+      try { this.onTick&&this.onTick(this.t); } catch(e){ console.error("[twin] tick", e); }
       this._raf=requestAnimationFrame((n)=>this._loop(n)); }
-    play(){ if(this.reduced){this._draw();return;} this.playing=true; this._last=performance.now();
+    // Play es una acción explícita del usuario: anima siempre (reduced-motion solo evita el autoplay).
+    play(){ if(this.playing) return; this.playing=true; this._last=performance.now();
       this._raf=requestAnimationFrame((n)=>this._loop(n)); }
     pause(){ this.playing=false; cancelAnimationFrame(this._raf); }
     setHour(t){ this.t=((t%1440)+1440)%1440; this._draw(); this.onTick&&this.onTick(this.t); }
