@@ -170,6 +170,28 @@
     inp.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); go(); } });
   }
 
+  /* ---------- fotos (Wikimedia Commons, con crédito) ---------- */
+  async function renderPhotos() {
+    let credits = [];
+    try { const r = await fetch("assets/img/credits.json", { cache: "no-cache" }); if (r.ok) credits = await r.json(); } catch (e) {}
+    if (!credits.length) return;
+    const strip = $("photoStrip"), sec = $("fotos");
+    if (strip && sec) {
+      strip.innerHTML = credits.slice(0, 4).map((c) =>
+        `<figure><img src="assets/img/${c.file}" alt="${(c.alt || "").replace(/"/g, "&quot;")}" loading="lazy">
+          <figcaption>${c.alt || ""}<small>Foto: ${c.author || "—"} (${c.license || ""})</small></figcaption></figure>`).join("");
+      sec.hidden = false;
+    }
+    // fondos tenues en secciones donde la foto aporta contexto
+    const bg = (id, file) => { const el = $(id); if (!el || !credits.some((c) => c.file === file)) return;
+      el.classList.add("has-photo"); el.style.setProperty("--photo", `url(assets/img/${file})`); };
+    bg("parque", "lima-panoramica.jpg"); bg("seguridad", "combi.jpg");
+    // créditos en FAQ · Fuentes
+    const el = $("faqSources");
+    if (el) { const lis = credits.map((c) => `<li><a href="${c.source}" target="_blank" rel="noopener">${c.title || c.file}</a> — ${c.author || ""}, ${c.license || ""}</li>`).join("");
+      el.insertAdjacentHTML("beforeend", `<div class="src-group" id="src-fotos"><h4>Fotografías</h4><ul>${lis}</ul></div>`); }
+  }
+
   /* ---------- FAQ · fuentes por tema ---------- */
   function renderFaqSources(data) {
     const el = $("faqSources"); if (!el) return;
@@ -247,8 +269,28 @@
     $("ovFreq").textContent = demandLabel(d);
     $("ovClock").textContent = hhmm(t); $("ovPeak").textContent = demandLabel(d);
     $("stPax").textContent = GLT.fmt.short(s.pax);
+    const ob = $("stOnboard"), oc = $("stOcc");
+    if (ob) ob.textContent = GLT.fmt.short(s.onboard);
+    if (oc) oc.textContent = Math.round(s.occ * 100) + "%";
     $("hourVal").textContent = hhmm(t);
     $("hour").value = Math.floor(t);
+  }
+
+  /* ---------- pestañas del panel + capa de tráfico ---------- */
+  function initTabs() {
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    tabs.forEach((b) => b.addEventListener("click", () => {
+      tabs.forEach((x) => { const on = x === b; x.classList.toggle("active", on); x.setAttribute("aria-selected", on); });
+      document.querySelectorAll(".tabpane").forEach((p) => { p.hidden = p.id !== "tab-" + b.dataset.tab; });
+      GLT.track("tab_" + b.dataset.tab);
+    }));
+  }
+  function addTrafficLegend() {
+    const el = $("mapLegend"); if (!el) return;
+    const n = document.createElement("span"); n.className = "leg"; n.dataset.id = "_traffic";
+    n.innerHTML = '<span class="sw traf"></span>Tráfico en arterias';
+    n.addEventListener("click", () => { n.classList.toggle("off"); GLT.traffic.setVisible(!n.classList.contains("off")); });
+    el.appendChild(n);
   }
 
   const ICON_PLAY = '<path d="M8 5v14l11-7z"/>', ICON_PAUSE = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
@@ -289,12 +331,16 @@
       renderSecurity(data);
       renderFaqSources(data);
       attachSources();
+      renderPhotos();
 
       twin = new GLT.Twin($("twinMap"), data);
       window.__twin = twin;
       renderLegend(data.network, twin);
       initSearch(twin);
       const fit = $("mapFit"); if (fit) fit.addEventListener("click", () => twin.fit());
+      if (GLT.traffic && GLT.traffic.init(twin, data)) { addTrafficLegend(); twin.bringNetworkToFront(); }
+      if (GLT.trip) GLT.trip.init(twin, data);
+      initTabs();
 
       const ops = (data.network.lines || []).filter((l) => l.status === "operational");
       $("stLines").textContent = (data.network.lines || []).length;

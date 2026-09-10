@@ -14,9 +14,18 @@ fuentes públicas.
 
 ## Qué incluye
 
-- **Mapa en vivo (Leaflet + OSM/CARTO)** — la red masiva sobre el mapa real de la ciudad,
-  con vehículos animados según frecuencias por hora; **zoom, pan**, búsqueda de estaciones
-  y **ficha al hacer clic** en una línea (operador, tarifa, material rodante, hitos).
+- **Mapa en vivo (Leaflet + Esri/OSM)** — la red masiva sobre el mapa real de la ciudad,
+  con un **modelo mesoscópico simplificado (ABM-lite)**: despacho por intervalo horario,
+  paradas con tiempo de *dwell* en cada estación y **ocupación** por vehículo (perfil de
+  carga × demanda horaria × capacidad; pasa el cursor para verla). **Zoom, pan**, búsqueda
+  de estaciones y **ficha al hacer clic** en una línea.
+- **Arterias principales (32, OSM)** — Panamericanas, Vía Expresa, Evitamiento, Javier
+  Prado, Universitaria, Túpac Amaru… coloreadas por **congestión según la hora** y con
+  flujo de autos animado.
+- **Mi viaje: casa → trabajo** — marca origen y destino en el mapa (o elige un ejemplo) y
+  compara **auto**, **transporte masivo** y **combi**: tiempo a esa hora, distancia, costo
+  en soles, CO₂ y **horas perdidas al año** en tráfico. Grafo multimodal + Dijkstra;
+  espera = mitad del intervalo, tarifas reales, congestión = f(demanda horaria).
 - **Tablero de movilidad (Chart.js)** — reparto modal, pasajeros/día por sistema, curva de
   demanda horaria (sincronizada con el reloj de la simulación), crecimiento de la red y
   comparación con capitales de la región. Paleta accesible (colorblind-safe).

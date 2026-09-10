@@ -43,6 +43,9 @@
 <meta name="twitter:title" content="Lima en Movimiento">
 <meta name="twitter:description" content="La red de transporte de Lima y Callao moviéndose en tiempo simulado.">
 <meta name="twitter:image" content="https://unimauro.github.io/lima-en-movimiento/assets/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link rel="preconnect" href="https://ai.tunky.net">
 <link rel="preconnect" href="https://server.arcgisonline.com">
@@ -70,7 +73,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16"/><circle cx="8.5" cy="14" r="1"/><circle cx="15.5" cy="14" r="1"/><path d="M8 21l1.5-3M16 21l-1.5-3"/></svg>
     </span>
-    <div><b>Lima en Movimiento</b><span>Transporte urbano · Lima y Callao</span></div>
+    <div><b>Lima en Movimiento</b><span>Transporte urbano de Lima y Callao</span></div>
   </a>
 
   <nav class="side-nav">
@@ -109,12 +112,12 @@
 <main class="main">
 
 <!-- HERO / GEMELO -->
-<section class="hero wrap" id="gemelo">
+<section class="hero wrap" id="gemelo" data-tone="met">
   <div class="hero-head">
     <div class="eyebrow">La red en vivo</div>
     <h1>La red de Lima, moviéndose en tiempo simulado</h1>
     <p id="heroSub">Una réplica virtual de la red masiva de Lima y Callao sobre el mapa real de la ciudad.
-      Los vehículos circulan según frecuencias que cambian con la hora del día. Pulsa play, avanza el reloj y usa el mapa: acércate, aléjate y navega las calles.</p>
+      Los vehículos circulan según frecuencias que cambian con la hora, se detienen en cada estación y se llenan en hora punta; las arterias se congestionan. Mueve el reloj, navega las calles y <b>simula tu viaje de casa al trabajo</b>.</p>
   </div>
 
   <div class="twin">
@@ -134,6 +137,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
       </button>
       <div class="map-legend" id="mapLegend"></div>
+      <div class="veh-tip" id="vehTip" hidden></div>
     </div>
 
     <div class="card panel">
@@ -152,28 +156,58 @@
           <label>Hora del día <b class="tnum" id="hourVal">07:00</b></label>
           <input type="range" id="hour" min="0" max="1439" step="1" value="420">
         </div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="sim" role="tab" aria-selected="true">Red masiva</button>
+        <button class="tab" data-tab="trip" role="tab" aria-selected="false">Mi viaje 🏠→💼</button>
+      </div>
+
+      <div class="tabpane" id="tab-sim">
         <div class="field">
           <label>Buscar estación</label>
           <input type="search" id="stSearch" list="stationList" placeholder="Ej.: Gamarra, Naranjal…" autocomplete="off">
           <datalist id="stationList"></datalist>
         </div>
-      </div>
-      <div>
-        <h3>Estado de la red</h3>
+        <h3 style="margin-top:14px">Estado de la red</h3>
         <div class="livestats" style="margin-top:10px">
           <div class="stat"><div class="v tnum" id="stVeh">—</div><div class="k">vehículos en circulación</div></div>
-          <div class="stat"><div class="v tnum" id="stPax">—</div><div class="k">pax/hora aprox. (red masiva)</div></div>
+          <div class="stat"><div class="v tnum" id="stOnboard">—</div><div class="k">pasajeros a bordo ahora</div></div>
+          <div class="stat"><div class="v tnum" id="stOcc">—</div><div class="k">ocupación media de la flota</div></div>
+          <div class="stat"><div class="v tnum" id="stPax">—</div><div class="k">pax/hora en la red masiva</div></div>
           <div class="stat"><div class="v tnum" id="stLines">—</div><div class="k">líneas modeladas</div></div>
           <div class="stat"><div class="v tnum" id="stKm">—</div><div class="k">km de red masiva</div></div>
         </div>
+        <p class="hint">Pasa el cursor sobre un vehículo para ver su ocupación y próxima parada. Toca una línea para su ficha; usa la leyenda para filtrar capas.</p>
       </div>
-      <p class="hint">Toca una estación en el mapa para ver su información. Usa la leyenda para filtrar por línea.</p>
+
+      <div class="tabpane" id="tab-trip" hidden>
+        <h3>De casa al trabajo</h3>
+        <div class="trip-set">
+          <button class="sup-btn" id="tripSetA">🏠 Casa (A)</button>
+          <button class="sup-btn" id="tripSetB">💼 Trabajo (B)</button>
+          <button class="sup-btn ghost" id="tripClear">Limpiar</button>
+        </div>
+        <div class="trip-presets" id="tripPresets"></div>
+        <div class="trip-status hint" id="tripStatus"></div>
+        <div class="trip-results" id="tripResults" hidden></div>
+        <div class="proj-callout" id="tripCallout" hidden></div>
+        <p class="hint">Los tiempos cambian con la hora del reloj. Modelo simplificado: velocidad libre × congestión horaria, espera = mitad del intervalo, tarifas reales. <a href="#faq">Cómo se calcula</a>.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- FOTOS -->
+<section class="photos" id="fotos" hidden>
+  <div class="wrap">
+    <div class="eyebrow">La red, en la calle</div>
+    <div class="photo-strip" id="photoStrip"></div>
+  </div>
+</section>
+
 <!-- KPIs -->
-<section class="wrap" id="indicadores" style="padding-top:8px">
+<section class="wrap" id="indicadores" data-tone="l1" style="padding-top:8px">
   <div class="eyebrow">Indicadores de la red</div>
   <h2 class="sec-title">Lima en cifras</h2>
   <p class="sec-sub">Magnitudes de referencia del sistema de transporte de Lima Metropolitana y Callao.</p>
@@ -181,7 +215,7 @@
 </section>
 
 <!-- TABLERO -->
-<section class="wrap" id="tablero">
+<section class="wrap" id="tablero" data-tone="met">
   <div class="eyebrow">Tablero de movilidad</div>
   <h2 class="sec-title">Cómo se mueve Lima</h2>
   <p class="sec-sub">Reparto de viajes, demanda por sistema y comparación regional. La curva de demanda es la misma que gobierna la simulación de arriba.</p>
@@ -217,7 +251,7 @@
 </section>
 
 <!-- PARQUE AUTOMOTOR -->
-<section class="wrap" id="parque" hidden>
+<section class="wrap" id="parque" data-tone="gold" hidden>
   <div class="eyebrow">Simulación · parque automotor</div>
   <h2 class="sec-title">Cada vez más autos</h2>
   <p class="sec-sub" id="fleetSub">El parque vehicular de Lima crece más rápido que su red masiva. Proyecta el crecimiento y mira a dónde va la ciudad si nada cambia.</p>
@@ -245,7 +279,7 @@
 </section>
 
 <!-- SEGURIDAD -->
-<section class="wrap" id="seguridad" hidden>
+<section class="wrap" id="seguridad" data-tone="red" hidden>
   <div class="eyebrow">Seguridad en el transporte</div>
   <h2 class="sec-title">Extorsión y violencia sobre las ruedas</h2>
   <div class="prose" id="secIntro" style="margin-top:12px"></div>
@@ -266,7 +300,7 @@
 </section>
 
 <!-- CONTEXTO -->
-<section class="wrap" id="contexto">
+<section class="wrap" id="contexto" data-tone="purple">
   <div class="eyebrow">Contexto</div>
   <h2 class="sec-title">Una reforma a medio camino</h2>
   <div class="prose" id="ctxIntro" style="margin-top:12px"></div>
@@ -280,7 +314,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="wrap" id="faq">
+<section class="wrap" id="faq" data-tone="ink">
   <div class="eyebrow">Preguntas frecuentes</div>
   <h2 class="sec-title">Qué es esto y de dónde salen los datos</h2>
   <p class="sec-sub">Todo lo que se muestra es una maqueta educativa con datos de fuentes públicas. Aquí explicamos qué es real, qué es estimado y de dónde viene cada cifra.</p>
@@ -300,7 +334,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Cómo funciona la simulación del mapa?</summary>
-      <div>No es rastreo GPS en vivo. Los vehículos se generan según las <b>frecuencias (headways) por hora</b> de cada línea, moduladas por la curva de demanda real de la ciudad. El reloj y la velocidad son controlables. Es una representación del <b>comportamiento típico</b> de la red, no la posición real de cada unidad.</div>
+      <div>No es rastreo GPS en vivo: es un <b>modelo mesoscópico simplificado, basado en agentes</b>. Cada vehículo se despacha según el <b>intervalo (headway) por hora</b> de su línea, recorre el trazado real, se <b>detiene en cada estación</b> (tiempo de parada) y lleva una <b>ocupación</b> estimada con un perfil de carga tipo campana escalado por la demanda horaria y la capacidad del vehículo (verás “sobrecarga” en punta). Las <b>arterias</b> se colorean por congestión (velocidad libre × factor de demanda, ≈45 % en hora punta) y el flujo de autos sigue esa velocidad. El <b>simulador de viaje</b> construye un grafo multimodal (arterias + red masiva) y busca la ruta de menor tiempo (Dijkstra) para auto, transporte masivo (espera = mitad del intervalo, transbordos a pie) y combi (con paradas), con tarifas reales y factores de CO₂ típicos. <b>Lo que NO es:</b> un modelo de 4 etapas ni una asignación de demanda con matriz origen–destino; está calibrado con agregados públicos, no con encuestas O/D. Es una herramienta para <i>entender órdenes de magnitud</i>, no para diseño operativo.</div>
     </details>
     <details class="faq-item">
       <summary>La sección de seguridad, ¿señala rutas o empresas?</summary>
@@ -338,7 +372,7 @@
 </section>
 
 <!-- FUENTES -->
-<section class="wrap" id="fuentes">
+<section class="wrap" id="fuentes" data-tone="ink">
   <div class="eyebrow">Metodología y fuentes</div>
   <h2 class="sec-title">Qué es real y qué es maqueta</h2>
   <p class="sec-sub" id="ctxMethod"></p>
@@ -346,7 +380,7 @@
 </section>
 
 <!-- APOYO -->
-<section class="wrap" id="apoyo">
+<section class="wrap" id="apoyo" data-tone="gold">
   <div class="eyebrow">Apoya el proyecto</div>
   <h2 class="sec-title">Invítame un café ☕</h2>
   <p class="sec-sub">Lima en Movimiento es un proyecto abierto y educativo. Si te fue útil, puedes apoyar su mantenimiento y que sume más líneas y datos reales.</p>
@@ -377,7 +411,7 @@
   <div class="wrap">
     <span class="badge">Lima en Movimiento · maqueta educativa</span>
     <span>Datos de referencia de fuentes públicas (ATU, operadores, estudios de movilidad).</span>
-    <span style="margin-left:auto">Lima en Movimiento · <span id="year"></span></span>
+    <span style="margin-left:auto">Lima en Movimiento, <span id="year"></span></span>
   </div>
 </footer>
 </main>
@@ -412,6 +446,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/twin.js"></script>
+<script src="assets/js/traffic.js"></script>
+<script src="assets/js/trip.js"></script>
 <script src="assets/js/charts.js"></script>
 <script src="assets/js/chat.js"></script>
 <script src="assets/js/app.js"></script>

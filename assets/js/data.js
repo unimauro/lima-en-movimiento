@@ -29,11 +29,11 @@ GLT.load = async function () {
     return r.json();
   });
   const opt = (f) => grab(f).catch(() => null);   // opcionales: no rompen si faltan
-  const [network, routes, indicators, context, fleet, security, linesDetail] = await Promise.all([
+  const [network, routes, indicators, context, fleet, security, linesDetail, arteries] = await Promise.all([
     grab("network.json"), grab("routes.geojson"),
     grab("indicators.json"), grab("context.json"),
-    opt("fleet.json"), opt("security.json"), opt("lines_detail.json"),
+    opt("fleet.json"), opt("security.json"), opt("lines_detail.json"), opt("arteries.geojson"),
   ]);
-  GLT.data = { network, routes, indicators, context, fleet, security, linesDetail };
+  GLT.data = { network, routes, indicators, context, fleet, security, linesDetail, arteries };
   return GLT.data;
 };
