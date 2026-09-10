@@ -11,8 +11,8 @@
   // y exige el header X-Client-Token. Pega el token para activar la IA:
   const CHAT = {
     endpoint: "https://ai.tunky.net/v1/chat",
-    token: "",   // <-- X-Client-Token de ai.tunky.net (opcional; sin él responde con datos locales)
-    system: "Eres el asistente de 'Lima en Movimiento', un gemelo digital del transporte urbano de Lima y Callao (Metro, Metropolitano y corredores). Responde en español, breve y claro.",
+    token: "lima_c20b85a3f03bba0ea183f1d9a5b82a8b",   // X-Client-Token dedicado de ai.tunky.net (público por diseño, revocable por proyecto)
+    system: "Eres el asistente de 'Lima en Movimiento', un gemelo digital del transporte urbano de Lima y Callao (Metro, Metropolitano y corredores). Responde en español, breve y claro, sobre movilidad y transporte de Lima.",
   };
   // ------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@
     const res = await fetch(CHAT.endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-Client-Token": CHAT.token },
-      body: JSON.stringify({ message: text, messages: history.slice(-12), system: CHAT.system }),
+      body: JSON.stringify({ messages: [{ role: "system", content: CHAT.system }].concat(history.slice(-12)) }),
     });
     const raw = await res.text(); let data; try { data = JSON.parse(raw); } catch (e) { data = raw; }
     if (!res.ok) throw new Error((data && data.error) || "HTTP " + res.status);
