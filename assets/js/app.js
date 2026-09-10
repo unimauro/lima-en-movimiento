@@ -196,7 +196,8 @@
   function renderFaqSources(data) {
     const el = $("faqSources"); if (!el) return;
     const groups = [
-      { key: "mapa", title: "Mapa, líneas y estaciones", items: [{ label: "OpenStreetMap (colaboradores) — vía Overpass API", url: "https://www.openstreetmap.org/copyright" }] },
+      { key: "mapa", title: "Mapa, líneas, arterias y ciclovías", items: [{ label: "OpenStreetMap (colaboradores) — vía Overpass API", url: "https://www.openstreetmap.org/copyright" }] },
+      { key: "modos", title: "Modos y tarifas del simulador de viaje", items: (data.modes && data.modes.sources) || [] },
       { key: "indicadores", title: "Indicadores de movilidad", items: (data.indicators && data.indicators.sources) || [] },
       { key: "parque", title: "Parque automotor y tráfico", items: (data.fleet && data.fleet.sources) || [] },
       { key: "seguridad", title: "Seguridad en el transporte", items: (data.security && data.security.sources) || [] },
@@ -288,9 +289,15 @@
   function addTrafficLegend() {
     const el = $("mapLegend"); if (!el) return;
     const n = document.createElement("span"); n.className = "leg"; n.dataset.id = "_traffic";
-    n.innerHTML = '<span class="sw traf"></span>Tráfico en arterias';
+    n.innerHTML = '<span class="sw traf"></span>Tráfico: autos y combis';
     n.addEventListener("click", () => { n.classList.toggle("off"); GLT.traffic.setVisible(!n.classList.contains("off")); });
     el.appendChild(n);
+    if (GLT.traffic.hasCycleways && GLT.traffic.hasCycleways()) {
+      const c = document.createElement("span"); c.className = "leg"; c.dataset.id = "_cycle";
+      c.innerHTML = `<span class="sw" style="background:#43a047"></span>Ciclovías (${Math.round(GLT.traffic.cyclewaysKm())} km)`;
+      c.addEventListener("click", () => { c.classList.toggle("off"); GLT.traffic.setCyclewaysVisible(!c.classList.contains("off")); });
+      el.appendChild(c);
+    }
   }
 
   const ICON_PLAY = '<path d="M8 5v14l11-7z"/>', ICON_PAUSE = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';

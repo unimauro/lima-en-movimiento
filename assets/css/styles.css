@@ -372,7 +372,10 @@ input[type=search]:focus { outline: none; border-color: var(--accent); }
   border-radius: 999px; padding: 5px 10px; cursor: pointer; font-family: inherit; }
 .chip-btn:hover { border-color: var(--accent); color: var(--text-1); }
 .trip-status { margin-top: 10px; min-height: 18px; }
-.trip-results { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.trip-results { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.trip-results .mode-card.best { grid-column: 1 / -1; }
+.mode-card .mc-h em { white-space: normal; text-align: right; line-height: 1.15; }
+@media (max-width: 1100px) { .trip-results { grid-template-columns: 1fr; } }
 .mode-card { text-align: left; width: 100%; border: 1px solid var(--border); border-left: 4px solid var(--mc, var(--accent));
   background: var(--surface-2); border-radius: 12px; padding: 10px 12px; cursor: pointer; font-family: inherit; color: var(--text-1); }
 .mode-card:hover { border-color: var(--border-strong); }

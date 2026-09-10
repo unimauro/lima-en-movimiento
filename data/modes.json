@@ -1,0 +1,48 @@
+{
+  "_nota": "Parámetros de referencia para el simulador de viaje. Donde no hay cifra oficial se indica (estimado). Actualizado 2026-09-10.",
+  "taxi_app": {
+    "base_soles": 3.0, "per_km_soles": 1.2, "per_min_soles": 0.25, "min_fare_soles": 7.0, "wait_min": 5,
+    "example": "Miraflores–Centro de Lima (≈9 km, 30 min en punta) ≈ S/ 18–25 en apps de taxi.",
+    "note": "(estimado) Promedio de tarifas dinámicas de apps (Uber, inDrive, Cabify) y taxi de calle en Lima; varían por demanda y hora.",
+    "source_ref": 0
+  },
+  "colectivo": {
+    "fare_soles": 4.0,
+    "corridors": ["Av. Javier Prado", "Av. Arequipa", "Panamericana Norte", "Panamericana Sur", "Carretera Central", "Av. Universitaria"],
+    "speed_factor_vs_car": 0.95,
+    "note": "(estimado) Autos colectivos de ruta fija: S/ 3–5 por tramo según corredor y hora. La Ley 31096 (2020) formalizó el colectivo fuera de Lima y Callao; en Lima Metropolitana sigue sin autorización de la ATU.",
+    "source_ref": 1
+  },
+  "mototaxi": {
+    "fare_short_soles": 2.5, "fare_per_km_soles": 1.0, "typical_trip_km": 2.0, "speed_kmh": 20, "max_trip_km": 6,
+    "districts": ["San Juan de Lurigancho", "Villa El Salvador", "Villa María del Triunfo", "Comas", "Carabayllo", "Puente Piedra", "San Martín de Porres", "Ate", "Callao (Ventanilla)", "Chorrillos", "Pachacámac"],
+    "fleet_estimate": null,
+    "note": "(estimado) Viajes cortos de acercamiento en la periferia: S/ 2–3 el tramo típico; no hay cifra oficial consolidada de flota en Lima.",
+    "source_ref": 2
+  },
+  "combi_custer": {
+    "fare_soles": 2.0, "speed_kmh": 18,
+    "note": "(estimado) Pasaje S/ 1.50–3.00 según distancia; velocidad comercial baja por paradas frecuentes.",
+    "source_ref": 2
+  },
+  "bicicleta": {
+    "speed_kmh_cycleway": 15, "speed_kmh_street": 11, "network_km": 432, "modal_share_pct": 1.5,
+    "note": "network_km = km de tramos de ciclovía en OpenStreetMap para Lima y Callao (cuenta cada sentido cuando está mapeado aparte); la ATU y municipios reportan más de 300 km físicos. Reparto modal en bici ≈ 1–2 % (estimado).",
+    "source_ref": 3
+  },
+  "caminar": { "speed_kmh": 4.5, "modal_share_pct": 24, "source_ref": 4 },
+  "co2_g_per_pax_km": {
+    "auto": 170, "taxi": 170, "combi": 70, "colectivo": 60, "mototaxi": 90, "bicicleta": 0, "metro": 25, "brt": 45, "corredor": 60,
+    "note": "(estimado) Factores típicos por pasajero-km a partir de factores de conversión internacionales y ocupaciones medias de Lima.",
+    "source_ref": 5
+  },
+  "ocupacion": { "auto": 1.5, "taxi": 1.5, "combi": 12, "colectivo": 4, "mototaxi": 1.5 },
+  "sources": [
+    { "label": "Uber — estimador de tarifas (Lima)", "url": "https://www.uber.com/global/es/price-estimate/" },
+    { "label": "Ley 31096 — formalización del servicio de auto colectivo (El Peruano)", "url": "https://busquedas.elperuano.pe/normaslegales/ley-que-declara-de-interes-nacional-y-necesidad-publica-la-fo-ley-n-31096-1914308-1/" },
+    { "label": "Lima Cómo Vamos — Encuesta de percepción sobre movilidad", "url": "https://www.limacomovamos.org/" },
+    { "label": "ATU — Red de ciclovías de Lima y Callao", "url": "https://www.gob.pe/atu" },
+    { "label": "ATU — Plan de Movilidad Urbana (reparto modal)", "url": "https://www.gob.pe/institucion/atu/informes-publicaciones" },
+    { "label": "UK DEFRA/DESNZ — Greenhouse gas conversion factors", "url": "https://www.gov.uk/government/collections/government-conversion-factors-for-company-reporting" }
+  ]
+}
