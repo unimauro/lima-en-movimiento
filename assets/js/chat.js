@@ -109,6 +109,7 @@
 
   async function handle(text) {
     text = (text || "").trim(); if (!text || busy) return;
+    GLT.track && GLT.track("chat_message");
     add("me", text); history.push({ role: "user", content: text });
     busy = true; $("chatSend").disabled = true;
     const t = typing();
@@ -125,7 +126,7 @@
     open = v == null ? !open : v;
     $("chatPanel").hidden = !open;
     $("chatFab").classList.toggle("hide", open);
-    if (open) { greet(); setTimeout(() => $("chatInput").focus(), 60); }
+    if (open) { greet(); GLT.track && GLT.track("chat_open"); setTimeout(() => $("chatInput").focus(), 60); }
   }
 
   function init() {

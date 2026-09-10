@@ -5,6 +5,9 @@ window.GLT = window.GLT || {};
 
 GLT.css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
+// Envía un evento a Google Analytics (si gtag está disponible)
+GLT.track = function (name, params) { try { if (window.gtag) window.gtag("event", name, params || {}); } catch (e) {} };
+
 const nf = new Intl.NumberFormat("es-PE");
 GLT.fmt = {
   int: (n) => nf.format(Math.round(n || 0)),

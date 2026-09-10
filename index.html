@@ -3,11 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) + Consent Mode v2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-C2QGTKK4DV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+    analytics_storage: 'denied', wait_for_update: 500
+  });
+  try { if (localStorage.getItem('glt-consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
   gtag('js', new Date());
   gtag('config', 'G-C2QGTKK4DV');
 </script>
@@ -315,7 +320,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Recopila datos de los visitantes?</summary>
-      <div>El sitio es <b>estático</b> y no te pide datos personales ni usa formularios de registro. Usa <b>Google Analytics (GA4)</b> para medir el tráfico de forma <b>agregada</b> (visitas, páginas vistas), lo que implica cookies de medición; no vendemos datos ni construimos un perfil tuyo. El chatbot procesa tu pregunta solo para responderte.</div>
+      <div>El sitio es <b>estático</b> y no te pide datos personales ni usa formularios de registro. Usa <b>Google Analytics (GA4)</b> para medir el tráfico de forma <b>agregada</b> (visitas, páginas vistas), lo que implica cookies de medición; <b>puedes rechazarlas</b> en el aviso que aparece al entrar (usamos Google Consent Mode). No vendemos datos ni construimos un perfil tuyo. El chatbot procesa tu pregunta solo para responderte.</div>
     </details>
     <details class="faq-item">
       <summary>¿Quién está detrás?</summary>
@@ -392,6 +397,15 @@
     <input id="chatInput" type="text" autocomplete="off" placeholder="Ej.: ¿Qué es el Metropolitano?" maxlength="500">
     <button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
   </form>
+</div>
+
+<!-- Banner de consentimiento de cookies -->
+<div class="cookie" id="cookieBanner" hidden>
+  <p>Usamos cookies para medir el tráfico con <b>Google Analytics</b> y mejorar el sitio. Puedes aceptarlas o rechazarlas. <a href="#faq">Más info</a>.</p>
+  <div class="cookie-actions">
+    <button class="ck-btn ghost" id="ckReject">Rechazar</button>
+    <button class="ck-btn" id="ckAccept">Aceptar</button>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>

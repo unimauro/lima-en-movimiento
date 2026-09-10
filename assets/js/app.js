@@ -32,6 +32,21 @@
     });
   }
 
+  /* ---------- consentimiento de cookies (Consent Mode) ---------- */
+  function initConsent() {
+    const b = $("cookieBanner"); if (!b) return;
+    let choice = null; try { choice = localStorage.getItem("glt-consent"); } catch (e) {}
+    if (!choice) b.hidden = false;
+    const set = (v) => {
+      try { localStorage.setItem("glt-consent", v); } catch (e) {}
+      if (window.gtag) window.gtag("consent", "update", { analytics_storage: v === "granted" ? "granted" : "denied" });
+      b.hidden = true;
+    };
+    const acc = $("ckAccept"), rej = $("ckReject");
+    if (acc) acc.addEventListener("click", () => { set("granted"); GLT.track("consent_accept"); });
+    if (rej) rej.addEventListener("click", () => set("denied"));
+  }
+
   /* ---------- sidebar / nav / apoyo ---------- */
   function initUI() {
     const sb = $("sidebar"), scrim = $("scrim");
@@ -50,15 +65,19 @@
     } catch (e) {}
 
     document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
-      try { await navigator.clipboard.writeText(b.dataset.copy); const t = b.textContent; b.textContent = "¡Copiado!"; setTimeout(() => (b.textContent = t), 1500); } catch (e) {}
+      try { await navigator.clipboard.writeText(b.dataset.copy); const t = b.textContent; b.textContent = "¡Copiado!"; setTimeout(() => (b.textContent = t), 1500); GLT.track("yape_copy"); } catch (e) {}
     }));
     const share = $("shareBtn");
     if (share) share.addEventListener("click", async () => {
+      GLT.track("share_click");
       const d = { title: "Lima en Movimiento", text: "Gemelo digital del transporte urbano de Lima", url: location.href };
       try { if (navigator.share) await navigator.share(d); else { await navigator.clipboard.writeText(location.href); share.textContent = "Enlace copiado"; setTimeout(() => (share.textContent = "Compartir"), 1500); } } catch (e) {}
     });
     const coffee = $("coffeeCard");
-    if (coffee) coffee.href = window.__COFFEE_URL__ || "https://www.buymeacoffee.com/";
+    if (coffee) { coffee.href = window.__COFFEE_URL__ || "https://www.buymeacoffee.com/";
+      coffee.addEventListener("click", () => GLT.track("coffee_click")); }
+    document.querySelectorAll('.side-mini, a[href*="github.com/unimauro/lima-en-movimiento"]').forEach((a) =>
+      a.addEventListener("click", () => GLT.track("github_click")));
   }
 
   /* ---------- KPIs ---------- */
@@ -146,7 +165,7 @@
   function initSearch(twin) {
     const dl = $("stationList"), inp = $("stSearch"); if (!dl || !inp) return;
     dl.innerHTML = twin.stationNames().map((n) => `<option value="${n.replace(/"/g, "&quot;")}"></option>`).join("");
-    const go = () => { const v = inp.value.trim(); if (v) twin.flyToStation(v); };
+    const go = () => { const v = inp.value.trim(); if (v && twin.flyToStation(v)) GLT.track("station_search", { q: v }); };
     inp.addEventListener("change", go);
     inp.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); go(); } });
   }
@@ -239,6 +258,7 @@
         ? '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>'
         : '<path d="M8 5v14l11-7z"/>';
       if (playing) twin.play(); else twin.pause();
+      GLT.track(playing ? "map_play" : "map_pause");
     });
     $("speed").addEventListener("input", (e) => {
       const v = +e.target.value; $("speedVal").textContent = v; twin.setSpeed(v);
@@ -253,6 +273,7 @@
   async function boot() {
     initTheme();
     initUI();
+    initConsent();
     if (GLT.chat) GLT.chat.init();
     $("year").textContent = new Date().getFullYear();
     try {
