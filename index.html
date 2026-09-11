@@ -178,7 +178,7 @@
           <div class="stat"><div class="v tnum" id="stLines">—</div><div class="k">líneas modeladas</div></div>
           <div class="stat"><div class="v tnum" id="stKm">—</div><div class="k">km de red masiva</div></div>
         </div>
-        <p class="hint">Pasa el cursor sobre un vehículo para ver su ocupación y próxima parada. Toca una línea para su ficha; usa la leyenda para filtrar capas.</p>
+        <p class="hint" id="netHint">Pasa el cursor sobre un vehículo para ver su ocupación y próxima parada. Toca una línea para su ficha; usa la leyenda para mostrar u ocultar capas.</p>
       </div>
 
       <div class="tabpane" id="tab-trip" hidden>
@@ -350,7 +350,11 @@
     </details>
     <details class="faq-item">
       <summary>¿Puedo reutilizar o citar los datos?</summary>
-      <div>Sí. El código es abierto (MIT) y los datos citan sus fuentes; te pedimos citar tanto este proyecto como la fuente original de cada cifra. El repositorio está en <a href="https://github.com/unimauro/lima-en-movimiento" target="_blank" rel="noopener">GitHub</a>.</div>
+      <div>Sí. El código es abierto (MIT) y los datos citan sus fuentes; te pedimos citar tanto este proyecto como la fuente original de cada cifra. Cita sugerida: <i>Lima en Movimiento (2026). Gemelo digital del transporte urbano de Lima y Callao. unimauro.github.io/lima-en-movimiento</i>. El repositorio está en <a href="https://github.com/unimauro/lima-en-movimiento" target="_blank" rel="noopener">GitHub</a>.</div>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cómo se hizo este sitio?</summary>
+      <div>Es un sitio <b>estático</b> (HTML, CSS y JavaScript sin frameworks) publicado en GitHub Pages. El mapa usa <b>Leaflet</b> con tiles de Esri; los gráficos, <b>Chart.js</b>. La geometría de líneas, estaciones, arterias y ciclovías se extrajo de <b>OpenStreetMap</b> con la API Overpass; las cifras vienen de fuentes públicas y están en archivos JSON dentro del repositorio, así que cualquiera puede revisarlas o corregirlas. La simulación y el simulador de viaje son código propio (ver <i>¿Cómo funciona la simulación?</i>). Todo se construyó con ayuda de agentes de IA que buscan datos y escriben código, siempre con revisión y pruebas antes de publicar. Si quieres replicarlo o aprender, el README del repositorio explica la estructura paso a paso.</div>
     </details>
     <details class="faq-item">
       <summary>¿Recopila datos de los visitantes?</summary>

@@ -396,6 +396,17 @@ input[type=search]:focus { outline: none; border-color: var(--accent); }
   background: var(--surface-1); border: 2.5px solid var(--accent); box-shadow: var(--shadow); }
 .od-mk .od-A { border-color: #2f9e6e; } .od-mk .od-B { border-color: #eb6834; }
 .leg .sw.traf { background: repeating-linear-gradient(90deg, #2f9e6e 0 4px, #e0a300 4px 8px, #e34948 8px 12px); }
+/* leyenda como interruptores: estado visible, sin tachado ambiguo */
+button.leg { background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px 4px 8px;
+  font: inherit; font-size: 12px; color: var(--text-1); cursor: pointer; }
+button.leg::before { content: "✓"; font-size: 10px; margin-right: 5px; color: var(--accent); font-weight: 700; }
+button.leg:hover { border-color: var(--accent); }
+button.leg.off { opacity: .55; text-decoration: none; color: var(--muted); border-style: dashed; }
+button.leg.off::before { content: "○"; color: var(--muted); }
+button.leg.off .sw { opacity: .35; }
+.leg-reset, button.leg-reset { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 700; }
+.leg-reset::before, button.leg-reset::before { content: "↺"; color: #fff; }
+.hint.warn { color: var(--gold); font-weight: 600; }
 
 /* ---------- Banner de cookies ---------- */
 .cookie { position: fixed; left: 16px; bottom: 16px; z-index: 90; max-width: 420px;

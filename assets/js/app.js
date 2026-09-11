@@ -253,13 +253,30 @@
   }
 
   /* ---------- leyenda del mapa ---------- */
+  // Leyenda = interruptores de capa. Cada botón muestra su estado y hay un "Mostrar todo".
+  function legSync() {
+    const el = $("mapLegend"), r = $("legReset"); if (!el || !r) return;
+    r.hidden = el.querySelectorAll(".leg.off").length === 0;
+  }
   function renderLegend(net, twin) {
     const el = $("mapLegend");
     el.innerHTML = (net.lines || []).map((l) =>
-      `<span class="leg" data-id="${l.id}"><span class="sw" style="background:${l.color}"></span>${l.short || l.name}${l.status !== "operational" ? " ·" + (l.status === "construction" ? "obra" : "plan") : ""}</span>`).join("");
-    el.querySelectorAll(".leg").forEach((n) => n.addEventListener("click", () => {
-      n.classList.toggle("off"); twin.toggleLine(n.dataset.id); syncStats();
+      `<button type="button" class="leg" data-id="${l.id}" aria-pressed="true" title="Ocultar o mostrar ${l.short || l.name}"><span class="sw" style="background:${l.color}"></span>${l.short || l.name}${l.status !== "operational" ? (l.status === "construction" ? " (obra)" : " (plan)") : ""}</button>`).join("")
+      + `<button type="button" class="leg leg-reset" id="legReset" hidden title="Volver a mostrar todas las capas">Mostrar todo</button>`;
+    el.querySelectorAll(".leg[data-id]").forEach((n) => n.addEventListener("click", () => {
+      n.classList.toggle("off"); n.setAttribute("aria-pressed", String(!n.classList.contains("off")));
+      twin.toggleLine(n.dataset.id); syncStats(); legSync();
     }));
+    $("legReset").addEventListener("click", () => {
+      el.querySelectorAll(".leg.off[data-id]").forEach((n) => {
+        n.classList.remove("off"); n.setAttribute("aria-pressed", "true");
+        const id = n.dataset.id;
+        if (id === "_traffic") GLT.traffic.setVisible(true);
+        else if (id === "_cycle") GLT.traffic.setCyclewaysVisible(true);
+        else twin.toggleLine(id);
+      });
+      syncStats(); legSync(); GLT.track("legend_reset");
+    });
   }
 
   /* ---------- estado en vivo ---------- */
@@ -273,6 +290,15 @@
     const ob = $("stOnboard"), oc = $("stOcc");
     if (ob) ob.textContent = GLT.fmt.short(s.onboard);
     if (oc) oc.textContent = Math.round(s.occ * 100) + "%";
+    const hint = $("netHint");
+    if (hint) {
+      const opsHidden = twin.lines.filter((L) => L.def.status === "operational" && twin.hidden.has(L.def.id)).length;
+      const opsTotal = twin.lines.filter((L) => L.def.status === "operational").length;
+      hint.classList.toggle("warn", s.veh === 0 && opsHidden > 0);
+      hint.textContent = (s.veh === 0 && opsHidden > 0)
+        ? (opsHidden === opsTotal ? "Todas las líneas están ocultas: toca «Mostrar todo» en la leyenda del mapa." : "Hay líneas ocultas en la leyenda del mapa; toca «Mostrar todo» para verlas.")
+        : (s.veh === 0 ? "Fuera del horario de operación (05:00–23:00). Mueve el reloj para ver la red en marcha." : "Pasa el cursor sobre un vehículo para ver su ocupación y próxima parada. Toca una línea para su ficha; usa la leyenda para mostrar u ocultar capas.");
+    }
     $("hourVal").textContent = hhmm(t);
     $("hour").value = Math.floor(t);
   }
@@ -288,16 +314,16 @@
   }
   function addTrafficLegend() {
     const el = $("mapLegend"); if (!el) return;
-    const n = document.createElement("span"); n.className = "leg"; n.dataset.id = "_traffic";
-    n.innerHTML = '<span class="sw traf"></span>Tráfico: autos y combis';
-    n.addEventListener("click", () => { n.classList.toggle("off"); GLT.traffic.setVisible(!n.classList.contains("off")); });
-    el.appendChild(n);
-    if (GLT.traffic.hasCycleways && GLT.traffic.hasCycleways()) {
-      const c = document.createElement("span"); c.className = "leg"; c.dataset.id = "_cycle";
-      c.innerHTML = `<span class="sw" style="background:#43a047"></span>Ciclovías (${Math.round(GLT.traffic.cyclewaysKm())} km)`;
-      c.addEventListener("click", () => { c.classList.toggle("off"); GLT.traffic.setCyclewaysVisible(!c.classList.contains("off")); });
-      el.appendChild(c);
-    }
+    const reset = $("legReset");
+    const mk = (id, html, title, onToggle) => {
+      const n = document.createElement("button"); n.type = "button"; n.className = "leg"; n.dataset.id = id; n.title = title;
+      n.setAttribute("aria-pressed", "true"); n.innerHTML = html;
+      n.addEventListener("click", () => { n.classList.toggle("off"); const on = !n.classList.contains("off"); n.setAttribute("aria-pressed", String(on)); onToggle(on); legSync(); });
+      if (reset) el.insertBefore(n, reset); else el.appendChild(n);
+    };
+    mk("_traffic", '<span class="sw traf"></span>Tráfico: autos y combis', "Ocultar o mostrar el tráfico en arterias", (on) => GLT.traffic.setVisible(on));
+    if (GLT.traffic.hasCycleways && GLT.traffic.hasCycleways())
+      mk("_cycle", `<span class="sw" style="background:#43a047"></span>Ciclovías (${Math.round(GLT.traffic.cyclewaysKm())} km)`, "Ocultar o mostrar las ciclovías", (on) => GLT.traffic.setCyclewaysVisible(on));
   }
 
   const ICON_PLAY = '<path d="M8 5v14l11-7z"/>', ICON_PAUSE = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
