@@ -658,3 +658,18 @@ body {
 
 /* separador tenue entre secciones para dar ritmo sin peso */
 section + section { border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent); }
+
+/* ---------- Autoridad y reforma: promesas vs. realidad ---------- */
+.proms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.prom { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; border-left: 4px solid var(--muted); }
+.prom-pend { border-left-color: #d03b3b; } .prom-parc { border-left-color: var(--gold); } .prom-logr { border-left-color: #2f9e6e; }
+.prom-h { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.prom-h b { font-size: 14.5px; }
+.prom p { margin: 0; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.prom-badge { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px; flex: none; color: #fff; }
+.prom-badge.pend { background: #d03b3b; } .prom-badge.parc { background: var(--gold); color: #201500; } .prom-badge.logr { background: #2f9e6e; }
+.inf-card p { font-size: 13px; color: var(--text-2); line-height: 1.55; margin: 0 0 6px; }
+.inf-card p b { color: var(--text-1); }
+.kpi .v.kpi-txt { font-size: clamp(18px, 2.2vw, 24px); line-height: 1.1; }
+@media (max-width: 720px) { .proms { grid-template-columns: 1fr; } }

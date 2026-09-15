@@ -35,6 +35,7 @@ GLT.load = async function () {
     opt("fleet.json"), opt("security.json"), opt("lines_detail.json"), opt("arteries.geojson"),
     opt("cycleways.geojson"), opt("modes.json"),
   ]);
-  GLT.data = { network, routes, indicators, context, fleet, security, linesDetail, arteries, cycleways, modes };
+  const [atu, informal] = await Promise.all([opt("atu.json"), opt("informal.json")]);
+  GLT.data = { network, routes, indicators, context, fleet, security, linesDetail, arteries, cycleways, modes, atu, informal };
   return GLT.data;
 };

@@ -1,0 +1,68 @@
+{
+  "intro": "La Autoridad de Transporte Urbano para Lima y Callao (ATU) nació con la Ley N.º 30900 (publicada el 28 de diciembre de 2018) y empezó a operar a mediados de 2019 como la autoridad ÚNICA que debía poner fin a décadas de fragmentación: absorbió las competencias de la Autoridad Autónoma del Tren Eléctrico (AATE), la Gerencia de Transporte Urbano (GTU) de la Municipalidad de Lima, la del Callao y Protransporte, con el mandato de organizar e implementar un Sistema Integrado de Transporte con tarifa integrada, corredores formales y flota moderna. Siete años después el balance es mixto y, en lo esencial, decepcionante: la ATU sí concentró legalmente la rectoría del transporte de Lima y Callao (su logro más sólido) y elevó su fiscalización e incautación de unidades informales, pero las promesas centrales de la reforma siguen a medio camino. El boleto único recién entró en piloto en 2026 (siete años tarde), la informalidad se mantiene alrededor de dos tercios del sistema, los corredores complementarios operan de forma incompleta y endeudados, y la institución vivió una crisis crónica de liderazgo con seis presidentes/jefes desde 2019. A esto se suma un factor que la ATU no controla pero que define la experiencia diaria del usuario y del transportista: la extorsión, que en 2025-2026 dejó decenas de choferes asesinados y desbordó por completo la capacidad de respuesta estatal. La reforma no fracasó del todo —existe una autoridad y hay avances técnicos reales—, pero está muy lejos de haber cumplido lo que prometió.",
+  "kpis": [
+    {"label": "Años en funciones", "value": 7, "unit": "", "note": "Ley 30900 de dic-2018; operativa desde jun-2019", "source_ref": 0},
+    {"label": "Presidentes/jefes de la ATU desde 2019", "value": 6, "unit": "", "note": "Valenzuela, Jara, Aguilar, Vidal, Hernández y Romero; El Comercio contó 5 en menos de 7 años, promedio ~267 días en los últimos años", "source_ref": 2},
+    {"label": "Transporte aún informal (estimación)", "value": 67, "unit": "%", "note": "cifra ampliamente citada; unidades sin autorización, revisión técnica ni seguro vigente", "source_ref": 5},
+    {"label": "Boleto único / integración tarifaria", "value": null, "unit": "", "note": "Sin sistema pleno; piloto de la tarjeta interoperable desde jun-2026 e interoperabilidad Metro/Metropolitano/corredores prevista para el 3er trimestre de 2026", "source_ref": 3},
+    {"label": "Empresas de transporte formal extorsionadas (estimación)", "value": 70, "unit": "%", "note": "gremios y prensa; mafias exigen cupos iniciales y cuotas semanales", "source_ref": 7},
+    {"label": "Vehículos chatarreados en 2025", "value": 385, "unit": "unidades", "note": "frente a una meta anunciada de ~500 para el año; 184 en 2024", "source_ref": 4}
+  ],
+  "promesas": [
+    {
+      "promesa": "Autoridad única (fin de la fragmentación institucional)",
+      "estado": "logrado",
+      "detalle": "Es el avance más consolidado: la ATU concentró legalmente las competencias que antes dispersaban AATE, la GTU de la Municipalidad de Lima, la del Callao y Protransporte. La reforma de febrero de 2026 le devolvió capacidad de gestión y supervisión que había perdido. La rectoría existe; lo que no se consolidó fue el 'modelo institucional' para ejercerla con estabilidad.",
+      "source_ref": 0
+    },
+    {
+      "promesa": "Integración tarifaria (boleto único / tarjeta interoperable)",
+      "estado": "parcial",
+      "detalle": "Prometida como pilar de la reforma en 2019, recién avanzó en 2026: la ATU inició en junio de 2026 el piloto de la Tarjeta Interoperable del Transporte (primeras validaciones en la ruta 'Urbanito') y proyectó su despliegue progresivo desde agosto de 2026, con interoperabilidad plena entre Metro, Metropolitano y corredores anunciada para el tercer trimestre de 2026. Es decir: siete años de retraso y aún sin un boleto único funcionando de extremo a extremo.",
+      "source_ref": 3
+    },
+    {
+      "promesa": "Chatarreo de unidades antiguas",
+      "estado": "parcial",
+      "detalle": "Hay actividad creciente pero a un ritmo insuficiente frente al tamaño del parque informal: la ATU chatarreó 385 unidades en 2025 (frente a 184 en 2024 y una meta anunciada cercana a 500), incluidas 107 con más de 35 años de antigüedad. En paralelo envió más de 6.000 vehículos al depósito en 2025, de los cuales el 92% operaba de manera informal. La fiscalización subió, pero el chatarreo efectivo sigue siendo marginal ante decenas de miles de unidades por renovar.",
+      "source_ref": 4
+    },
+    {
+      "promesa": "Formalización de rutas mediante corredores complementarios",
+      "estado": "parcial",
+      "detalle": "El sistema de corredores complementarios opera de forma incompleta y en conflicto: a inicios de 2026 los corredores Azul, Rojo y Morado estaban activos, el Amarillo suspendido y el Verde desactivado; se sumó el nuevo corredor Rosado uniendo Callao con Lima. Los operadores denuncian incumplimiento de cláusulas clave del contrato (exclusividad de vías y fiscalización del informal) y arrastran deudas millonarias (el corredor Morado reportó ~S/ 300 millones no recaudados por la competencia informal). La red prometida nunca se completó.",
+      "source_ref": 6
+    },
+    {
+      "promesa": "Reducir la informalidad del transporte",
+      "estado": "pendiente",
+      "detalle": "Pese al aumento de operativos, la informalidad sigue dominando: se estima que alrededor del 67% del transporte en Lima es informal, operando sin autorización, revisión técnica ni seguro vigente. El grueso de las intervenciones de la ATU recae precisamente sobre unidades informales (cerca del 90% de las intervenidas), señal de que la formalización estructural del sistema no se ha logrado.",
+      "source_ref": 5
+    },
+    {
+      "promesa": "Estabilidad institucional para sostener la reforma",
+      "estado": "pendiente",
+      "detalle": "La ATU tuvo seis presidentes/jefes desde 2019 (Humberto Valenzuela, María Jara, José Aguilar, Marybel Vidal, David Hernández y Jaime Romero Bonilla), con gestiones de menos de un año en promedio en los últimos años. Esa rotación frenó proyectos de largo plazo y alimentó propuestas legislativas para extinguir la ATU y devolver las competencias a las municipalidades de Lima y Callao, lo que revela una crisis de legitimidad institucional no resuelta.",
+      "source_ref": 8
+    },
+    {
+      "promesa": "Respuesta frente a la extorsión al transporte",
+      "estado": "pendiente",
+      "detalle": "Es la mayor grieta de la reforma, aunque escapa en parte a las competencias de la ATU (que no es un cuerpo policial). En 2025-2026 la crisis se agravó: alrededor de 60 conductores asesinados en 2025 y decenas más en 2026, más del 70% de las empresas formales extorsionadas y una seguidilla de paros del transporte (cerca de uno mensual en 2025). La ATU coordina operativos con la PNP y garantiza servicios durante los paros, pero no ha podido contener la violencia; la seguridad quedó como el problema que más deslegitima toda la reforma.",
+      "source_ref": 7
+    }
+  ],
+  "methodology": "Evaluación construida con datos públicos y prensa seria (2018-2026). El campo 'estado' (pendiente/parcial/logrado) es un juicio de balance del autor basado en las fuentes citadas, no una calificación oficial de la ATU ni del MTC. Varias cifras son estimaciones o datos de coyuntura sujetos a actualización: el porcentaje de informalidad (~67%) y de empresas extorsionadas (~70%) son estimaciones ampliamente citadas pero no censales; el conteo de presidentes puede variar según se incluya o no a jefes interinos y al titular vigente en 2026. Las fechas de integración tarifaria corresponden a anuncios oficiales de 2026 y pueden postergarse. Cada cifra y promesa remite por 'source_ref' al índice de la lista de fuentes.",
+  "sources": [
+    {"label": "Ley N.º 30900 que crea la ATU — El Peruano / Congreso", "url": "https://busquedas.elperuano.pe/dispositivo/NL/1727064-7"},
+    {"label": "Autoridad de Transporte Urbano para Lima y Callao — Wikipedia", "url": "https://es.wikipedia.org/wiki/Autoridad_de_Transporte_Urbano_para_Lima_y_Callao"},
+    {"label": "ATU: cinco presidentes en menos de 7 años, inestabilidad en medio de una reforma urgente — El Comercio", "url": "https://elcomercio.pe/lima/transporte/presidencia-de-atu-cambia-una-vez-mas-una-luz-al-final-del-tunel-en-medio-de-inestabilidad-promesas-incumplidas-y-poco-avance-david-hernandez-marybel-vidal-corredores-complementarios-metropolitano-transporte-lima-y-callao-noticia/"},
+    {"label": "ATU inicia piloto de la tarjeta interoperable e integración de recaudo (2026) — Infobae", "url": "https://www.infobae.com/peru/2026/04/22/atu-acelera-tarjeta-unica-para-integrar-estos-servicios-de-transporte-usuarios-podran-viajar-por-lima-con-un-solo-pago/"},
+    {"label": "ATU chatarreó 107 vehículos con más de 35 años durante 2025 — El Comercio", "url": "https://elcomercio.pe/lima/transporte/atu-chatarrean-107-vehiculos-de-transporte-publico-con-mas-de-35-anos-de-antiguedad-durante-el-2025-mtc-papeletas-noticia/"},
+    {"label": "El 67% del transporte en Lima es informal — América TV", "url": "https://www.americatv.com.pe/noticias/actualidad/67-transporte-lima-informal-n496993"},
+    {"label": "Corredores complementarios: las rutas y los problemas de cada uno — El Comercio", "url": "https://elcomercio.pe/lima/corredores-complementarios-las-rutas-y-los-problemas-que-afronta-cada-uno-podrian-suspender-sus-operaciones-autoridad-de-transporte-urbano-atu-noticia/"},
+    {"label": "Más del 70% de empresas de transporte formal en Lima y Callao son extorsionadas — RPP", "url": "https://rpp.pe/peru/actualidad/mas-del-70-de-empresas-de-transporte-publico-formal-en-lima-y-callao-son-extorsionadas-noticia-1627164"},
+    {"label": "Proponen extinguir la ATU y devolver competencias a las municipalidades — Gestión", "url": "https://gestion.pe/economia/proponen-extinguir-la-atu-solucion-al-caos-vehicular-o-retroceso-institucional-noticia/"},
+    {"label": "ATU envió más de 6 mil vehículos al depósito en 2025: 92% operaba de forma informal — Expreso", "url": "https://www.expreso.com.pe/actualidad/atu-envio-mas-de-6-mil-vehiculos-al-deposito-en-2025-92-de-esas-unidades-operaba-de-manera-informal-mtc-pnp-sutran-sucamec-noticia/1252178/"}
+  ]
+}

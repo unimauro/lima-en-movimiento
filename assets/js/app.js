@@ -95,10 +95,15 @@
   }
 
   function kpiCard(k) {
-    const n = Number(k.value), big = n >= 100000;
-    const v = big ? GLT.fmt.short(n) : Number.isInteger(n) ? GLT.fmt.int(n) : String(k.value).replace(".", ",");
-    const u = k.unit && !big ? ` <small>${k.unit}</small>` : "";
-    return `<div class="kpi"><div class="v tnum">${v}${u}</div><div class="k">${k.label || ""}</div>${k.note ? `<div class="n">${k.note}</div>` : ""}</div>`;
+    const raw = k.value, num = Number(raw), isNum = raw !== null && raw !== "" && !Number.isNaN(num);
+    let v, u = "";
+    if (!isNum) {
+      const rng = String(raw).match(/^\s*(\d{3,})\s*[-–—]\s*(\d{3,})\s*$/);
+      v = rng ? (GLT.fmt.int(+rng[1]) + "–" + GLT.fmt.int(+rng[2])) : ((raw != null && raw !== "") ? String(raw) : (k.valueText || "—"));
+    }
+    else { const big = num >= 100000; v = big ? GLT.fmt.short(num) : Number.isInteger(num) ? GLT.fmt.int(num) : String(raw).replace(".", ","); u = k.unit && !big ? ` <small>${k.unit}</small>` : ""; }
+    const small = (!isNum && v.length > 8) ? " kpi-txt" : "";
+    return `<div class="kpi"><div class="v tnum${small}">${v}${u}</div><div class="k">${k.label || ""}</div>${k.note ? `<div class="n">${k.note}</div>` : ""}</div>`;
   }
   function hideNav(sel) { const a = document.querySelector(`.side-nav a[href="${sel}"]`); if (a) a.style.display = "none"; }
 
@@ -192,6 +197,44 @@
       el.insertAdjacentHTML("beforeend", `<div class="src-group" id="src-fotos"><h4>Fotografías</h4><ul>${lis}</ul></div>`); }
   }
 
+  /* ---------- Autoridad y reforma (ATU) + transporte informal ---------- */
+  function paras(el, txt) { if (el && txt) el.innerHTML = String(txt).split(/\n\n+/).map((p) => `<p>${p}</p>`).join(""); }
+  function renderReforma(data) {
+    const A = data.atu, I = data.informal;
+    if (!A && !I) { hideNav("#reforma"); return; }
+    $("reforma").hidden = false;
+    if (A) {
+      paras($("atuIntro"), A.intro);
+      $("atuKpis").innerHTML = (A.kpis || []).filter((k) => k.value !== null && k.value !== undefined && k.value !== "").slice(0, 4).map(kpiCard).join("");
+      const ST = { pendiente: ["Pendiente", "pend"], parcial: ["Parcial", "parc"], logrado: ["Logrado", "logr"] };
+      $("atuPromesas").innerHTML = (A.promesas || []).map((p) => {
+        const s = ST[p.estado] || ["—", ""];
+        return `<div class="prom prom-${s[1]}"><div class="prom-h"><span class="prom-badge ${s[1]}">${s[0]}</span><b>${p.promesa || ""}</b></div><p>${p.detalle || ""}</p></div>`;
+      }).join("");
+    } else { ["atuIntro", "atuKpis", "atuPromesas"].forEach((id) => $(id) && ($(id).style.display = "none")); }
+    if (I) {
+      paras($("infIntro"), I.intro);
+      $("infKpis").innerHTML = (I.kpis || []).slice(0, 4).map(kpiCard).join("");
+      const card = (m, title, icon) => { if (!m) return "";
+        const rows = [];
+        const add = (k, v) => { if (v) rows.push(`<p><b>${k}:</b> ${v}</p>`); };
+        if (m.que_es) rows.push(`<p>${m.que_es}</p>`);
+        add("Dónde", (m.zonas || m.corredores || []).join(", "));
+        add("Escala", m.escala); add("Tarifa", m.tarifa); add("Marco legal", m.legal);
+        add("Última milla", m.ultima_milla); add("Riesgos", m.riesgos);
+        return `<div class="mini inf-card"><h4>${icon} ${title}</h4>${rows.join("")}</div>`;
+      };
+      $("infCards").innerHTML = card(I.colectivo, "Colectivos", "🚙") + card(I.mototaxi, "Mototaxis", "🛺");
+    } else { ["infIntro", "infKpis", "infCards"].forEach((id) => $(id) && ($(id).style.display = "none")); }
+    const src = [].concat((A && A.sources) || [], (I && I.sources) || []);
+    const seen = new Set(), lis = src.filter((s) => s && s.label && !seen.has(s.label) && seen.add(s.label))
+      .map((s) => s.url ? `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>` : s.label).join(" · ");
+    const meth = [A && A.methodology, I && I.methodology].filter(Boolean).join(" ");
+    $("reformaMethod").innerHTML = `<h3 style="font-size:14px;margin-bottom:6px">Metodología y fuentes</h3>
+      <p style="margin:0 0 8px;color:var(--text-2);font-size:13px">${meth}</p>
+      <p style="margin:0;font-size:12px;color:var(--muted)">${lis}</p>`;
+  }
+
   /* ---------- FAQ · fuentes por tema ---------- */
   function renderFaqSources(data) {
     const el = $("faqSources"); if (!el) return;
@@ -201,6 +244,7 @@
       { key: "indicadores", title: "Indicadores de movilidad", items: (data.indicators && data.indicators.sources) || [] },
       { key: "parque", title: "Parque automotor y tráfico", items: (data.fleet && data.fleet.sources) || [] },
       { key: "seguridad", title: "Seguridad en el transporte", items: (data.security && data.security.sources) || [] },
+      { key: "reforma", title: "Autoridad (ATU) y transporte informal", items: [].concat((data.atu && data.atu.sources) || [], (data.informal && data.informal.sources) || []) },
       { key: "fichas", title: "Fichas por línea", items: (data.linesDetail && data.linesDetail.sources) || [] },
       { key: "contexto", title: "Contexto e historia", items: (data.context && data.context.sources) || [] },
     ];
@@ -362,6 +406,7 @@
       GLT.charts.buildAll(data);
       renderFleet(data);
       renderSecurity(data);
+      renderReforma(data);
       renderFaqSources(data);
       attachSources();
       renderPhotos();
