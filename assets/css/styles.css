@@ -626,3 +626,35 @@ button.leg:focus-visible, .side-nav a:focus-visible { outline-offset: 3px; }
 
 /* Cita de fuente por gráfico: menos ruido, alineada a la señalética */
 .chart-src a { border-bottom: none; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); text-underline-offset: 3px; }
+
+/* ============================================================
+   v2.2 — atmósfera (menos plano, más profundidad; legibilidad intacta)
+   Sin imágenes de lugares: halos de color de la paleta del transporte,
+   fijos detrás del contenido. Generalizable a cualquier ciudad.
+   ============================================================ */
+/* base un punto menos "negro puro" */
+@media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) { --plane: #111620; --surface-2: #1b222b; } }
+:root[data-theme="dark"] { --plane: #111620; --surface-2: #1b222b; }
+
+/* halos suaves con los colores de las líneas, fijos al viewport */
+body {
+  background:
+    radial-gradient(1150px 700px at 5% -8%,  color-mix(in srgb, var(--accent) 15%, transparent), transparent 56%),
+    radial-gradient(980px 660px at 104% 0%,   color-mix(in srgb, var(--tone-l1) 12%, transparent), transparent 50%),
+    radial-gradient(1300px 1000px at 92% 112%, color-mix(in srgb, var(--tone-purple) 10%, transparent), transparent 60%),
+    var(--plane);
+  background-attachment: fixed;
+}
+:root[data-theme="light"] body, :root:not([data-theme="dark"]) body { } /* los mismos halos, ya suaves sobre claro */
+
+/* aura detrás del gran titular del hero */
+.hero { position: relative; isolation: isolate; }
+.hero::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: -40px; top: -20px; width: min(720px, 62%); height: 360px;
+  background: radial-gradient(58% 58% at 30% 42%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 72%);
+  filter: blur(4px);
+}
+
+/* separador tenue entre secciones para dar ritmo sin peso */
+section + section { border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent); }
