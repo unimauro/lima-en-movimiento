@@ -85,6 +85,10 @@ python3 -m http.server 8000   # abre http://localhost:8000
 Push a `main` → GitHub Actions (`.github/workflows/pages.yml`) publica en GitHub Pages.
 Rutas relativas: funciona en cualquier subpath. `.nojekyll` evita el procesado Jekyll.
 
+## Agradecimientos
+
+Ideas y feedback: **Kely Alfaro** (enfoque de convivencia vial, mirada activista y usabilidad) y **Amaru** (educación vial en video, mostrar las rutas del transporte convencional). Ver [`BACKLOG.md`](BACKLOG.md) para las ideas pendientes.
+
 ## Licencia
 
 Código MIT. Los datos citan sus fuentes; respétalas al reutilizar.
