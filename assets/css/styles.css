@@ -583,3 +583,46 @@ section.has-photo::before { content: ""; position: absolute; inset: 0; z-index: 
 }
 /* touch: tooltips de hover no existen; que el toque abra la ficha */
 @media (hover: none) { .veh-tip { display: none !important; } }
+
+/* ============================================================
+   v2.1 — pase de dirección de arte (frontend-design)
+   "Tablero de información en vivo": foco visible, superficies planas,
+   detalles al servicio del contenido, la audacia en el mapa.
+   ============================================================ */
+
+/* Piso de calidad: foco de teclado visible y consistente (no en clic) */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2.5px solid var(--accent); outline-offset: 2px; border-radius: 7px;
+}
+:focus:not(:focus-visible) { outline: none; }
+button.leg:focus-visible, .side-nav a:focus-visible { outline-offset: 3px; }
+
+/* Selección con el azul de la marca */
+::selection { background: color-mix(in srgb, var(--accent) 88%, transparent); color: #fff; }
+
+/* Hero como letrero: balance de línea y aire, sin viudas */
+.hero-head h1 { letter-spacing: -.015em; text-wrap: balance; }
+.hero-head p, .sec-sub { text-wrap: pretty; }
+
+/* Enlaces de cuerpo: subrayado discreto y con intención, no adorno */
+.prose a, .faq-item > div a, .src-group a, .sec-sub a, .authority a, .mini a {
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--accent-ink) 40%, transparent); }
+.prose a:hover, .faq-item > div a:hover, .src-group a:hover, .sec-sub a:hover {
+  text-decoration-color: var(--accent); }
+
+/* Superficies planas: el borde marca el cambio al elevar, no una sombra en reposo */
+.kpi, .mini, .sup-card, .src-group, .chartcard, .stat { transition: border-color .18s ease, transform .18s ease; }
+.kpi:hover, .mini:hover, .sup-card:hover, .src-group:hover { border-color: var(--border-strong); }
+
+/* Tabs del panel: subrayado tipo pestaña real en la activa */
+.tab.active { position: relative; }
+.tab.active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px;
+  border-radius: 2px; background: var(--accent); }
+
+/* La tarjeta "más rápida" del viaje: que se lea como el resultado principal */
+.mode-card.best { border-left-width: 5px; }
+.mc-h em { color: var(--mc); }
+
+/* Cita de fuente por gráfico: menos ruido, alineada a la señalética */
+.chart-src a { border-bottom: none; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); text-underline-offset: 3px; }
